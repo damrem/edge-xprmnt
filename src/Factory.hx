@@ -1,9 +1,15 @@
 package;
+import b2d.B2;
+import b2d.components.BodyComponent;
+import b2d.components.BodyDefComponent;
+import b2d.components.FixtureDefComponent;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.collision.shapes.B2Shape;
 import box2D.dynamics.B2Body;
 import box2D.dynamics.B2BodyDef;
+import box2D.dynamics.B2BodyType;
 import box2D.dynamics.B2FixtureDef;
+import edge.IComponent;
 
 /**
  * ...
@@ -27,8 +33,10 @@ class Factory
 	public static function createBallEntity(x:Float, y:Float, radius:Float, angle:Float, color:UInt):Array<{}>
 	{
 		var entity = new Array<{}>();
-		var body = new BodyComponent(createShapedBody(new B2CircleShape(radius)));
+		/*
+		var body = new b2d.components.BodyComponent(createShapedBody(new B2CircleShape(radius)));
 		entity.push(body);
+		*/
 		/*
 		var shape = new DiskShape(radius, color);
 		var sprite = new EntitySprite(entity);
@@ -42,6 +50,20 @@ class Factory
 		entity.add(new BodyComponent(bodyDef, fixtureDef));
 		*/
 		return entity;
+	}
+	
+	public static function bodyDef(type:B2BodyType = B2BodyType.DYNAMIC_BODY):IComponent
+	{
+		var bd = new B2BodyDef();
+		bd.type = type;
+		return new BodyDefComponent(bd);
+	}
+	
+	public static function fixtureDef(density:Float = 1.0):IComponent
+	{
+		var fd = new B2FixtureDef();
+		fd.density = density;
+		return new FixtureDefComponent(fd);
 	}
 	
 }

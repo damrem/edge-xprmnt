@@ -1,4 +1,4 @@
-package;
+package b2d.components;
 import box2D.collision.shapes.B2Shape;
 import edge.IComponent;
 
@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class B2ShapeComponent implements IComponent
+class ShapeComponent implements IComponent
 {
 	public var shape:B2Shape;	
 }

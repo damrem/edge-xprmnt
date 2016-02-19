@@ -1,5 +1,5 @@
 package b2d.components;
-import b2d.typdefs.BodyDef;
+import box2D.dynamics.B2BodyDef;
 import edge.IComponent;
 
 /**
@@ -8,5 +8,5 @@ import edge.IComponent;
  */
 class BodyDefComponent implements IComponent
 {
-	public var bodyDef:BodyDef;
+	public var bodyDef:B2BodyDef;
 }

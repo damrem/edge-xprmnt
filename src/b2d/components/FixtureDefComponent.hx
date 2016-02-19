@@ -1,5 +1,5 @@
 package b2d.components;
-import b2d.typdefs.FixtureDef;
+import box2D.dynamics.B2FixtureDef;
 import edge.IComponent;
 
 /**
@@ -9,6 +9,6 @@ import edge.IComponent;
 class FixtureDefComponent implements IComponent
 {
 
-	public var fixtureDef:FixtureDef;
+	public var fixtureDef:B2FixtureDef;
 	
 }

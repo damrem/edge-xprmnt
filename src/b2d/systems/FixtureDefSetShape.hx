@@ -1,6 +1,6 @@
 package b2d.systems;
-import b2d.components.FixtureDefComponent;
-import b2d.components.ShapeComponent;
+import b2d.components.FixtureDef;
+import b2d.components.Shape;
 import edge.Entity;
 import edge.ISystem;
 
@@ -10,15 +10,15 @@ import edge.ISystem;
  */
 class FixtureDefSetShape implements ISystem
 {
-	public function update(fd:FixtureDefComponent, sh:ShapeComponent)
+	public function update(fd:FixtureDef, sh:Shape)
 	{
 		
 	}
 	
-	public function updateAdded(e:Entity, n:{ fd:FixtureDefComponent, sh:ShapeComponent }) 
+	public function updateAdded(e:Entity, n:{ fd:FixtureDef, sh:Shape }) 
 	{
 		trace("updateAdded");
-		n.fd.fixtureDef.shape = n.sh.shape;
+		n.fd.b2FixtureDef.shape = n.sh.b2Shape;
 	}
 	
 }

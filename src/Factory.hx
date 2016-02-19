@@ -1,8 +1,8 @@
 package;
 import b2d.B2;
-import b2d.components.BodyComponent;
-import b2d.components.BodyDefComponent;
-import b2d.components.FixtureDefComponent;
+import b2d.components.Body;
+import b2d.components.BodyDef;
+import b2d.components.FixtureDef;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.collision.shapes.B2Shape;
 import box2D.dynamics.B2Body;
@@ -56,14 +56,14 @@ class Factory
 	{
 		var bd = new B2BodyDef();
 		bd.type = type;
-		return new BodyDefComponent(bd);
+		return new BodyDef(bd);
 	}
 	
 	public static function fixtureDef(density:Float = 1.0):IComponent
 	{
 		var fd = new B2FixtureDef();
 		fd.density = density;
-		return new FixtureDefComponent(fd);
+		return new FixtureDef(fd);
 	}
 	
 }

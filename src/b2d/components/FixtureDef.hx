@@ -6,9 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class FixtureDefComponent implements IComponent
+class FixtureDef implements IComponent
 {
-
-	public var fixtureDef:B2FixtureDef;
-	
+	public var b2FixtureDef:B2FixtureDef;	
 }

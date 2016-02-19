@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class PositionComponent implements IComponent
+class Position implements IComponent
 {
 	public var x:Float;
 	public var y:Float;

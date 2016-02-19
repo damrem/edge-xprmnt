@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class BodyDefComponent implements IComponent
+class BodyDef implements IComponent
 {
-	public var bodyDef:B2BodyDef;
+	public var b2BodyDef:B2BodyDef;
 }

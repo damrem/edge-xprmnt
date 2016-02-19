@@ -1,9 +1,9 @@
 package;
 
 import b2d.B2;
-import b2d.components.BodyComponent;
-import b2d.components.PositionComponent;
-import b2d.components.ShapeComponent;
+import b2d.components.Body;
+import b2d.components.Position;
+import b2d.components.Shape;
 import b2d.systems.BodyCreateFixture;
 import b2d.systems.CreateBodyFromDef;
 import b2d.systems.WorldDrawDebugData;
@@ -57,11 +57,11 @@ class Main extends Sprite
 		edgeWorld.engine.create(Factory.createBallEntity(100, 100, 50, 0, 0xff0000));
 		*/
 		edgeWorld.engine.create([
-			new PositionComponent(50, 50), 
+			new Position(50, 50), 
 			Factory.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			new ShapeComponent(new B2CircleShape(50)),
+			new Shape(new B2CircleShape(50)),
 			Factory.fixtureDef(1.0),
-			new BodyComponent()
+			new Body()
 		]);
 	}
 

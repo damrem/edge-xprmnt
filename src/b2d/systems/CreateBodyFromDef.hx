@@ -1,6 +1,6 @@
 package b2d.systems;
-import b2d.components.BodyComponent;
-import b2d.components.BodyDefComponent;
+import b2d.components.Body;
+import b2d.components.BodyDef;
 import edge.Entity;
 import edge.ISystem;
 
@@ -11,15 +11,15 @@ import edge.ISystem;
 class CreateBodyFromDef implements ISystem
 {
 
-	public function update(bodyDef:BodyDefComponent, bodyComponent:BodyComponent) 
+	public function update(bd:BodyDef, b:Body) 
 	{
 		
 	}
 	
-	public function updateAdded(e:Entity, n: { bodyDef:BodyDefComponent, bodyComponent:BodyComponent } )
+	public function updateAdded(e:Entity, n: { bd:BodyDef, b:Body } )
 	{
 		trace("updateAdded");
-		n.bodyComponent.b2body = B2.world().createBody(n.bodyDef.bodyDef);
+		n.b.b2Body = B2.world().createBody(n.bd.b2BodyDef);
 	}
 	
 }

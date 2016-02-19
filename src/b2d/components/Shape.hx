@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class ShapeComponent implements IComponent
+class Shape implements IComponent
 {
-	public var shape:B2Shape;	
+	public var b2Shape:B2Shape;	
 }

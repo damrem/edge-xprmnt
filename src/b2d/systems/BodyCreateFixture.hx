@@ -1,6 +1,6 @@
 package b2d.systems;
-import b2d.components.BodyComponent;
-import b2d.components.FixtureDefComponent;
+import b2d.components.Body;
+import b2d.components.FixtureDef;
 import edge.Entity;
 import edge.ISystem;
 
@@ -11,15 +11,15 @@ import edge.ISystem;
 class BodyCreateFixture implements ISystem
 {
 
-	public function update(fixtureDefComponent:FixtureDefComponent, bodyComponent:BodyComponent) 
+	public function update(fd:FixtureDef, b:Body) 
 	{
 		
 	}
 	
-	public function updateAdded(e:Entity, n: { fixtureDefComponent:FixtureDefComponent, bodyComponent:BodyComponent } )
+	public function updateAdded(e:Entity, n: { fd:FixtureDef, b:Body } )
 	{
 		trace("updateAdded");
-		n.bodyComponent.b2body.createFixture(n.fixtureDefComponent.fixtureDef);
+		n.b.b2Body.createFixture(n.fd.b2FixtureDef);
 	}
 	
 }

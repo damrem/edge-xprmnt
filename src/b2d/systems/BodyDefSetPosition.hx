@@ -1,6 +1,6 @@
 package b2d.systems;
-import b2d.components.BodyDefComponent;
-import b2d.components.PositionComponent;
+import b2d.components.BodyDef;
+import b2d.components.Position;
 import edge.Entity;
 import edge.ISystem;
 
@@ -11,15 +11,15 @@ import edge.ISystem;
 class BodyDefSetPosition implements ISystem
 {
 
-	public function update(bodyDef:BodyDefComponent, position:PositionComponent) 
+	public function update(bd:BodyDef, pos:Position) 
 	{
 		
 	}
 	
-	public function updateAdded(entity:Entity, node: { bodyDef:BodyDefComponent, position:PositionComponent } )
+	public function updateAdded(e:Entity, n: { bd:BodyDef, pos:Position } )
 	{
 		trace("updateAdded");
-		node.bodyDef.bodyDef.position.set(node.position.x, node.position.x);
+		n.bd.b2BodyDef.position.set(n.pos.x, n.pos.x);
 	}
 	
 }

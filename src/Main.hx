@@ -28,7 +28,7 @@ class Main extends Sprite
 		
 		var edgeWorld = new World();
 		var b2World = b2d.B2.world();
-		b2d.B2.addDebugTo(this);
+		B2.addDebugTo(this);
 		
 		/*
 		var bd = new BodyDef();
@@ -44,6 +44,7 @@ class Main extends Sprite
 		//	SYSTEMS
 		edgeWorld.physics.add(new WorldStep());
 		edgeWorld.physics.add(new WorldDrawDebugData());
+		
 		edgeWorld.physics.add(new BodyDefSetPosition());
 		edgeWorld.physics.add(new FixtureDefSetShape());
 		edgeWorld.physics.add(new CreateBodyFromDef());
@@ -56,11 +57,20 @@ class Main extends Sprite
 		edgeWorld.engine.create(Factory.createBallEntity(100, 100, 50, 0, 0xff0000));
 		edgeWorld.engine.create(Factory.createBallEntity(100, 100, 50, 0, 0xff0000));
 		*/
+		
 		edgeWorld.engine.create([
 			new Position(50, 50), 
-			Factory.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			new Shape(new B2CircleShape(50)),
-			Factory.fixtureDef(1.0),
+			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
+			B2.circleShape(50),
+			B2.fixtureDef(1.0),
+			new Body()
+		]);
+		
+		edgeWorld.engine.create([
+			new Position(150, 150), 
+			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
+			B2.rectShape(10, 10),
+			B2.fixtureDef(1.0),
 			new Body()
 		]);
 	}

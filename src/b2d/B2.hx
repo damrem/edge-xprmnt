@@ -1,9 +1,16 @@
 package b2d;
+import b2d.components.BodyDef;
+import b2d.components.FixtureDef;
+import b2d.components.Shape;
+import box2D.collision.shapes.B2CircleShape;
+import box2D.collision.shapes.B2PolygonShape;
 import box2D.common.math.B2Vec2;
+import box2D.dynamics.B2BodyType;
 import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2DebugDraw;
 import box2D.dynamics.B2World;
+import edge.IComponent;
 import openfl.display.DisplayObjectContainer;
 import openfl.display.Sprite;
 
@@ -15,7 +22,7 @@ class B2
 {
 	static var _world:B2World;
 	static var gravity:B2Vec2;
-	static var debugSprite:Sprite;
+	public static var debugSprite:Sprite;
 	
 	/**
 	 * Returns the box2d world, after creating it if needed.
@@ -61,11 +68,31 @@ class B2
 		
 	}
 	
-	public static function getDebug():Sprite
+	public static function bodyDef(type:B2BodyType = B2BodyType.DYNAMIC_BODY):IComponent
 	{
-		return debugSprite;
+		var bd = new B2BodyDef();
+		bd.type = type;
+		return new BodyDef(bd);
 	}
 	
+	public static function fixtureDef(density:Float = 1.0):IComponent
+	{
+		var fd = new B2FixtureDef();
+		fd.density = density;
+		return new FixtureDef(fd);
+	}
+	
+	public static function rectShape(width:Float, height:Float, angle:Float=0):IComponent 
+	{
+		var shape = new B2PolygonShape();
+		shape.setAsOrientedBox(width, height, new B2Vec2(), angle);
+		return new Shape(shape);
+	}
+	
+	public static function circleShape(radius:Float):IComponent
+	{
+		return new Shape(new B2CircleShape(radius));
+	}
 }
 
 

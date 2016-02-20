@@ -13,6 +13,9 @@ import b2d.systems.WorldStep;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.dynamics.B2BodyType;
 import edge.World;
+import hxlpers.geom.Pos;
+import maze.components.Aperture;
+import maze.systems.BuildPhysicalTile;
 import openfl.display.Sprite;
 
 /**
@@ -49,6 +52,8 @@ class Main extends Sprite
 		edgeWorld.physics.add(new FixtureDefSetShape());
 		edgeWorld.physics.add(new CreateBodyFromDef());
 		edgeWorld.physics.add(new BodyCreateFixture());
+		
+		edgeWorld.physics.add(new BuildPhysicalTile());
 		//edgeWorld.physics.add(new CreateShape());
 		edgeWorld.start();
 		
@@ -72,6 +77,12 @@ class Main extends Sprite
 			B2.rectShape(10, 10),
 			B2.fixtureDef(1.0),
 			new Body()
+		]);
+		
+		edgeWorld.engine.create([
+			new Position(200, 200),
+			B2.bodyDef(B2BodyType.KINEMATIC_BODY),
+			new Aperture()
 		]);
 	}
 

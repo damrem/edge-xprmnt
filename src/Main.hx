@@ -27,7 +27,7 @@ class Main extends Sprite
 		super();
 		
 		var edgeWorld = new World();
-		var b2World = b2d.B2.world();
+		B2.createWorld();
 		B2.addDebugTo(this);
 		
 		/*

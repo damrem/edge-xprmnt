@@ -20,31 +20,30 @@ import openfl.display.Sprite;
  */
 class B2
 {
-	static var _world:B2World;
-	static var gravity:B2Vec2;
+	public static var world:B2World;
+	public static var gravity:B2Vec2;
 	public static var debugSprite:Sprite;
 	
 	/**
-	 * Returns the box2d world, after creating it if needed.
+	 * Creates the box2d world.
 	 * @param	gravity
 	 * @param	doSleep
 	 * @return	The Box2D world.
 	 */
-	public static function world(?gravity:B2Vec2, doSleep:Bool=true):B2World
+	public static function createWorld(?gravity:B2Vec2, doSleep:Bool=true):B2World
 	{
-		if (_world == null && B2.gravity == null)
+		if (gravity == null)
 		{
-			if (gravity == null)
-			{
-				B2.gravity = new B2Vec2();				
-			}
-			else
-			{
-				B2.gravity = gravity;
-			}
-			_world = new B2World(B2.gravity, doSleep);
+			B2.gravity = new B2Vec2();				
 		}
-		return _world;
+		else
+		{
+			B2.gravity = gravity;
+		}
+		
+		world = new B2World(B2.gravity, doSleep);
+		
+		return world;
 	}
 	
 	public static function addDebugTo(container:DisplayObjectContainer)
@@ -64,7 +63,7 @@ class B2
 			B2DebugDraw.e_pairBit | 
 			B2DebugDraw.e_shapeBit
 		);
-		B2.world().setDebugDraw(debugDraw);
+		B2.world.setDebugDraw(debugDraw);
 		
 	}
 	

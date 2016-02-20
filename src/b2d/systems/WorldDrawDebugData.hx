@@ -11,7 +11,7 @@ class WorldDrawDebugData implements ISystem
 
 	public function update() 
 	{
-		B2.world().drawDebugData();
+		B2.world.drawDebugData();
 	}
 	
 }

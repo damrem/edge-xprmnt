@@ -46,29 +46,29 @@ class BuildPhysicalTile implements ISystem
 		{
 			for (y in cornerBlockCoords)
 			{
-				fixtureDef.shape = B2.b2RectShape(cornerBlockSize, cornerBlockSize, x, y);
+				fixtureDef.shape = B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y);
 				node.body.b2Body.createFixture(fixtureDef);
 			}
 		}
 		
 		if (!node.aperture.bottom)
 		{
-			fixtureDef.shape = B2.b2RectShape(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord);
+			fixtureDef.shape = B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord);
 			node.body.b2Body.createFixture(fixtureDef);
 		}
 		if (!node.aperture.top)
 		{
-			fixtureDef.shape = B2.b2RectShape(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord);
+			fixtureDef.shape = B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord);
 			node.body.b2Body.createFixture(fixtureDef);
 		}
 		if (!node.aperture.right)
 		{
-			fixtureDef.shape = B2.b2RectShape(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0);
+			fixtureDef.shape = B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0);
 			node.body.b2Body.createFixture(fixtureDef);
 		}
 		if (!node.aperture.left)
 		{
-			fixtureDef.shape = B2.b2RectShape(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0);
+			fixtureDef.shape = B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0);
 			node.body.b2Body.createFixture(fixtureDef);
 		}
 		

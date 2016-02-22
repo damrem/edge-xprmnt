@@ -1,8 +1,8 @@
 package b2d;
-import b2d.components.FixtureDef;
-import b2d.components.Shape;
+import b2d.components.ShapedFixtureDef;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.collision.shapes.B2PolygonShape;
+import box2D.collision.shapes.B2Shape;
 import box2D.common.math.B2Vec2;
 import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2BodyType;
@@ -80,32 +80,23 @@ class B2
 		return fd;
 	}
 	
-	public static function fixtureDef(density:Float = 1.0):IComponent
+	public static function shapedFixtureDef(shape:B2Shape, density:Float = 1.0):IComponent
 	{
-		return new FixtureDef(b2FixtureDef(density));
+		return new ShapedFixtureDef(shape, b2FixtureDef(density));
 	}
 	
-	public static function b2RectShape(width:Float, height:Float, x:Float=0, y:Float=0, angle:Float=0):B2PolygonShape 
+	public static function b2Rect(width:Float, height:Float, x:Float=0, y:Float=0, angle:Float=0):B2PolygonShape 
 	{
 		var shape = new B2PolygonShape();
 		shape.setAsOrientedBox(width, height, new B2Vec2(x, y), angle);
 		return shape;
 	}
 	
-	public static function rectShape(width:Float, height:Float, x:Float=0, y:Float=0, angle:Float=0):IComponent 
-	{
-		return new Shape(b2RectShape(width, height, x, y, angle));
-	}
-	
-	public static function b2CircleShape(radius:Float):B2CircleShape
+	public static function b2Circle(radius:Float):B2CircleShape
 	{
 		return new B2CircleShape(radius);
 	}
-	
-	public static function circleShape(radius:Float):IComponent
-	{
-		return new Shape(b2CircleShape(radius));
-	}
+
 }
 
 

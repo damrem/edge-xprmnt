@@ -3,7 +3,6 @@ package;
 import b2d.B2;
 import b2d.components.Body;
 import b2d.components.Position;
-import b2d.components.Shape;
 import b2d.systems.BodyCreateFixture;
 import b2d.systems.CreateBodyFromDef;
 import b2d.systems.WorldDrawDebugData;
@@ -65,15 +64,13 @@ class Main extends Sprite
 		
 		edgeWorld.engine.create([
 			new Position(50, 50), 
-			B2.circleShape(50),
-			B2.fixtureDef(1.0),
+			B2.shapedFixtureDef(B2.b2Circle(50), 1.0),
 			new Body(B2.b2BodyDef(B2BodyType.DYNAMIC_BODY))
 		]);
 		
 		edgeWorld.engine.create([
 			new Position(150, 150), 
-			B2.rectShape(10, 10),
-			B2.fixtureDef(1.0),
+			B2.shapedFixtureDef(B2.b2Rect(10, 10), 1.0),
 			new Body(B2.b2BodyDef(B2BodyType.DYNAMIC_BODY))
 		]);
 		

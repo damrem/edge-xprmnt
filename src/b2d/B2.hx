@@ -1,15 +1,13 @@
 package b2d;
-import b2d.components.BodyDef;
 import b2d.components.FixtureDef;
 import b2d.components.Shape;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.collision.shapes.B2PolygonShape;
-import box2D.collision.shapes.B2Shape;
 import box2D.common.math.B2Vec2;
-import box2D.dynamics.B2BodyType;
-import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2BodyDef;
+import box2D.dynamics.B2BodyType;
 import box2D.dynamics.B2DebugDraw;
+import box2D.dynamics.B2FixtureDef;
 import box2D.dynamics.B2World;
 import edge.IComponent;
 import openfl.display.DisplayObjectContainer;
@@ -73,11 +71,6 @@ class B2
 		var bd = new B2BodyDef();
 		bd.type = type;
 		return bd;
-	}
-	
-	public static function bodyDef(type:B2BodyType = B2BodyType.DYNAMIC_BODY):IComponent
-	{
-		return new BodyDef(b2BodyDef(type));
 	}
 	
 	public static function b2FixtureDef(density:Float = 1.0):B2FixtureDef

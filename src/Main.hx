@@ -65,23 +65,21 @@ class Main extends Sprite
 		
 		edgeWorld.engine.create([
 			new Position(50, 50), 
-			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
 			B2.circleShape(50),
 			B2.fixtureDef(1.0),
-			new Body()
+			new Body(B2.b2BodyDef(B2BodyType.DYNAMIC_BODY))
 		]);
 		
 		edgeWorld.engine.create([
 			new Position(150, 150), 
-			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
 			B2.rectShape(10, 10),
 			B2.fixtureDef(1.0),
-			new Body()
+			new Body(B2.b2BodyDef(B2BodyType.DYNAMIC_BODY))
 		]);
 		
 		edgeWorld.engine.create([
 			new Position(200, 200),
-			B2.bodyDef(B2BodyType.KINEMATIC_BODY),
+			//B2.bodyDef(B2BodyType.KINEMATIC_BODY),
 			new Aperture()
 		]);
 	}

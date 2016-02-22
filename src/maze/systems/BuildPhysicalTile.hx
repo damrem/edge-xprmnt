@@ -1,7 +1,6 @@
 package maze.systems;
 import b2d.B2;
 import b2d.components.Body;
-import b2d.components.BodyDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
@@ -34,14 +33,14 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	function update(aperture:Aperture, body:Body, bodyDef:BodyDef)
+	function update(aperture:Aperture, body:Body)
 	{
 		
 	}
 	
-	public function updateAdded(e:Entity, node:{ aperture:Aperture, body:Body, bodyDef:BodyDef })
+	public function updateAdded(e:Entity, node:{ aperture:Aperture, body:Body })
 	{
-		node.body.b2Body = B2.world.createBody(node.bodyDef.b2BodyDef);
+		node.body.b2Body = B2.world.createBody(node.body.b2BodyDef);
 		
 		for (x in cornerBlockCoords)
 		{
@@ -75,7 +74,7 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	public function updateRemoved(e:Entity, node:{ aperture:Aperture, body:Body, bodyDef:BodyDef })
+	public function updateRemoved(e:Entity, node:{ aperture:Aperture, body:Body })
 	{
 		
 	}

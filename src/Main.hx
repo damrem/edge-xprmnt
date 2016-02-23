@@ -12,8 +12,11 @@ import b2d.systems.WorldStep;
 import box2D.dynamics.B2BodyType;
 import edge.World;
 import maze.components.Aperture;
+import maze.factories.MazeGenerator;
 import maze.systems.BuildPhysicalTile;
+import openfl.display.FPS;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 
 /**
  * ...
@@ -50,6 +53,10 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		edgeWorld.physics.add(new BodyCreateShapedFixture());
+		
+		
+		
+		
 		//edgeWorld.physics.add(new BodyCreateFixture());
 		
 		//edgeWorld.physics.add(new CreateShape());
@@ -61,6 +68,7 @@ class Main extends Sprite
 		edgeWorld.engine.create(Factory.createBallEntity(100, 100, 50, 0, 0xff0000));
 		*/
 		
+		/*
 		edgeWorld.engine.create([
 			new Position(50, 50), 
 			B2.shapedFixtureDef(B2.b2Circle(50), 1.0),
@@ -88,6 +96,16 @@ class Main extends Sprite
 			new Position(300, 150),
 			new Aperture()
 		]);
+		*/
+		
+		for (tile in MazeGenerator.create(9, 9))
+		{
+			edgeWorld.engine.create(tile);
+		}
+		
+		addChild(new FPS(10, 10, 0xff0000));
+		
+		//addEventListener(MouseEvent.CLICK, 
 	}
 
 }

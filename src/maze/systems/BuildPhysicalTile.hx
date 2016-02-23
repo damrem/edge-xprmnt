@@ -13,9 +13,6 @@ import maze.components.Aperture;
  */
 class BuildPhysicalTile implements ISystem
 {
-	static public inline var TILE_SIZE:Float = 48;
-	static public inline var TUNNEL_SIZE:Float = 32;
-
 	var cornerBlockSize:Float;
 	var cornerBlockCoords:Array<Float>;
 	var fixtureDef:B2FixtureDef;
@@ -26,11 +23,11 @@ class BuildPhysicalTile implements ISystem
 	{
 		fixtureDef = B2.b2FixtureDef();
 		
-		cornerBlockSize = (TILE_SIZE - TUNNEL_SIZE) / 4;
-		cornerBlockAbsCoord = (TUNNEL_SIZE) / 2 + cornerBlockSize;
+		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 4;
+		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE) / 2 + cornerBlockSize;
 		trace(cornerBlockAbsCoord);
 		cornerBlockCoords = [ -cornerBlockAbsCoord, cornerBlockAbsCoord];
-		wallLength = TUNNEL_SIZE / 2;
+		wallLength = TileConf.TUNNEL_SIZE / 2;
 		
 	}
 	

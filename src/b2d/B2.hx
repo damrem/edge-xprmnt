@@ -80,7 +80,7 @@ class B2
 		return fd;
 	}
 	
-	public static function shapedFixtureDef(shape:B2Shape, density:Float = 1.0):IComponent
+	public static function shapedFixtureDef(shape:B2Shape, density:Float = 1.0):ShapedFixtureDef
 	{
 		return new ShapedFixtureDef(shape, b2FixtureDef(density));
 	}

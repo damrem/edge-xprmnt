@@ -2,17 +2,15 @@ package;
 
 import b2d.B2;
 import b2d.components.Body;
+import b2d.components.MultiShapedFixtureDef;
 import b2d.components.Position;
-import b2d.systems.BodyCreateFixture;
+import b2d.systems.BodyCreateShapedFixture;
+import b2d.systems.BodyDefSetPosition;
 import b2d.systems.CreateBodyFromDef;
 import b2d.systems.WorldDrawDebugData;
-import b2d.systems.BodyDefSetPosition;
-import b2d.systems.FixtureDefSetShape;
 import b2d.systems.WorldStep;
-import box2D.collision.shapes.B2CircleShape;
 import box2D.dynamics.B2BodyType;
 import edge.World;
-import hxlpers.geom.Pos;
 import maze.components.Aperture;
 import maze.systems.BuildPhysicalTile;
 import openfl.display.Sprite;
@@ -48,11 +46,11 @@ class Main extends Sprite
 		edgeWorld.physics.add(new WorldDrawDebugData());
 		
 		edgeWorld.physics.add(new BodyDefSetPosition());
-		edgeWorld.physics.add(new FixtureDefSetShape());
 		edgeWorld.physics.add(new CreateBodyFromDef());
-		edgeWorld.physics.add(new BodyCreateFixture());
+		edgeWorld.physics.add(new BodyCreateShapedFixture());
+		//edgeWorld.physics.add(new BodyCreateFixture());
 		
-		edgeWorld.physics.add(new BuildPhysicalTile());
+		//edgeWorld.physics.add(new BuildPhysicalTile());
 		//edgeWorld.physics.add(new CreateShape());
 		edgeWorld.start();
 		
@@ -76,7 +74,12 @@ class Main extends Sprite
 		
 		edgeWorld.engine.create([
 			new Position(200, 200),
-			//B2.bodyDef(B2BodyType.KINEMATIC_BODY),
+			new Body(B2.b2BodyDef(B2BodyType.KINEMATIC_BODY)),
+			new MultiShapedFixtureDef([
+				B2.shapedFixtureDef(B2.b2Rect(30, 10), 1.0),
+				B2.shapedFixtureDef(B2.b2Rect(10, 30), 1.0),
+				B2.shapedFixtureDef(B2.b2Rect(50, 10), 1.0)
+			]),
 			new Aperture()
 		]);
 	}

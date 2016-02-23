@@ -47,10 +47,11 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new BodyDefSetPosition());
 		edgeWorld.physics.add(new CreateBodyFromDef());
+		
+		edgeWorld.physics.add(new BuildPhysicalTile());
 		edgeWorld.physics.add(new BodyCreateShapedFixture());
 		//edgeWorld.physics.add(new BodyCreateFixture());
 		
-		//edgeWorld.physics.add(new BuildPhysicalTile());
 		//edgeWorld.physics.add(new CreateShape());
 		edgeWorld.start();
 		
@@ -79,7 +80,12 @@ class Main extends Sprite
 				B2.shapedFixtureDef(B2.b2Rect(30, 10), 1.0),
 				B2.shapedFixtureDef(B2.b2Rect(10, 30), 1.0),
 				B2.shapedFixtureDef(B2.b2Rect(50, 10), 1.0)
-			]),
+			])
+		]);
+		
+		edgeWorld.engine.create([
+			new Body(B2.b2BodyDef()),
+			new Position(300, 150),
 			new Aperture()
 		]);
 	}

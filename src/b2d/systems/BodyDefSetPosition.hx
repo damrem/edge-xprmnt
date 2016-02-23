@@ -19,7 +19,7 @@ class BodyDefSetPosition implements ISystem
 	public function updateAdded(e:Entity, node: { body:Body, pos:Position } )
 	{
 		trace("updateAdded");
-		node.body.b2BodyDef.position.set(node.pos.x, node.pos.x);
+		node.body.b2BodyDef.position.set(node.pos.x, node.pos.y);
 	}
 	
 }

@@ -1,6 +1,7 @@
 package maze.systems;
 import b2d.B2;
 import b2d.components.Body;
+import b2d.components.MultiShapedFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
@@ -38,39 +39,39 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	public function updateAdded(e:Entity, node:{ aperture:Aperture, body:Body })
+	public function updateAdded(entity:Entity, node:{ aperture:Aperture, body:Body })
 	{
-		node.body.b2Body = B2.world.createBody(node.body.b2BodyDef);
+		var shapedFixtureDefs = [];
 		
 		for (x in cornerBlockCoords)
 		{
 			for (y in cornerBlockCoords)
 			{
-				fixtureDef.shape = B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y);
-				node.body.b2Body.createFixture(fixtureDef);
+				shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y)));
 			}
 		}
 		
 		if (!node.aperture.bottom)
 		{
-			fixtureDef.shape = B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord);
-			node.body.b2Body.createFixture(fixtureDef);
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord)));
 		}
+		
 		if (!node.aperture.top)
 		{
-			fixtureDef.shape = B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord);
-			node.body.b2Body.createFixture(fixtureDef);
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord)));
 		}
+		
 		if (!node.aperture.right)
 		{
-			fixtureDef.shape = B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0);
-			node.body.b2Body.createFixture(fixtureDef);
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
 		}
+		
 		if (!node.aperture.left)
 		{
-			fixtureDef.shape = B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0);
-			node.body.b2Body.createFixture(fixtureDef);
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
 		}
+		
+		entity.add(new MultiShapedFixtureDef(shapedFixtureDefs));
 		
 	}
 	

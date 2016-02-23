@@ -11,7 +11,10 @@ import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
 import box2D.dynamics.B2BodyType;
 import edge.World;
+import maze.systems.MoveMazeRandomly;
+
 import maze.components.Aperture;
+import maze.components.Maze;
 import maze.factories.MazeGenerator;
 import maze.systems.BuildPhysicalTile;
 import openfl.display.FPS;
@@ -53,6 +56,8 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		edgeWorld.physics.add(new BodyCreateShapedFixture());
+		
+		edgeWorld.physics.add(new MoveMazeRandomly());
 		
 		
 		
@@ -98,7 +103,11 @@ class Main extends Sprite
 		]);
 		*/
 		
-		for (tile in MazeGenerator.create(9, 9))
+		var tiles = MazeGenerator.create(9, 9);
+		
+		edgeWorld.engine.create([new Maze(tiles)]);
+		
+		for (tile in tiles)
 		{
 			edgeWorld.engine.create(tile);
 		}

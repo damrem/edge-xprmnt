@@ -12,6 +12,7 @@ import b2d.systems.WorldStep;
 import box2D.dynamics.B2BodyType;
 import edge.World;
 import maze.systems.MoveMazeRandomly;
+import maze.systems.MoveTile;
 
 import maze.components.Aperture;
 import maze.components.Maze;
@@ -58,6 +59,7 @@ class Main extends Sprite
 		edgeWorld.physics.add(new BodyCreateShapedFixture());
 		
 		edgeWorld.physics.add(new MoveMazeRandomly());
+		edgeWorld.physics.add(new MoveTile());
 		
 		
 		

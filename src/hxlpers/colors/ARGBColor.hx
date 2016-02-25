@@ -4,7 +4,7 @@ package hxlpers.colors;
  * ...
  * @author damrem
  */
-abstract RGBColor(UInt) from UInt to UInt
+abstract ARGBColor(UInt) from UInt to UInt
 {
 
 	public function new(v:UInt=0) this = v;

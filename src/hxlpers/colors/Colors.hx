@@ -7,7 +7,7 @@ package hxlpers.colors;
 class Colors
 {
 
-	public static inline var WHITE:RGBColor = 0xFFFFFF;
-	public static inline var RED:RGBColor = 0xFF0000;
+	public static inline var WHITE:ARGBColor = 0xFFFFFF;
+	public static inline var RED:ARGBColor = 0xFF0000;
 	
 }

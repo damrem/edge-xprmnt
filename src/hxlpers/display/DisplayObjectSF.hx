@@ -1,6 +1,6 @@
 package hxlpers.display;
 import hxlpers.colors.ColorComponent;
-import hxlpers.colors.RGBColor;
+import hxlpers.colors.ARGBColor;
 import openfl.display.DisplayObject;
 import openfl.geom.ColorTransform;
 using hxlpers.display.GraphicsSF;
@@ -16,7 +16,7 @@ class DisplayObjectSF
 		return user.scaleX = user.scaleY = factor;
 	}
 	
-	static public function color(user:DisplayObject, color:RGBColor):DisplayObject
+	static public function color(user:DisplayObject, color:ARGBColor):DisplayObject
 	{
 		var ct = new ColorTransform();
 		ct.color = color;

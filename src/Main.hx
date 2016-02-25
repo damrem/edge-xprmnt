@@ -63,7 +63,7 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		
-		var mainLayer = new Layer();
+		var mainLayer = new Layer(2);
 		
 		edgeWorld.render.add(new RenderLayer(this));
 		edgeWorld.render.add(new AddRemoveGfx());

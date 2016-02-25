@@ -2,8 +2,10 @@ package;
 
 import b2d.B2;
 import b2d.components.Body;
+import b2d.components.Impulse;
 import b2d.components.Position;
 import b2d.components.Shape;
+import b2d.systems.BodyApplyImpulse;
 import b2d.systems.BodyCreateFixture;
 import b2d.systems.BodyDefSetPosition;
 import b2d.systems.CreateBodyFromDef;
@@ -40,7 +42,6 @@ class Main extends Sprite
 		
 		var edgeWorld = new World();
 		B2.createWorld();
-		B2.addDebugTo(this);
 		
 		/*
 		var bd = new BodyDef();
@@ -55,12 +56,13 @@ class Main extends Sprite
 		
 		//	SYSTEMS
 		edgeWorld.physics.add(new WorldStep());
-		//edgeWorld.physics.add(new WorldDrawDebugData());
+		edgeWorld.physics.add(new WorldDrawDebugData());
 		
 		edgeWorld.physics.add(new BodyDefSetPosition());
 		edgeWorld.physics.add(new FixtureDefSetShape());
 		edgeWorld.physics.add(new CreateBodyFromDef());
 		edgeWorld.physics.add(new BodyCreateFixture());
+		edgeWorld.physics.add(new BodyApplyImpulse());
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		
@@ -91,17 +93,19 @@ class Main extends Sprite
 			B2.fixtureDef(1.0),
 			new Body(),
 			new Gfx(new DiskShape(48)),
-			mainLayer
+			mainLayer,
+			new Impulse(0.02,0.01)
 		]);
 		
 		edgeWorld.engine.create([
 			new Position(150, 150), 
 			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			B2.rectShape(12, 12),
+			B2.rectShape(48, 48),
 			B2.fixtureDef(1.0),
 			new Body(),
-			new Gfx(new BoxShape(12, 12)),
-			mainLayer
+			new Gfx(new BoxShape(48, 48)),
+			mainLayer,
+			new Impulse(-0.01,-0.02)
 		]);
 		
 		edgeWorld.engine.create([
@@ -110,6 +114,7 @@ class Main extends Sprite
 			new Aperture()
 		]);
 		
+		B2.addDebugTo(this, .5);
 		addChild(new FPS(10, 10, 0xffffff));
 	}
 

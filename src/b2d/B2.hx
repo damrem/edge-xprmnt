@@ -47,11 +47,12 @@ class B2
 		return world;
 	}
 	
-	public static function addDebugTo(container:DisplayObjectContainer)
+	public static function addDebugTo(container:DisplayObjectContainer, alpha = 1.0)
 	{
 		var debugDraw = new B2DebugDraw();
 		
 		debugSprite = new Sprite();
+		debugSprite.alpha = alpha;
 		container.addChild(debugSprite);
 		debugDraw.setSprite(debugSprite);
 		debugDraw.setDrawScale(1);

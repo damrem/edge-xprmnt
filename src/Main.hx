@@ -20,6 +20,7 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import rendering.components.Gfx;
 import rendering.components.Layer;
+import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
 import rendering.systems.PositionGfx;
 import rendering.systems.RenderLayer;
@@ -63,7 +64,7 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		
-		var mainLayer = new Layer(2);
+		var mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
 		
 		edgeWorld.render.add(new RenderLayer(this));
 		edgeWorld.render.add(new AddRemoveGfx());
@@ -86,20 +87,20 @@ class Main extends Sprite
 		edgeWorld.engine.create([
 			new Position(50, 50), 
 			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			B2.circleShape(50),
+			B2.circleShape(48),
 			B2.fixtureDef(1.0),
 			new Body(),
-			new Gfx(new DiskShape(50)),
+			new Gfx(new DiskShape(48)),
 			mainLayer
 		]);
 		
 		edgeWorld.engine.create([
 			new Position(150, 150), 
 			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			B2.rectShape(10, 10),
+			B2.rectShape(12, 12),
 			B2.fixtureDef(1.0),
 			new Body(),
-			new Gfx(new BoxShape(10, 10)),
+			new Gfx(new BoxShape(12, 12)),
 			mainLayer
 		]);
 		

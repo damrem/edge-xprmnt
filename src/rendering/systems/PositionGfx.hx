@@ -7,7 +7,7 @@ using hxlpers.math.MathSF;
  * ...
  * @author damrem
  */
-class GfxPositioner implements ISystem
+class PositionGfx implements ISystem
 {
 
 	public function update(gfx:Gfx, body:Body) 

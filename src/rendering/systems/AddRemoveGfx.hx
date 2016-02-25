@@ -10,7 +10,7 @@ import rendering.components.Layer;
  * ...
  * @author damrem
  */
-class GfxManager implements ISystem
+class AddRemoveGfx implements ISystem
 {
 	public function update(layer:Layer, gfx:Gfx) 
 	{

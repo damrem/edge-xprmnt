@@ -12,7 +12,7 @@ using hxlpers.display.BitmapDataSF;
  * ...
  * @author damrem
  */
-class LayerManager implements ISystem
+class RenderLayer implements ISystem
 {
 	var host:DisplayObjectContainer;
 	

@@ -20,9 +20,9 @@ import openfl.display.FPS;
 import openfl.display.Sprite;
 import rendering.components.Gfx;
 import rendering.components.Layer;
-import rendering.systems.GfxManager;
-import rendering.systems.GfxPositioner;
-import rendering.systems.LayerManager;
+import rendering.systems.AddRemoveGfx;
+import rendering.systems.PositionGfx;
+import rendering.systems.RenderLayer;
 
 using hxlpers.display.ShapeSF;
 
@@ -65,9 +65,9 @@ class Main extends Sprite
 		
 		var mainLayer = new Layer();
 		
-		edgeWorld.render.add(new LayerManager(this));
-		edgeWorld.render.add(new GfxManager());
-		edgeWorld.render.add(new GfxPositioner());
+		edgeWorld.render.add(new RenderLayer(this));
+		edgeWorld.render.add(new AddRemoveGfx());
+		edgeWorld.render.add(new PositionGfx());
 		
 		//edgeWorld.physics.add(new CreateShape());
 		edgeWorld.start();

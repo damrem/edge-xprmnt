@@ -8,6 +8,5 @@ import openfl.display.DisplayObject;
  */
 class Gfx implements IComponent
 {
-	public var sprite:DisplayObject;
-	public var layer:Layer;
+	public var display:DisplayObject;
 }

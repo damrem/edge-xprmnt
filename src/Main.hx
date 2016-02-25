@@ -12,12 +12,17 @@ import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
 import box2D.dynamics.B2BodyType;
 import edge.World;
+import hxlpers.shapes.BoxShape;
+import hxlpers.shapes.DiskShape;
 import maze.components.Aperture;
 import maze.systems.BuildPhysicalTile;
+import openfl.display.FPS;
 import openfl.display.Sprite;
 import rendering.components.Gfx;
 import rendering.components.Layer;
-import rendering.systems.LayerRenderer;
+import rendering.systems.GfxManager;
+import rendering.systems.GfxPositioner;
+import rendering.systems.LayerManager;
 
 using hxlpers.display.ShapeSF;
 
@@ -49,7 +54,7 @@ class Main extends Sprite
 		
 		//	SYSTEMS
 		edgeWorld.physics.add(new WorldStep());
-		edgeWorld.physics.add(new WorldDrawDebugData());
+		//edgeWorld.physics.add(new WorldDrawDebugData());
 		
 		edgeWorld.physics.add(new BodyDefSetPosition());
 		edgeWorld.physics.add(new FixtureDefSetShape());
@@ -59,7 +64,10 @@ class Main extends Sprite
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		
 		var mainLayer = new Layer();
-		edgeWorld.render.add(new LayerRenderer(this));
+		
+		edgeWorld.render.add(new LayerManager(this));
+		edgeWorld.render.add(new GfxManager());
+		edgeWorld.render.add(new GfxPositioner());
 		
 		//edgeWorld.physics.add(new CreateShape());
 		edgeWorld.start();
@@ -73,13 +81,16 @@ class Main extends Sprite
 		var disk = new openfl.display.Shape();
 		disk.circle(50, 0xff0000);
 		
+		edgeWorld.engine.create([mainLayer]);
+		
 		edgeWorld.engine.create([
 			new Position(50, 50), 
 			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
 			B2.circleShape(50),
 			B2.fixtureDef(1.0),
 			new Body(),
-			new Gfx(disk, mainLayer)
+			new Gfx(new DiskShape(50)),
+			mainLayer
 		]);
 		
 		edgeWorld.engine.create([
@@ -87,7 +98,9 @@ class Main extends Sprite
 			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
 			B2.rectShape(10, 10),
 			B2.fixtureDef(1.0),
-			new Body()
+			new Body(),
+			new Gfx(new BoxShape(10, 10)),
+			mainLayer
 		]);
 		
 		edgeWorld.engine.create([
@@ -95,6 +108,8 @@ class Main extends Sprite
 			B2.bodyDef(B2BodyType.KINEMATIC_BODY),
 			new Aperture()
 		]);
+		
+		addChild(new FPS(10, 10, 0xffffff));
 	}
 
 }

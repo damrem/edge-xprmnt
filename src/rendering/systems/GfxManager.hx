@@ -10,15 +10,8 @@ import rendering.components.Layer;
  * ...
  * @author damrem
  */
-class LayerRenderer implements ISystem
+class GfxManager implements ISystem
 {
-	var host:DisplayObjectContainer;
-	
-	public function new(host:DisplayObjectContainer)
-	{
-		this.host = host;
-	}
-	
 	public function update(layer:Layer, gfx:Gfx) 
 	{
 		
@@ -27,7 +20,13 @@ class LayerRenderer implements ISystem
 	public function updateAdded(e:Entity, node: { layer:Layer, gfx:Gfx } )
 	{
 		trace("updateAdded");
-		node.layer.scene.addChild(node.gfx.sprite);
+		node.layer.scene.addChild(node.gfx.display);
+	}
+	
+	public function updateRemoved(e:Entity, node: { layer:Layer, gfx:Gfx } )
+	{
+		trace("updateRemoved");
+		node.layer.scene.removeChild(node.gfx.display);
 	}
 	
 }

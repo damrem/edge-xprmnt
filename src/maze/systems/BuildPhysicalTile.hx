@@ -30,12 +30,12 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	function update(aperture:TileDef, body:Body)
+	function update(tileDef:TileDef, body:Body)
 	{
 		
 	}
 	
-	public function updateAdded(entity:Entity, node:{ aperture:TileDef, body:Body })
+	public function updateAdded(entity:Entity, node:{ tileDef:TileDef, body:Body })
 	{
 		var shapedFixtureDefs = [];
 		
@@ -47,22 +47,22 @@ class BuildPhysicalTile implements ISystem
 			}
 		}
 		
-		if (!node.aperture.bottom)
+		if (!node.tileDef.bottom)
 		{
 			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord)));
 		}
 		
-		if (!node.aperture.top)
+		if (!node.tileDef.top)
 		{
 			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord)));
 		}
 		
-		if (!node.aperture.right)
+		if (!node.tileDef.right)
 		{
 			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
 		}
 		
-		if (!node.aperture.left)
+		if (!node.tileDef.left)
 		{
 			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
 		}
@@ -71,7 +71,7 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	public function updateRemoved(e:Entity, node:{ aperture:TileDef, body:Body })
+	public function updateRemoved(e:Entity, node:{ tileDef:TileDef, body:Body })
 	{
 		
 	}

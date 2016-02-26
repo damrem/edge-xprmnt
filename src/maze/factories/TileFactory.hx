@@ -19,7 +19,7 @@ class TileFactory
 	{
 		var tileEntity = new Array<{}>();
 		
-		tileEntity.push(new TileDef());
+		tileEntity.push(new TileDef(x, y));
 		tileEntity.push(new Position((x + 0.5) * TileConf.SIZE, (y + 0.5) * TileConf.SIZE));
 		tileEntity.push(new Body(B2.b2BodyDef(B2BodyType.KINEMATIC_BODY)));
 		

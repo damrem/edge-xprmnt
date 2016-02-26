@@ -12,15 +12,17 @@ using hxlpers.ds.Array2SF;
 class Maze implements IComponent
 {
 
-	public var tileDefs:Array2 < TileDef > > ;
+	public var tiles:Array2 < Array< {} > > ;
 	
+	/*
 	public function new(tileEntities:Array2<Array<{}>>)
 	{
 		for (tileEntity in tileEntities)
 		{
 			var cell = tileEntities.getCellOf(tileEntity);
-			tileDefs.set(cell.x, cell.y, tileEntity.
+			tiles.set(cell.x, cell.y, tileEntity.
 		}
 	}
+	*/
 	
 }

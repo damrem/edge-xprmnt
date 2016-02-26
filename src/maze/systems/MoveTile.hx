@@ -19,7 +19,7 @@ using hxlpers.ds.Array2SF;
  */
 class MoveTile implements ISystem
 {
-	public function update(body:Body, movement:TileMovement) 
+	public function update(tileDef:TileDef, body:Body, movement:TileMovement) 
 	{
 		body.b2Body.setPosition(movement.position);
 		//movingTileNode.physical.body.setPosition(movingTileNode.movement.position);
@@ -29,9 +29,9 @@ class MoveTile implements ISystem
 	{
 		trace("updateAdded");
 		
-		var cell = Main.maze.tileDefs.getCellOf(node.tileDef);
+		var cell = node.tileDef.cell;
 		
-		node.movement.position = new B2Vec2(UnitConvert.posXfromCellX(movingTileNode.tile.cell.x), UnitConvert.posYfromCellY(movingTileNode.tile.cell.y));
+		node.movement.position = new B2Vec2(UnitConvert.posXfromCellX(cell.x), UnitConvert.posYfromCellY(cell.y));
 		
 		Actuate
 		.tween(node.movement.position, 2.0, { 

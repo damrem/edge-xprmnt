@@ -1,13 +1,14 @@
 package maze.systems;
 
-import ash.core.Entity;
-import ash.tools.ListIteratingSystem;
+
+
 import de.polygonal.ds.Array2.Array2Cell;
+import edge.Entity;
 import edge.ISystem;
 import hxlpers.Direction;
-import labyrinth.movement.TileMovementComponent;
 import maze.components.Maze;
 import maze.components.MazeMovement;
+import maze.components.TileMovement;
 
 using hxlpers.ds.Array2SF;
 
@@ -21,7 +22,6 @@ class MoveMaze implements ISystem
 
 	public function new() 
 	{
-		super(MovingMazeNode, nodeUpdate, nodeAdded);
 		destCell = new Array2Cell();
 	}
 	
@@ -30,37 +30,66 @@ class MoveMaze implements ISystem
 		
 	}
 	
-	function updateAdded(entity:Entity, node:{maze:Maze, movement:MazeMovement}) 
+	public function updateAdded(entity:Entity, node:{maze:Maze, movement:MazeMovement}) 
 	{
-		var movingTileEntities:Array<Array<{}>> = [];
+		trace("updateAdded");
+		
+		var movingTiles:Array<Array<{}>> = [];
 		//var originCell;
 		
 		if (node.movement.direction == Direction.Left || node.movement.direction == Direction.Right)
 		{
-			movingTileEntities = node.maze.tiles.getRow(node.movement.coord, movingTileEntities);
+			movingTiles = node.maze.tiles.getRow(node.movement.coord, movingTiles);
 		}
 		else if (node.movement.direction == Direction.Up || node.movement.direction == Direction.Down)
 		{
-			movingTileEntities = node.maze.tiles.getCol(movingMazeNode.movement.coord, movingTileEntities);
+			movingTiles = node.maze.tiles.getCol(node.movement.coord, movingTiles);
 		}
 		
-		for (tileEntity in movingTileEntities)
+		//trace("movingTiles"+ movingTiles);
+		
+		/*
+		for (movingTile in movingTiles)
 		{
 			
+			destCell = node.maze.tiles.getCellOf(movingTile);
+			
+			switch(node.movement.direction)
+			{
+				case Direction.Left:
+					destCell.x--;
+					if (destCell.x < 0) destCell.x = MazeConf.WIDTH - 1;
+					
+				case Direction.Up:
+					destCell.y--;
+					if (destCell.y < 0) destCell.y = MazeConf.HEIGHT - 1;
+					
+				case Direction.Right:
+					destCell.x++;
+					if (destCell.x >= MazeConf.WIDTH) destCell.x = 0;
+					
+				case Direction.Down:
+					destCell.y++;
+					if (destCell.y >= MazeConf.HEIGHT) destCell.y = 0;
+					
+				case Direction.None:
+				
+			}
 			///???
-			tileEntity.
-			var tileComponent = cast(tileEntity.get(TileComponent), TileComponent);
-			tileComponent.cell = movingMazeNode.maze.tiles.cellOf(tileEntity, tileComponent.cell);
+			movingTile.push(new TileMovement(destCell));
+			
+			
 			
 		}
+		*/
+		node.maze.tiles.move(node.movement.coord, node.movement.coord, node.movement.direction);
 		
-		movingMazeNode.maze.tiles.move(movingMazeNode.movement.coord, movingMazeNode.movement.coord, movingMazeNode.movement.direction);
 		
-		for (tileEntity in movingTileEntities)
+		for (movingTile in movingTiles)
 		{
-			var destCell = movingMazeNode.maze.tiles.cellOf(tileEntity, destCell);
+			var destCell = node.maze.tiles.cellOf(movingTile, destCell);
 			
-			tileEntity.add(new TileMovementComponent(destCell));
+			movingTile.push(new TileMovement(destCell));
 			
 		}
 	}

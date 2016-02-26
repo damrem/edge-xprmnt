@@ -5,7 +5,7 @@ import b2d.components.MultiShapedFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
-import maze.components.Aperture;
+import maze.components.TileDef;
 
 /**
  * ...
@@ -25,18 +25,17 @@ class BuildPhysicalTile implements ISystem
 		
 		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 4;
 		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE) / 2 + cornerBlockSize;
-		trace(cornerBlockAbsCoord);
 		cornerBlockCoords = [ -cornerBlockAbsCoord, cornerBlockAbsCoord];
 		wallLength = TileConf.TUNNEL_SIZE / 2;
 		
 	}
 	
-	function update(aperture:Aperture, body:Body)
+	function update(aperture:TileDef, body:Body)
 	{
 		
 	}
 	
-	public function updateAdded(entity:Entity, node:{ aperture:Aperture, body:Body })
+	public function updateAdded(entity:Entity, node:{ aperture:TileDef, body:Body })
 	{
 		var shapedFixtureDefs = [];
 		
@@ -72,7 +71,7 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	public function updateRemoved(e:Entity, node:{ aperture:Aperture, body:Body })
+	public function updateRemoved(e:Entity, node:{ aperture:TileDef, body:Body })
 	{
 		
 	}

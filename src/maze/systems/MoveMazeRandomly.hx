@@ -44,6 +44,8 @@ class MoveMazeRandomly implements ISystem
 	
 	function startMoving()
 	{
+		trace("startMoving");
+		
 		var direction = Direction.None;
 		var coord:Int = 0;
 		

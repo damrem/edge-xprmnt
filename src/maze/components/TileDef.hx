@@ -5,7 +5,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class Aperture implements IComponent
+class TileDef implements IComponent
 {
 
 	var bits:Int;
@@ -41,6 +41,11 @@ class Aperture implements IComponent
 	function get_top()
 	{
 		return bits & 8 > 0;
+	}
+	
+	public function toString():String
+	{
+		return "[Aperture bits=" + bits + "]";
 	}
 	
 }

@@ -21,14 +21,12 @@ class BodyCreateShapedFixture implements ISystem
 	
 	public function updateAdded(e:Entity, node:{ body:Body, shapedFixtureDef:ShapedFixtureDef }) 
 	{
-		trace("updateAdded");
 		node.shapedFixtureDef.b2FixtureDef.shape = node.shapedFixtureDef.b2Shape;
 		node.body.b2Body.createFixture(node.shapedFixtureDef.b2FixtureDef);
 	}
 	
 	public function multiShapeFixtureDefNodeAdded(e:Entity, node: { body:Body, multiShapedFixtureDef:MultiShapedFixtureDef } )
 	{
-		trace("multiShapeFixtureDefNodeAdded");
 		for (shapedFixtureDef in node.multiShapedFixtureDef.shapedFixtureDefs)
 		{
 			shapedFixtureDef.b2FixtureDef.shape = shapedFixtureDef.b2Shape;

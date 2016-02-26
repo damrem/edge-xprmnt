@@ -20,7 +20,6 @@ class MazeGenerator
 			for(x in 0...width)
 			{
 				var tile = TileFactory.createEntity(x, y);
-				trace(x, y);
 				tiles.set(x, y, tile);
 			}
 		}

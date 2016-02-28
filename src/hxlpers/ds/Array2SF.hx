@@ -95,7 +95,7 @@ class Array2SF
 	}
 	
 	
-	static public function move<T>(user:Array2<T>, colIndex:Int, rowIndex:Int, direction:hxlpers.Direction, ?inserted:T):Array<T>
+	static public function move<T>(user:Array2<T>, colIndex:Int, rowIndex:Int, direction:hxlpers.Direction, ?inserted:T):T
 	{
 		var colOrRow:Array<T> = [];
 		
@@ -104,6 +104,7 @@ class Array2SF
 		switch(direction)
 		{
 			default:
+				outtered = null;
 			case Direction.Right:
 				user.getRow(rowIndex, colOrRow);
 				outtered = colOrRow.pop();
@@ -129,7 +130,7 @@ class Array2SF
 				user.setCol(colIndex, colOrRow);
 		}
 		
-		return colOrRow;
+		return outtered;
 	}
 	
 }

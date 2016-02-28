@@ -9,11 +9,11 @@ class UnitConvert
 
 	public static function posXfromCellX(cellX:Int):Float
 	{
-		return (cellX + 0.5) * TileConf.SIZE;
+		return 100+(cellX + 0.5) * TileConf.SIZE;
 	}
 	
 	public static function posYfromCellY(cellY:Int):Float
 	{
-		return (cellY + 0.5) * TileConf.SIZE;
+		return 100+(cellY + 0.5) * TileConf.SIZE;
 	}
 }

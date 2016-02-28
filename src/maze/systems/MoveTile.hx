@@ -19,33 +19,34 @@ using hxlpers.ds.Array2SF;
  */
 class MoveTile implements ISystem
 {
-	public function update(tileDef:TileDef, body:Body, movement:TileMovement) 
+	public function update(tileDef:TileDef, body:Body, tileMovement:TileMovement) 
 	{
-		body.b2Body.setPosition(movement.position);
-		//movingTileNode.physical.body.setPosition(movingTileNode.movement.position);
+		trace("update");
+		body.b2Body.setPosition(tileMovement.position);
+		//movingTileNode.physical.body.setPosition(movingTileNode.tileMovement.position);
 	}
 	
-	public function updateAdded(entity:Entity, node:{tileDef:TileDef, body:Body, movement:TileMovement}) 
+	public function updateAdded(entity:Entity, node:{tileDef:TileDef, body:Body, tileMovement:TileMovement}) 
 	{
 		trace("updateAdded");
 		
 		var cell = node.tileDef.cell;
 		
-		node.movement.position = new B2Vec2(UnitConvert.posXfromCellX(cell.x), UnitConvert.posYfromCellY(cell.y));
+		node.tileMovement.position = new B2Vec2(UnitConvert.posXfromCellX(cell.x), UnitConvert.posYfromCellY(cell.y));
 		
 		Actuate
-		.tween(node.movement.position, 2.0, { 
+		.tween(node.tileMovement.position, 2.0, { 
 			x:UnitConvert.posXfromCellX(cell.x), 
 			y:UnitConvert.posYfromCellY(cell.y) 
 		} )
-		.onComplete(tweenEnded, [entity, node.movement]);
+		.onComplete(tweenEnded, [entity, node.tileMovement]);
 		
 	}
 	
-	function tweenEnded(entity:Entity, movement:TileMovement)
+	function tweenEnded(entity:Entity, tileMovement:TileMovement)
 	{
-		trace("removeMovement", entity, movement);
-		entity.remove(movement);
+		trace("removeMovement", entity, tileMovement);
+		entity.remove(tileMovement);
 	}
 	
 	

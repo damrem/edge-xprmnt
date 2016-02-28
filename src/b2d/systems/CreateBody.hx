@@ -7,7 +7,7 @@ import edge.ISystem;
  * ...
  * @author damrem
  */
-class CreateBodyFromDef implements ISystem
+class CreateBody implements ISystem
 {
 
 	public function update(b:Body) 
@@ -17,6 +17,7 @@ class CreateBodyFromDef implements ISystem
 	
 	public function updateAdded(e:Entity, n: { b:Body } )
 	{
+		trace("updateAdded");
 		n.b.b2Body = B2.world.createBody(n.b.b2BodyDef);
 	}
 	

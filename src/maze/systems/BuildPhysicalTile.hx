@@ -22,10 +22,10 @@ class BuildPhysicalTile implements ISystem
 	
 	public function new() 
 	{
-		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 4;
-		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE) / 2 + cornerBlockSize;
+		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 2;
+		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE + cornerBlockSize) / 2;
 		cornerBlockCoords = [ -cornerBlockAbsCoord, cornerBlockAbsCoord];
-		wallLength = TileConf.TUNNEL_SIZE / 2;
+		wallLength = TileConf.TUNNEL_SIZE;
 		
 	}
 	

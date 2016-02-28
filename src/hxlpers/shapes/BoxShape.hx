@@ -14,7 +14,7 @@ class BoxShape extends ShortcutShape
 	{
 		super(FillColor, Thickness, StrokeColor);
 		this.centered = Centered;
-		graphics.drawRect(centered? -Width:0, centered? -Height:0, Width*2, Height*2);
+		graphics.drawRect(centered? -Width / 2:0, centered? -Height / 2:0, Width, Height);
 		endFill();
 	}
 	

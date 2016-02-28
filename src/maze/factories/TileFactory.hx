@@ -1,12 +1,8 @@
 package maze.factories;
 
-import b2d.B2;
 import b2d.components.Body;
-import b2d.components.Position;
 import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2BodyType;
-import edge.Entity;
-import edge.IComponent;
 import maze.components.TileDef;
 
 
@@ -21,11 +17,13 @@ class TileFactory
 		var tileEntity = new Array<{}>();
 		
 		tileEntity.push(new TileDef(x, y));
-		tileEntity.push(new Position((x + 0.5) * TileConf.SIZE, (y + 0.5) * TileConf.SIZE));
+		//tileEntity.push(new Position((x + 0.5) * TileConf.SIZE, ));
 		
-		var b2BodyDef = new B2BodyDef();
-		b2BodyDef.type = B2BodyType.KINEMATIC_BODY;
-		tileEntity.push(new Body(b2BodyDef));
+		tileEntity.push(new Body({
+			x: (x + 0.5) * TileConf.SIZE, 
+			y: (y + 0.5) * TileConf.SIZE,
+			type: B2BodyType.KINEMATIC_BODY
+		}));
 		
 		return tileEntity;
 	}

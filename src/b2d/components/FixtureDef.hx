@@ -15,12 +15,9 @@ class FixtureDef implements IComponent
 	{
 		b2FixtureDef = new B2FixtureDef();
 		
-		b2FixtureDef.density = fixtureDefDef.density;
+		b2FixtureDef.shape = fixtureDefDef.shape;
 		
-		if (fixtureDefDef.shape != null)
-		{
-			b2FixtureDef.shape = fixtureDefDef.shape;
-		}
+		b2FixtureDef.density = fixtureDefDef.density;
 		
 		if (fixtureDefDef.filter != null)
 		{
@@ -32,8 +29,8 @@ class FixtureDef implements IComponent
 
 typedef FixtureDefDef =
 {
+	var shape:B2Shape;
 	@:optional var density:Float;
-	@:optional var shape:B2Shape;
 	@:optional var filter:B2FilterDataDef;
 }
 

@@ -21,6 +21,7 @@ class BodyCreateFixture implements ISystem
 	
 	public function updateAdded(e:Entity, node:{ body:Body, shapedFixtureDef:FixtureDef }) 
 	{
+		trace("updateAdded");
 		node.shapedFixtureDef.b2FixtureDef.shape = node.shapedFixtureDef.b2FixtureDef.shape;
 		node.body.b2Body.createFixture(node.shapedFixtureDef.b2FixtureDef);
 	}

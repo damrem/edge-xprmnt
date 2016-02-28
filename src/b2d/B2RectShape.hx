@@ -14,11 +14,19 @@ class B2RectShape extends B2PolygonShape
 	public function new(def:B2RectShapeDef) 
 	{
 		super();
+		if (def.x == null)
+		{
+			def.x = 0;
+		}
+		if (def.y == null)
+		{
+			def.y = 0;
+		}
 		if (def.angle == null)
 		{
 			def.angle = 0;
 		}
-		setAsOrientedBox(def.width, def.height, new B2Vec2(def.x, def.y), def.angle);
+		setAsOrientedBox(def.width/2, def.height/2, new B2Vec2(def.x, def.y), def.angle);
 	}
 	
 }

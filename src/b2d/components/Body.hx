@@ -1,6 +1,8 @@
 package b2d.components;
+import box2D.common.math.B2Vec2;
 import box2D.dynamics.B2Body;
 import box2D.dynamics.B2BodyDef;
+import box2D.dynamics.B2BodyType;
 import edge.IComponent;
 
 /**
@@ -16,9 +18,19 @@ class Body implements IComponent
 	 * Empty constructor does not force to pass a B2Body argument,
 	 * so that b2Body can be set later.
 	 */
-	public function new(b2BodyDef:B2BodyDef)
+	public function new(bodyDefDef:BodyDefDef)
 	{
-		this.b2BodyDef = b2BodyDef;
-		
+		b2BodyDef = new B2BodyDef();
+		b2BodyDef.position.set(bodyDefDef.x, bodyDefDef.y);
+		if (bodyDefDef.type != null)
+		{
+			b2BodyDef.type = bodyDefDef.type;			
+		}
 	}
+}
+
+typedef BodyDefDef = {
+	@:optional var type:B2BodyType;
+	@:optional var x:Float;
+	@:optional var y:Float;
 }

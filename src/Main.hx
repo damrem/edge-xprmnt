@@ -1,13 +1,22 @@
 package;
 
 import b2d.B2;
+import b2d.B2RectShape;
+import b2d.components.Body;
+import b2d.components.FixtureDef;
+import b2d.components.Impulse;
 import b2d.systems.BodyApplyImpulse;
 import b2d.systems.BodyCreateFixture;
-import b2d.systems.BodyDefSetPosition;
-import b2d.systems.CreateBodyFromDef;
+import b2d.systems.CreateBody;
 import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
+import box2D.collision.shapes.B2CircleShape;
+import box2D.collision.shapes.B2PolygonShape;
+import box2D.common.math.B2Vec2;
+import box2D.dynamics.B2BodyType;
 import edge.World;
+import hxlpers.shapes.BoxShape;
+import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
 import maze.systems.BuildPhysicalTile;
@@ -16,6 +25,7 @@ import maze.systems.MoveMazeRandomly;
 import maze.systems.MoveTile;
 import openfl.display.FPS;
 import openfl.display.Sprite;
+import rendering.components.Gfx;
 import rendering.components.Layer;
 import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
@@ -63,13 +73,13 @@ class Main extends Sprite
 		edgeWorld.physics.add(new WorldStep());
 		edgeWorld.physics.add(new WorldDrawDebugData());
 		
-		edgeWorld.physics.add(new BodyDefSetPosition());
-		edgeWorld.physics.add(new CreateBodyFromDef());
-		edgeWorld.physics.add(new BodyApplyImpulse());
+		edgeWorld.physics.add(new CreateBody());
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		edgeWorld.physics.add(new BodyCreateFixture());
 		
+		edgeWorld.physics.add(new BodyApplyImpulse());
+
 		edgeWorld.physics.add(new MoveMazeRandomly());
 		edgeWorld.physics.add(new MoveMaze());
 		edgeWorld.physics.add(new MoveTile());
@@ -95,38 +105,59 @@ class Main extends Sprite
 		edgeWorld.engine.create(Factory.createBallEntity(100, 100, 50, 0, 0xff0000));
 		*/
 		
-		var disk = new openfl.display.Shape();
-		disk.circle(50, 0xff0000);
+		//var disk = new openfl.display.Shape();
+		//disk.circle(50, 0xff0000);
 		
 		edgeWorld.engine.create([mainLayer]);
 		
-		/*
+		
 		edgeWorld.engine.create([
-			new Position(50, 50), 
-			B2.shapedFixtureDef(B2.b2Circle(50), 1.0),
-			new Body(B2.b2BodyDef(B2BodyType.DYNAMIC_BODY))
-			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			B2.circleShape(48),
-			B2.fixtureDef(1.0),
-			new Body(),
-			new Gfx(new DiskShape(48)),
+			
+			new FixtureDef( {
+				shape:new B2CircleShape(12),
+				density:1.0,
+				filter: {
+					categoryBits:HERO_CATEGORY,
+					maskBits:HERO_MASK
+				}
+			}),
+			new Body( {
+				x:150,
+				y:75,
+				type:B2BodyType.DYNAMIC_BODY
+			}),
+			new Gfx(new DiskShape(12)),
 			mainLayer,
 			new Impulse(0.02,0.01)
 		]);
 		
+		
+		
+		
 		edgeWorld.engine.create([
-			new Position(150, 150), 
-			B2.shapedFixtureDef(B2.b2Rect(10, 10), 1.0),
-			new Body(B2.b2BodyDef(B2BodyType.DYNAMIC_BODY))
-			B2.bodyDef(B2BodyType.DYNAMIC_BODY), 
-			B2.rectShape(48, 48),
-			B2.fixtureDef(1.0),
-			new Body(),
-			new Gfx(new BoxShape(48, 48)),
+			new Body( {
+				x:250,
+				y:350,
+				type:B2BodyType.DYNAMIC_BODY
+			}),
+			new FixtureDef( {
+				
+				shape: new B2RectShape( {
+					width:24,
+					height:24
+				}),
+				density:1.0,
+				filter: {
+					categoryBits:HERO_CATEGORY,
+					maskBits:HERO_MASK
+				}
+			}),
+			new Gfx(new BoxShape(24, 24)),
 			mainLayer,
 			new Impulse(-0.01,-0.02)
 		]);
 		
+		/*
 		edgeWorld.engine.create([
 			new Position(200, 200),
 			new Body(B2.b2BodyDef(B2BodyType.KINEMATIC_BODY)),
@@ -143,6 +174,7 @@ class Main extends Sprite
 			new Aperture()
 		]);
 		*/
+		
 		
 		var tiles = MazeGenerator.create(9, 9);
 		

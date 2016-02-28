@@ -1,6 +1,5 @@
 package maze.components;
 
-import box2D.common.math.B2Vec2;
 import de.polygonal.ds.Array2.Array2Cell;
 import edge.IComponent;
 
@@ -11,10 +10,8 @@ import edge.IComponent;
 class TileMovement implements IComponent
 {
 	public var toCell:Array2Cell;
-	public var isEnded:Bool;
 	public var dx:Float;
 	public var dy:Float;
-//	public var position:B2Vec2;
 	
 	public function new(toCell:Array2Cell) 
 	{

@@ -15,14 +15,11 @@ class BuildPhysicalTile implements ISystem
 {
 	var cornerBlockSize:Float;
 	var cornerBlockCoords:Array<Float>;
-	var fixtureDef:B2FixtureDef;
 	var cornerBlockAbsCoord:Float;
 	var wallLength:Float;
 	
 	public function new() 
 	{
-		fixtureDef = B2.b2FixtureDef();
-		
 		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 4;
 		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE) / 2 + cornerBlockSize;
 		trace(cornerBlockAbsCoord);
@@ -44,28 +41,28 @@ class BuildPhysicalTile implements ISystem
 		{
 			for (y in cornerBlockCoords)
 			{
-				shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y)));
+				shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
 			}
 		}
 		
 		if (!node.aperture.bottom)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord)));
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
 		}
 		
 		if (!node.aperture.top)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord)));
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
 		}
 		
 		if (!node.aperture.right)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
 		}
 		
 		if (!node.aperture.left)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
+			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, -cornerBlockAbsCoord, 0), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
 		}
 		
 		entity.add(new MultiShapedFixtureDef(shapedFixtureDefs));

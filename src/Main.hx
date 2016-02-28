@@ -1,39 +1,25 @@
 package;
 
 import b2d.B2;
-import b2d.components.Body;
-import b2d.components.MultiShapedFixtureDef;
-import b2d.components.Impulse;
-import b2d.components.Position;
+import b2d.systems.BodyApplyImpulse;
 import b2d.systems.BodyCreateShapedFixture;
 import b2d.systems.BodyDefSetPosition;
-import b2d.components.Shape;
-import b2d.systems.BodyApplyImpulse;
-import b2d.systems.BodyCreateFixture;
-import b2d.systems.BodyDefSetPosition;
 import b2d.systems.CreateBodyFromDef;
-import b2d.systems.FixtureDefSetShape;
 import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
-import box2D.dynamics.B2BodyType;
 import edge.World;
-import maze.systems.MoveMazeRandomly;
-
-import hxlpers.shapes.BoxShape;
-import hxlpers.shapes.DiskShape;
-import maze.components.Aperture;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
 import maze.systems.BuildPhysicalTile;
+import maze.systems.MoveMazeRandomly;
 import openfl.display.FPS;
 import openfl.display.Sprite;
-import openfl.events.MouseEvent;
-import rendering.components.Gfx;
 import rendering.components.Layer;
 import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
 import rendering.systems.PositionGfx;
 import rendering.systems.RenderLayer;
+
 
 using hxlpers.display.ShapeSF;
 
@@ -44,6 +30,14 @@ using hxlpers.display.ShapeSF;
 class Main extends Sprite 
 {
 
+	public static inline var HERO_CATEGORY:Int = 0x0002;
+	public static inline var TILE_CATEGORY:Int = 0x0004;
+	public static inline var BOUNDARY_CATEGORY:Int = 0x0008;
+	
+	public static inline var HERO_MASK:Int = TILE_CATEGORY | BOUNDARY_CATEGORY;
+	public static inline var TILE_MASK:Int = HERO_CATEGORY;
+	public static inline var BOUNDARY_MASK:Int = HERO_CATEGORY;
+	
 	public function new() 
 	{
 		super();
@@ -154,12 +148,10 @@ class Main extends Sprite
 			edgeWorld.engine.create(tile);
 		}
 		
-		addChild(new FPS(10, 10, 0xff0000));
-		
 		//addEventListener(MouseEvent.CLICK, 
 		
 		B2.addDebugTo(this, .5);
-		addChild(new FPS(10, 10, 0xffffff));
+		addChild(new FPS(10, 10, 0xff0000));
 	}
 
 }

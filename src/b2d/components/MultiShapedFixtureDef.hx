@@ -8,5 +8,5 @@ import edge.IComponent;
  */
 class MultiShapedFixtureDef implements IComponent
 {
-	public var shapedFixtureDefs:Array<ShapedFixtureDef>;
+	public var shapedFixtureDefs:Array<FixtureDef>;
 }

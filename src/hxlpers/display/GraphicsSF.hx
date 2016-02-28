@@ -1,5 +1,5 @@
 package hxlpers.display;
-import hxlpers.colors.RGBColor;
+import hxlpers.colors.ARGBColor;
 import openfl.display.Graphics;
 
 /**

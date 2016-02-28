@@ -17,6 +17,7 @@ import hxlpers.shapes.BoxShape;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
+import maze.MazeConf;
 import maze.systems.BuildPhysicalTile;
 import maze.systems.MoveMaze;
 import maze.systems.MoveMazeRandomly;
@@ -174,7 +175,7 @@ class Main extends Sprite
 		*/
 		
 		
-		var tiles = MazeGenerator.create(9, 9);
+		var tiles = MazeGenerator.create(MazeConf.WIDTH, MazeConf.HEIGHT);
 		
 		maze = new Maze(tiles);
 		

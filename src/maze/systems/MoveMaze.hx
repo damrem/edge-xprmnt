@@ -56,20 +56,14 @@ class MoveMaze implements ISystem
 		
 		for (movingTile in movingTiles)
 		{
-			var destCell = node.maze.tiles.cellOf(movingTile, destCell);
-			trace(destCell);
-			trace(movingTile);
+			destCell = node.maze.tiles.getCellOf(movingTile);
 			for (component in movingTile)
 			{
-				trace(component);
 				if (Type.getClass(component) == Entity)
 				{
 					cast(component, Entity).add(new TileMovement(destCell));
 				}
 			}
-			//movingTile.push(new TileMovement(destCell));
-			//engine.entities
-			trace(movingTile);
 		}
 	}
 	

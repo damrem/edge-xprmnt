@@ -10,17 +10,30 @@ import edge.IComponent;
  */
 class TileMovement implements IComponent
 {
-	public var destCell:Array2Cell;
-	public var position:B2Vec2;
+	public var toCell:Array2Cell;
+	public var isEnded:Bool;
+	public var dx:Float;
+	public var dy:Float;
+//	public var position:B2Vec2;
 	
-	public function new(destCell:Array2Cell) 
+	public function new(toCell:Array2Cell) 
 	{
-		this.destCell = destCell;		
+		this.toCell = toCell;		
 	}
 	
 	public function toString():String
 	{
-		return "TileMovement("+destCell.x+","+destCell.y+")";
+		return "TileMovement("+toCell.x+","+toCell.y+")";
+	}
+	
+	public function toX():Float
+	{
+		return UnitConvert.posXfromCellX(toCell.x);
+	}
+	
+	public function toY():Float
+	{
+		return UnitConvert.posYfromCellY(toCell.y);
 	}
 	
 }

@@ -5,9 +5,11 @@ package maze.systems;
 import de.polygonal.ds.Array2.Array2Cell;
 import edge.Entity;
 import edge.ISystem;
+import edge.View;
 import hxlpers.Direction;
 import maze.components.Maze;
 import maze.components.MazeMovement;
+import maze.components.TileDef;
 import maze.components.TileMovement;
 
 using hxlpers.ds.Array2SF;
@@ -19,7 +21,7 @@ using hxlpers.ds.Array2SF;
 class MoveMaze implements ISystem
 {
 	var destCell:Array2Cell;
-
+	
 	public function new() 
 	{
 		destCell = new Array2Cell();
@@ -46,42 +48,9 @@ class MoveMaze implements ISystem
 			movingTiles = node.maze.tiles.getCol(node.movement.coord, movingTiles);
 		}
 		
-		//trace("movingTiles"+ movingTiles);
+		trace("movingTiles"+ movingTiles);
 		
-		/*
-		for (movingTile in movingTiles)
-		{
-			
-			destCell = node.maze.tiles.getCellOf(movingTile);
-			
-			switch(node.movement.direction)
-			{
-				case Direction.Left:
-					destCell.x--;
-					if (destCell.x < 0) destCell.x = MazeConf.WIDTH - 1;
-					
-				case Direction.Up:
-					destCell.y--;
-					if (destCell.y < 0) destCell.y = MazeConf.HEIGHT - 1;
-					
-				case Direction.Right:
-					destCell.x++;
-					if (destCell.x >= MazeConf.WIDTH) destCell.x = 0;
-					
-				case Direction.Down:
-					destCell.y++;
-					if (destCell.y >= MazeConf.HEIGHT) destCell.y = 0;
-					
-				case Direction.None:
-				
-			}
-			///???
-			movingTile.push(new TileMovement(destCell));
-			
-			
-			
-		}
-		*/
+		
 		node.maze.tiles.move(node.movement.coord, node.movement.coord, node.movement.direction);
 		
 		
@@ -89,9 +58,18 @@ class MoveMaze implements ISystem
 		{
 			var destCell = node.maze.tiles.cellOf(movingTile, destCell);
 			trace(destCell);
-			
-			movingTile.push(new TileMovement(destCell));
-			
+			trace(movingTile);
+			for (component in movingTile)
+			{
+				trace(component);
+				if (Type.getClass(component) == Entity)
+				{
+					cast(component, Entity).add(new TileMovement(destCell));
+				}
+			}
+			//movingTile.push(new TileMovement(destCell));
+			//engine.entities
+			trace(movingTile);
 		}
 	}
 	

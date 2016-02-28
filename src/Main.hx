@@ -11,8 +11,6 @@ import b2d.systems.CreateBody;
 import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
 import box2D.collision.shapes.B2CircleShape;
-import box2D.collision.shapes.B2PolygonShape;
-import box2D.common.math.B2Vec2;
 import box2D.dynamics.B2BodyType;
 import edge.World;
 import hxlpers.shapes.BoxShape;
@@ -184,7 +182,8 @@ class Main extends Sprite
 		
 		for (tile in tiles)
 		{
-			edgeWorld.engine.create(tile);
+			var entity = edgeWorld.engine.create(tile);
+			tile.push(entity);
 		}
 		
 		//addEventListener(MouseEvent.CLICK, 

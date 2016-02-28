@@ -1,7 +1,6 @@
 package maze.factories;
 
 import b2d.components.Body;
-import box2D.dynamics.B2BodyDef;
 import box2D.dynamics.B2BodyType;
 import maze.components.TileDef;
 
@@ -16,12 +15,12 @@ class TileFactory
 	{
 		var tileEntity = new Array<{}>();
 		
-		tileEntity.push(new TileDef(x, y));
+		tileEntity.push(new TileDef());
 		//tileEntity.push(new Position((x + 0.5) * TileConf.SIZE, ));
 		
 		tileEntity.push(new Body({
-			x: (x + 0.5) * TileConf.SIZE, 
-			y: (y + 0.5) * TileConf.SIZE,
+			x: UnitConvert.posXfromCellX(x), 
+			y: UnitConvert.posYfromCellY(y),
 			type: B2BodyType.KINEMATIC_BODY
 		}));
 		

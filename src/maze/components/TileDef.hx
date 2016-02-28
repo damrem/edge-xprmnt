@@ -1,5 +1,4 @@
 package maze.components;
-import de.polygonal.ds.Array2.Array2Cell;
 import edge.IComponent;
 
 /**
@@ -11,7 +10,7 @@ class TileDef implements IComponent
 
 	var bits:Int;
 	
-	public function new(x:Int, y:Int)
+	public function new()
 	{
 		do
 		{

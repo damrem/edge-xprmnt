@@ -1,7 +1,6 @@
 package maze.factories;
 
 import de.polygonal.ds.Array2;
-import edge.Entity;
 import maze.factories.TileFactory;
 
 

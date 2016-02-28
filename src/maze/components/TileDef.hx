@@ -48,7 +48,7 @@ class TileDef implements IComponent
 	
 	public function toString():String
 	{
-		return "[Aperture bits=" + bits + "]";
+		return "TileDef("+ bits + ")";
 	}
 	
 }

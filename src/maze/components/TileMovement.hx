@@ -15,8 +15,12 @@ class TileMovement implements IComponent
 	
 	public function new(destCell:Array2Cell) 
 	{
-		this.destCell = destCell;
-		
+		this.destCell = destCell;		
+	}
+	
+	public function toString():String
+	{
+		return "TileMovement("+destCell.x+","+destCell.y+")";
 	}
 	
 }

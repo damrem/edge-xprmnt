@@ -27,6 +27,11 @@ class Body implements IComponent
 			b2BodyDef.type = bodyDefDef.type;			
 		}
 	}
+	
+	public function toString():String
+	{
+		return "Body";
+	}
 }
 
 typedef BodyDefDef = {

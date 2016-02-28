@@ -1,6 +1,7 @@
 package maze.systems;
 import b2d.B2;
 import b2d.components.Body;
+import b2d.components.FixtureDef;
 import b2d.components.MultiFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
@@ -41,28 +42,58 @@ class BuildPhysicalTile implements ISystem
 		{
 			for (y in cornerBlockCoords)
 			{
-				shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
+				shapedFixtureDefs.push(new FixtureDef( {
+					shape: B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y),
+					filter: {
+						categoryBits:Main.TILE_CATEGORY, 
+						maskBits: Main.TILE_MASK
+					}
+				}));
 			}
 		}
 		
 		if (!node.aperture.bottom)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		if (!node.aperture.top)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		if (!node.aperture.right)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		if (!node.aperture.left)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, -cornerBlockAbsCoord, 0), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: B2.b2Rect(cornerBlockSize, wallLength, -cornerBlockAbsCoord, 0), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		entity.add(new MultiFixtureDef(shapedFixtureDefs));

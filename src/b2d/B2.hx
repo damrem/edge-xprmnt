@@ -68,15 +68,6 @@ class B2
 		
 	}
 	
-	public static function shapedFixtureDef(shape:B2Shape, density:Float = 1.0, filterCategoryBits:Int, filterMaskBits:Int):FixtureDef
-	{
-		var fd = new B2FixtureDef();
-		fd.density = density;
-		fd.filter.categoryBits = filterCategoryBits;
-		fd.filter.maskBits = filterMaskBits;
-		return new FixtureDef({shape:shape, density:density, filter:{categoryBits:filterCategoryBits, maskBits:filterMaskBits}});
-	}
-	
 	public static function b2Rect(width:Float, height:Float, x:Float=0, y:Float=0, angle:Float=0):B2PolygonShape 
 	{
 		var shape = new B2PolygonShape();

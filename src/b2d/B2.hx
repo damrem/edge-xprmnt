@@ -68,17 +68,9 @@ class B2
 		
 	}
 	
-	public static function b2Rect(width:Float, height:Float, x:Float=0, y:Float=0, angle:Float=0):B2PolygonShape 
-	{
-		var shape = new B2PolygonShape();
-		shape.setAsOrientedBox(width, height, new B2Vec2(x, y), angle);
-		return shape;
-	}
 	
-	public static function b2Circle(radius:Float):B2CircleShape
-	{
-		return new B2CircleShape(radius);
-	}
+	
+	
 
 }
 

@@ -1,5 +1,6 @@
 package maze.systems;
 import b2d.B2;
+import b2d.B2RectShape;
 import b2d.components.Body;
 import b2d.components.FixtureDef;
 import b2d.components.MultiFixtureDef;
@@ -43,7 +44,14 @@ class BuildPhysicalTile implements ISystem
 			for (y in cornerBlockCoords)
 			{
 				shapedFixtureDefs.push(new FixtureDef( {
-					shape: B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y),
+					shape: new B2RectShape( { 
+						width:cornerBlockSize,
+						height:cornerBlockSize,
+						x:x,
+						y:y,
+						//angle: 0
+					} ),
+					//B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y),
 					filter: {
 						categoryBits:Main.TILE_CATEGORY, 
 						maskBits: Main.TILE_MASK
@@ -55,7 +63,13 @@ class BuildPhysicalTile implements ISystem
 		if (!node.aperture.bottom)
 		{
 			shapedFixtureDefs.push(new FixtureDef( { 
-				shape: B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord), 
+				shape: new B2RectShape( {
+					width: wallLength,
+					height: cornerBlockSize, 
+					x:0, 
+					y:cornerBlockAbsCoord
+					
+				}), 
 				filter: {
 					categoryBits:Main.TILE_CATEGORY, 
 					maskBits: Main.TILE_MASK
@@ -66,7 +80,12 @@ class BuildPhysicalTile implements ISystem
 		if (!node.aperture.top)
 		{
 			shapedFixtureDefs.push(new FixtureDef( { 
-				shape: B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord), 
+				shape: new B2RectShape({
+					width: wallLength, 
+					height: cornerBlockSize, 
+					x: 0, 
+					y: -cornerBlockAbsCoord
+				}), 
 				filter: {
 					categoryBits:Main.TILE_CATEGORY, 
 					maskBits: Main.TILE_MASK
@@ -77,7 +96,12 @@ class BuildPhysicalTile implements ISystem
 		if (!node.aperture.right)
 		{
 			shapedFixtureDefs.push(new FixtureDef( { 
-				shape: B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0), 
+				shape: new B2RectShape({
+					width: cornerBlockSize, 
+					height: wallLength, 
+					x: cornerBlockAbsCoord, 
+					y: 0
+				}), 
 				filter: {
 					categoryBits:Main.TILE_CATEGORY, 
 					maskBits: Main.TILE_MASK
@@ -88,7 +112,12 @@ class BuildPhysicalTile implements ISystem
 		if (!node.aperture.left)
 		{
 			shapedFixtureDefs.push(new FixtureDef( { 
-				shape: B2.b2Rect(cornerBlockSize, wallLength, -cornerBlockAbsCoord, 0), 
+				shape: new B2RectShape( {
+					width: cornerBlockSize, 
+					height: wallLength, 
+					x: -cornerBlockAbsCoord, 
+					y:0 
+				}),
 				filter: {
 					categoryBits:Main.TILE_CATEGORY, 
 					maskBits: Main.TILE_MASK

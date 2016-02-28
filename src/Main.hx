@@ -2,7 +2,7 @@ package;
 
 import b2d.B2;
 import b2d.systems.BodyApplyImpulse;
-import b2d.systems.BodyCreateShapedFixture;
+import b2d.systems.BodyCreateFixture;
 import b2d.systems.BodyDefSetPosition;
 import b2d.systems.CreateBodyFromDef;
 import b2d.systems.WorldDrawDebugData;
@@ -65,7 +65,7 @@ class Main extends Sprite
 		edgeWorld.physics.add(new BodyApplyImpulse());
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
-		edgeWorld.physics.add(new BodyCreateShapedFixture());
+		edgeWorld.physics.add(new BodyCreateFixture());
 		
 		edgeWorld.physics.add(new MoveMazeRandomly());
 		

@@ -1,5 +1,4 @@
 package b2d.components;
-import b2d.FixtureDefDef;
 import box2D.collision.shapes.B2Shape;
 import box2D.dynamics.B2FixtureDef;
 import edge.IComponent;
@@ -29,4 +28,17 @@ class FixtureDef implements IComponent
 			b2FixtureDef.filter.maskBits = fixtureDefDef.filter.maskBits;
 		}
 	}
+}
+
+typedef FixtureDefDef =
+{
+	@:optional var density:Float;
+	@:optional var shape:B2Shape;
+	@:optional var filter:B2FilterDataDef;
+}
+
+typedef B2FilterDataDef =
+{
+	categoryBits:Int,
+	maskBits:Int
 }

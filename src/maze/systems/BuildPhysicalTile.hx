@@ -1,7 +1,7 @@
 package maze.systems;
 import b2d.B2;
 import b2d.components.Body;
-import b2d.components.MultiShapedFixtureDef;
+import b2d.components.MultiFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
@@ -65,7 +65,7 @@ class BuildPhysicalTile implements ISystem
 			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, -cornerBlockAbsCoord, 0), 1.0, Main.TILE_CATEGORY, Main.TILE_MASK));
 		}
 		
-		entity.add(new MultiShapedFixtureDef(shapedFixtureDefs));
+		entity.add(new MultiFixtureDef(shapedFixtureDefs));
 		
 	}
 	

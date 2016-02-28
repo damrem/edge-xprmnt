@@ -1,6 +1,6 @@
 package b2d.systems;
 import b2d.components.Body;
-import b2d.components.MultiShapedFixtureDef;
+import b2d.components.MultiFixtureDef;
 import b2d.components.FixtureDef;
 import edge.Entity;
 import edge.ISystem;
@@ -10,9 +10,9 @@ import edge.View;
  * ...
  * @author damrem
  */
-class BodyCreateShapedFixture implements ISystem
+class BodyCreateFixture implements ISystem
 {
-	var multiShapeFixtureDefNode:View<{ body:Body, multiShapedFixtureDef:MultiShapedFixtureDef }>;
+	var multiShapeFixtureDefNode:View<{ body:Body, multiShapedFixtureDef:MultiFixtureDef }>;
 	
 	public function update(body:Body, shapedFixtureDef:FixtureDef)
 	{
@@ -26,7 +26,7 @@ class BodyCreateShapedFixture implements ISystem
 		node.body.b2Body.createFixture(node.shapedFixtureDef.b2FixtureDef);
 	}
 	
-	public function multiShapeFixtureDefNodeAdded(e:Entity, node: { body:Body, multiShapedFixtureDef:MultiShapedFixtureDef } )
+	public function multiShapeFixtureDefNodeAdded(e:Entity, node: { body:Body, multiShapedFixtureDef:MultiFixtureDef } )
 	{
 		trace("multiShapeFixtureDefNodeAdded");
 		for (shapedFixtureDef in node.multiShapedFixtureDef.shapedFixtureDefs)

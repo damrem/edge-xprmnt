@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class MultiShapedFixtureDef implements IComponent
+class MultiFixtureDef implements IComponent
 {
 	public var shapedFixtureDefs:Array<FixtureDef>;
 }

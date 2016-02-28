@@ -95,31 +95,37 @@ class Array2SF
 	}
 	
 	
-	static public function move<T>(user:Array2<T>, colIndex:Int, rowIndex:Int, direction:hxlpers.Direction):Array<T>
+	static public function move<T>(user:Array2<T>, colIndex:Int, rowIndex:Int, direction:hxlpers.Direction, ?inserted:T):Array<T>
 	{
 		var colOrRow:Array<T> = [];
+		
+		var outtered:T;
 		
 		switch(direction)
 		{
 			default:
 			case Direction.Right:
 				user.getRow(rowIndex, colOrRow);
-				colOrRow.unshift(colOrRow.pop());
+				outtered = colOrRow.pop();
+				colOrRow.unshift(inserted == null?outtered:inserted);
 				user.setRow(rowIndex, colOrRow);
 				
 			case Direction.Down:
 				user.getCol(colIndex, colOrRow);
-				colOrRow.unshift(colOrRow.pop());
+				outtered = colOrRow.pop();
+				colOrRow.unshift(inserted == null?outtered:inserted);
 				user.setCol(colIndex, colOrRow);
 				
 			case Direction.Left:
 				user.getRow(rowIndex, colOrRow);
-				colOrRow.push(colOrRow.shift());
+				outtered = colOrRow.shift();
+				colOrRow.push(inserted == null?outtered:inserted);
 				user.setRow(rowIndex, colOrRow);
 				
 			case Direction.Up:
 				user.getCol(colIndex, colOrRow);
-				colOrRow.push(colOrRow.shift());
+				outtered = colOrRow.shift();
+				colOrRow.push(inserted == null?outtered:inserted);
 				user.setCol(colIndex, colOrRow);
 		}
 		

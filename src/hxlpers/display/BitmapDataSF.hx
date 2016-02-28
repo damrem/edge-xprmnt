@@ -1,6 +1,6 @@
 package hxlpers.display;
 import hxlpers.colors.ColorComponent;
-import hxlpers.colors.RGBColor;
+import hxlpers.colors.ARGBColor;
 import hxlpers.colors.RndColor;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
@@ -22,7 +22,7 @@ class BitmapDataSF
 		return user.getPixels(user.rect);
 	}
 	
-	static public function clear(user:BitmapData, color:RGBColor=0):BitmapData
+	static public function clear(user:BitmapData, color:ARGBColor=0):BitmapData
 	{
 		user.fillRect(new Rectangle(0, 0, cast(user.width), cast(user.height)), color);
 		return user;

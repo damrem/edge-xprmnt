@@ -1,7 +1,9 @@
 package maze.systems;
 import b2d.B2;
+import b2d.B2RectShape;
 import b2d.components.Body;
-import b2d.components.MultiShapedFixtureDef;
+import b2d.components.FixtureDef;
+import b2d.components.MultiFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
@@ -15,14 +17,11 @@ class BuildPhysicalTile implements ISystem
 {
 	var cornerBlockSize:Float;
 	var cornerBlockCoords:Array<Float>;
-	var fixtureDef:B2FixtureDef;
 	var cornerBlockAbsCoord:Float;
 	var wallLength:Float;
 	
 	public function new() 
 	{
-		fixtureDef = B2.b2FixtureDef();
-		
 		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 4;
 		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE) / 2 + cornerBlockSize;
 		cornerBlockCoords = [ -cornerBlockAbsCoord, cornerBlockAbsCoord];
@@ -43,31 +42,89 @@ class BuildPhysicalTile implements ISystem
 		{
 			for (y in cornerBlockCoords)
 			{
-				shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y)));
+				shapedFixtureDefs.push(new FixtureDef( {
+					shape: new B2RectShape( { 
+						width:cornerBlockSize,
+						height:cornerBlockSize,
+						x:x,
+						y:y,
+						//angle: 0
+					} ),
+					//B2.b2Rect(cornerBlockSize, cornerBlockSize, x, y),
+					filter: {
+						categoryBits:Main.TILE_CATEGORY, 
+						maskBits: Main.TILE_MASK
+					}
+				}));
 			}
 		}
 		
 		if (!node.tileDef.bottom)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, cornerBlockAbsCoord)));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: new B2RectShape( {
+					width: wallLength,
+					height: cornerBlockSize, 
+					x:0, 
+					y:cornerBlockAbsCoord
+					
+				}), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		if (!node.tileDef.top)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(wallLength, cornerBlockSize, 0, -cornerBlockAbsCoord)));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: new B2RectShape({
+					width: wallLength, 
+					height: cornerBlockSize, 
+					x: 0, 
+					y: -cornerBlockAbsCoord
+				}), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		if (!node.tileDef.right)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: new B2RectShape({
+					width: cornerBlockSize, 
+					height: wallLength, 
+					x: cornerBlockAbsCoord, 
+					y: 0
+				}), 
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
 		if (!node.tileDef.left)
 		{
-			shapedFixtureDefs.push(B2.shapedFixtureDef(B2.b2Rect(cornerBlockSize, wallLength, cornerBlockAbsCoord, 0)));
+			shapedFixtureDefs.push(new FixtureDef( { 
+				shape: new B2RectShape( {
+					width: cornerBlockSize, 
+					height: wallLength, 
+					x: -cornerBlockAbsCoord, 
+					y:0 
+				}),
+				filter: {
+					categoryBits:Main.TILE_CATEGORY, 
+					maskBits: Main.TILE_MASK
+				}
+			} ));
 		}
 		
-		entity.add(new MultiShapedFixtureDef(shapedFixtureDefs));
+		entity.add(new MultiFixtureDef(shapedFixtureDefs));
 		
 	}
 	

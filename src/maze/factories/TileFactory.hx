@@ -12,8 +12,9 @@ import maze.components.TileMovement;
  */
 class TileFactory
 {
-	public static function createEntity(x:Int, y:Int, ?tileMovement:TileMovement):Array<{}>
+	public static function createEntity(x:Int, y:Int/*, ?tileMovement:TileMovement*/):Array<{}>
 	{
+		trace("createEntity(" + x, y);
 		var tileEntity = new Array<{}>();
 		
 		tileEntity.push(new TileDef());
@@ -25,10 +26,12 @@ class TileFactory
 			type: B2BodyType.KINEMATIC_BODY
 		}));
 		
+		/*
 		if (tileMovement != null)
 		{
 			tileEntity.push(tileMovement);
 		}
+		*/
 		
 		return tileEntity;
 	}

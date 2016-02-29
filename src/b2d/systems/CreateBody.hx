@@ -23,7 +23,7 @@ class CreateBody implements ISystem
 	
 	public function updateRemoved(e:Entity, n: { b:Body } )
 	{
-		trace("updateRemoved");
+		//trace("updateRemoved");
 		B2.world.destroyBody(n.b.b2Body);
 	}
 	

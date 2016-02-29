@@ -56,9 +56,6 @@ class MoveMaze implements ISystem
 		var insertedFromX:Int;
 		var insertedFromY:Int;
 
-		var insertedToX:Int;
-		var insertedToY:Int;
-		
 		var outteredToX:Int;
 		var outteredToY:Int;
 		
@@ -67,66 +64,55 @@ class MoveMaze implements ISystem
 			case Direction.None:
 				insertedFromX = 10;
 				insertedFromY = 10;
-				insertedToX = 10;
-				insertedToY = 10;
 				outteredToX = 10;
 				outteredToY = 10;
 				
 			case Direction.Left:
 				insertedFromX = MazeConf.WIDTH;
 				insertedFromY = node.movement.coord;
-				insertedToX = MazeConf.WIDTH - 1;
-				insertedToY = node.movement.coord;
 				outteredToX = -1;
 				outteredToY = node.movement.coord;
 				
 			case Direction.Up:
 				insertedFromX = node.movement.coord;
 				insertedFromY = MazeConf.HEIGHT;
-				insertedToX = node.movement.coord;
-				insertedToY = MazeConf.HEIGHT - 1;
 				outteredToX = node.movement.coord;
 				outteredToY = -1;
 				
 			case Direction.Right:
 				insertedFromX = -1;
 				insertedFromY = node.movement.coord;
-				insertedToX = 0;
-				insertedToY = node.movement.coord;
 				outteredToX = MazeConf.WIDTH;
 				outteredToY = node.movement.coord;
 				
 			case Direction.Down:
 				insertedFromX = node.movement.coord;
 				insertedFromY = -1;
-				insertedToX = node.movement.coord;
-				insertedToY = 0;
 				outteredToX = node.movement.coord;
 				outteredToY = MazeConf.HEIGHT;
 		}
 		
 		
-		var replacingTile = TileFactory.createEntity(insertedFromX, insertedFromY/*, new TileMovement(new Array2Cell(insertedToX, insertedToY))*/);
+		var replacingTile = TileFactory.createEntity(insertedFromX, insertedFromY);
 		var replacingTileEntity = engine.create(replacingTile);
 		replacingTile.push(replacingTileEntity);
 		movingTiles.push(replacingTile);
-		trace("movingTiles"+ movingTiles);
+		//trace("movingTiles"+ movingTiles);
 		
 		var replacedTile = node.maze.tiles.move(node.movement.coord, node.movement.coord, node.movement.direction, replacingTile);
 		
 		for (movingTile in movingTiles)
 		{
 			var isOut:Bool;
-			//trace(node.maze.tiles.getCellOf(movingTile).x, node.maze.tiles.getCellOf(movingTile).y);
 			if (movingTile == replacedTile)
 			{
-				trace("out");
+				//trace("out");
 				destCell = new Array2Cell(outteredToX, outteredToY);
 				isOut = true;
 			}
 			else
 			{
-				trace("in");
+				//trace("in");
 				destCell = node.maze.tiles.getCellOf(movingTile);
 				isOut = false;
 			}

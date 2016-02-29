@@ -115,22 +115,26 @@ class MoveMaze implements ISystem
 		
 		for (movingTile in movingTiles)
 		{
-			
-			if (node.maze.tiles.getCellOf(movingTile) == null)
+			var isOut:Bool;
+			//trace(node.maze.tiles.getCellOf(movingTile).x, node.maze.tiles.getCellOf(movingTile).y);
+			if (movingTile == replacedTile)
 			{
+				trace("out");
 				destCell = new Array2Cell(outteredToX, outteredToY);
-				
+				isOut = true;
 			}
 			else
 			{
+				trace("in");
 				destCell = node.maze.tiles.getCellOf(movingTile);
+				isOut = false;
 			}
 			//destCell = node.maze.tiles.getCellOf(movingTile);
 			for (component in movingTile)
 			{
 				if (Type.getClass(component) == Entity)
 				{
-					cast(component, Entity).add(new TileMovement(destCell));
+					cast(component, Entity).add(new TileMovement(destCell, isOut));
 					break;
 				}
 			}

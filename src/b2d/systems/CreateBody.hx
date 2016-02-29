@@ -21,4 +21,10 @@ class CreateBody implements ISystem
 		n.b.b2Body = B2.world.createBody(n.b.b2BodyDef);
 	}
 	
+	public function updateRemoved(e:Entity, n: { b:Body } )
+	{
+		trace("updateRemoved");
+		B2.world.destroyBody(n.b.b2Body);
+	}
+	
 }

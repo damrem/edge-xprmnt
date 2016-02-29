@@ -35,11 +35,10 @@ class MoveTile implements ISystem
 			trace("ending movement");
 			entity.remove(tileMovement);
 		}
-		else
-		{
-			tileMovement.dx = dx;
-			tileMovement.dy = dy;
-		}
+		
+		tileMovement.dx = dx;
+		tileMovement.dy = dy;
+		
 	}
 	
 	public function updateAdded(entity:Entity, node:{tileDef:TileDef, body:Body, tileMovement:TileMovement}) 
@@ -64,7 +63,7 @@ class MoveTile implements ISystem
 		if (node.tileMovement.isOut)
 		{
 			trace("isOut");
-			entity.removeTypes([TileDef, Body, TileMovement, Entity]);
+			entity.removeTypes([TileDef, Body, Entity]);
 			entity.destroy();
 		}
 		

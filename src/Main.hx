@@ -12,7 +12,13 @@ import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.dynamics.B2BodyType;
+import controls.KeyboardControlled;
+import controls.KeyboardController;
+import controls.KeyboardListener;
 import edge.World;
+import heroes.HeroCommand;
+
+import heroes.HeroKeyboardController;
 import hxlpers.shapes.BoxShape;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
@@ -24,6 +30,7 @@ import maze.systems.MoveMazeRandomly;
 import maze.systems.MoveTile;
 import openfl.display.FPS;
 import openfl.display.Sprite;
+import openfl.ui.Keyboard;
 import rendering.components.Gfx;
 import rendering.components.Layer;
 import rendering.RenderingConf;
@@ -69,6 +76,9 @@ class Main extends Sprite
 		*/
 		
 		//	SYSTEMS
+		edgeWorld.frame.add(new KeyboardListener());
+		edgeWorld.frame.add(new KeyboardController());
+		
 		edgeWorld.physics.add(new WorldStep());
 		edgeWorld.physics.add(new WorldDrawDebugData());
 		
@@ -83,6 +93,7 @@ class Main extends Sprite
 		edgeWorld.physics.add(new MoveMaze());
 		edgeWorld.physics.add(new MoveTile());
 		
+		edgeWorld.physics.add(new HeroKeyboardController());
 		
 		
 		
@@ -110,6 +121,7 @@ class Main extends Sprite
 		edgeWorld.engine.create([mainLayer]);
 		
 		
+		
 		edgeWorld.engine.create([
 			
 			new FixtureDef( {
@@ -127,7 +139,15 @@ class Main extends Sprite
 			}),
 			new Gfx(new DiskShape(12)),
 			mainLayer,
-			new Impulse(0.02,0.01)
+			//new Impulse(0.02, 0.01),
+			
+			new KeyboardControlled([
+				Keyboard.LEFT => HeroCommand.Left,
+				Keyboard.UP => HeroCommand.Up,
+				Keyboard.RIGHT => HeroCommand.Right,
+				Keyboard.DOWN => HeroCommand.Down,
+				Keyboard.SPACE => HeroCommand.Shoot
+			])
 		]);
 		
 		
@@ -184,7 +204,7 @@ class Main extends Sprite
 		for (tile in tiles)
 		{
 			var entity = edgeWorld.engine.create(tile);
-			tile.push(entity);
+			tile.push(entity);	
 		}
 		
 		//addEventListener(MouseEvent.CLICK, 

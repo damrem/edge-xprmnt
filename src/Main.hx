@@ -17,7 +17,6 @@ import controls.KeyboardController;
 import controls.KeyboardListener;
 import edge.World;
 import heroes.HeroCommand;
-
 import heroes.HeroKeyboardController;
 import hxlpers.shapes.BoxShape;
 import hxlpers.shapes.DiskShape;
@@ -28,6 +27,7 @@ import maze.systems.BuildPhysicalTile;
 import maze.systems.MoveMaze;
 import maze.systems.MoveMazeRandomly;
 import maze.systems.MoveTile;
+import maze.UnitConvert;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.ui.Keyboard;
@@ -37,6 +37,7 @@ import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
 import rendering.systems.PositionGfx;
 import rendering.systems.RenderLayer;
+
 
 
 using hxlpers.display.ShapeSF;
@@ -122,37 +123,11 @@ class Main extends Sprite
 		
 		
 		
-		edgeWorld.engine.create([
-			
-			new FixtureDef( {
-				shape:new B2CircleShape(12),
-				density:1.0,
-				filter: {
-					categoryBits:HERO_CATEGORY,
-					maskBits:HERO_MASK
-				}
-			}),
-			new Body( {
-				x:150,
-				y:75,
-				type:B2BodyType.DYNAMIC_BODY
-			}),
-			new Gfx(new DiskShape(12)),
-			mainLayer,
-			//new Impulse(0.02, 0.01),
-			
-			new KeyboardControlled([
-				Keyboard.LEFT => HeroCommand.Left,
-				Keyboard.UP => HeroCommand.Up,
-				Keyboard.RIGHT => HeroCommand.Right,
-				Keyboard.DOWN => HeroCommand.Down,
-				Keyboard.SPACE => HeroCommand.Shoot
-			])
-		]);
 		
 		
 		
 		
+/*		
 		edgeWorld.engine.create([
 			new Body( {
 				x:250,
@@ -175,7 +150,7 @@ class Main extends Sprite
 			mainLayer,
 			new Impulse(-0.01,-0.02)
 		]);
-		
+*/		
 		/*
 		edgeWorld.engine.create([
 			new Position(200, 200),
@@ -206,6 +181,64 @@ class Main extends Sprite
 			var entity = edgeWorld.engine.create(tile);
 			tile.push(entity);	
 		}
+		
+		
+		
+		
+		edgeWorld.engine.create([
+			new FixtureDef( {
+				shape:new B2CircleShape(12),
+				density:1.0,
+				filter: {
+					categoryBits:HERO_CATEGORY,
+					maskBits:HERO_MASK
+				}
+			}),
+			new Body( {
+				x: UnitConvert.posXfromCellX(0),
+				y: UnitConvert.posYfromCellY(0),
+				type:B2BodyType.DYNAMIC_BODY
+			}),
+			new Gfx(new DiskShape(12)),
+			mainLayer,
+			//new Impulse(0.02, 0.01),
+			
+			new KeyboardControlled([
+				Keyboard.LEFT => HeroCommand.Left,
+				Keyboard.UP => HeroCommand.Up,
+				Keyboard.RIGHT => HeroCommand.Right,
+				Keyboard.DOWN => HeroCommand.Down,
+				Keyboard.SPACE => HeroCommand.Shoot
+			])
+		]);
+		
+		
+		edgeWorld.engine.create([
+			new FixtureDef( {
+				shape:new B2CircleShape(12),
+				density:1.0,
+				filter: {
+					categoryBits:HERO_CATEGORY,
+					maskBits:HERO_MASK
+				}
+			}),
+			new Body( {
+				x: UnitConvert.posXfromCellX(MazeConf.WIDTH - 1),
+				y: UnitConvert.posYfromCellY(MazeConf.HEIGHT - 1),
+				type:B2BodyType.DYNAMIC_BODY
+			}),
+			new Gfx(new DiskShape(12)),
+			mainLayer,
+			//new Impulse(0.02, 0.01),
+			
+			new KeyboardControlled([
+				Keyboard.Q => HeroCommand.Left,
+				Keyboard.Z => HeroCommand.Up,
+				Keyboard.D => HeroCommand.Right,
+				Keyboard.S => HeroCommand.Down,
+				Keyboard.SPACE => HeroCommand.Shoot
+			])
+		]);
 		
 		//addEventListener(MouseEvent.CLICK, 
 		

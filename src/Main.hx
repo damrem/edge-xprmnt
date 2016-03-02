@@ -24,6 +24,7 @@ import maze.components.Maze;
 import maze.factories.MazeGenerator;
 import maze.MazeConf;
 import maze.systems.BuildPhysicalTile;
+import maze.systems.DrawTile;
 import maze.systems.MoveMaze;
 import maze.systems.MoveMazeRandomly;
 import maze.systems.MoveTile;
@@ -48,6 +49,7 @@ using hxlpers.display.ShapeSF;
  */
 class Main extends Sprite 
 {
+	public static var mainLayer:Layer;
 	public static var maze:Maze;
 
 	public static inline var HERO_CATEGORY:Int = 0x0002;
@@ -81,7 +83,7 @@ class Main extends Sprite
 		edgeWorld.frame.add(new KeyboardController());
 		
 		edgeWorld.physics.add(new WorldStep());
-		edgeWorld.physics.add(new WorldDrawDebugData());
+		//edgeWorld.physics.add(new WorldDrawDebugData());
 		
 		edgeWorld.physics.add(new CreateBody());
 		
@@ -101,9 +103,10 @@ class Main extends Sprite
 		//edgeWorld.physics.add(new BodyCreateFixture());
 		
 		
-		var mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
+		mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
 		
-		edgeWorld.render.add(new RenderLayer(this));
+		edgeWorld.render.add(new RenderLayer(this, [mainLayer]));
+		edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());
 		edgeWorld.render.add(new PositionGfx());
 		

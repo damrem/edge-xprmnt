@@ -2,7 +2,10 @@ package maze.factories;
 
 import b2d.components.Body;
 import box2D.dynamics.B2BodyType;
+import hxlpers.shapes.BoxShape;
 import maze.components.TileDef;
+import openfl.display.Sprite;
+import rendering.components.Gfx;
 
 
 /**
@@ -11,20 +14,23 @@ import maze.components.TileDef;
  */
 class TileFactory
 {
-	public static function createEntity(x:Int, y:Int):Array<{}>
+	public static function createComps(x:Int, y:Int):Array<{}>
 	{
 		trace("createEntity(" + x, y);
-		var tileEntity = new Array<{}>();
+		var comps = new Array<{}>();
 		
-		tileEntity.push(new TileDef());
+		comps.push(new TileDef());
 		
-		tileEntity.push(new Body({
+		comps.push(new Body({
 			x: UnitConvert.posXfromCellX(x), 
 			y: UnitConvert.posYfromCellY(y),
 			type: B2BodyType.KINEMATIC_BODY
 		}));
 		
-		return tileEntity;
+		comps.push(new Gfx(new Sprite()));
+		comps.push(Main.mainLayer);
+		
+		return comps;
 	}
 	
 }

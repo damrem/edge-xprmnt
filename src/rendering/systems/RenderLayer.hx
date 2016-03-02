@@ -1,11 +1,8 @@
 package rendering.systems;
-import edge.Entity;
 import edge.ISystem;
-import edge.View;
-import openfl.display.BitmapData;
+import openfl.display.DisplayObjectContainer;
 import rendering.components.Layer;
 
-import openfl.display.DisplayObjectContainer;
 using hxlpers.display.BitmapDataSF;
 
 /**
@@ -16,9 +13,27 @@ class RenderLayer implements ISystem
 {
 	var host:DisplayObjectContainer;
 	
-	public function new(host:DisplayObjectContainer)
+	public function new(host:DisplayObjectContainer, ?layers:Array<Layer>)
 	{
-		this.host = host;	
+		this.host = host;
+		if (layers != null)
+		{
+			for (layer in layers)
+			{
+				addLayer(layer);
+			}
+		}
+	}
+	
+	public function addLayer(layer:Layer)
+	{
+		host.addChild(layer.screen);
+	}
+	
+	public function removeLayer(layer:Layer)
+	{
+		host.removeChild(layer.screen);
+		
 	}
 	
 	public function update(layer:Layer)
@@ -27,6 +42,7 @@ class RenderLayer implements ISystem
 		layer.image.draw(layer.scene0);
 	}
 	
+	/*
 	public function updateAdded(entity:Entity, node:{layer:Layer})
 	{
 		trace("updateAdded");
@@ -38,6 +54,7 @@ class RenderLayer implements ISystem
 		trace("updateRemoved");
 		host.removeChild(node.layer.screen);
 	}
+	*/
 	
 	
 	

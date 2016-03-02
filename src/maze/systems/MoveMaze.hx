@@ -93,7 +93,7 @@ class MoveMaze implements ISystem
 		}
 		
 		
-		var replacingTile = TileFactory.createEntity(insertedFromX, insertedFromY);
+		var replacingTile = TileFactory.createComps(insertedFromX, insertedFromY);
 		var replacingTileEntity = engine.create(replacingTile);
 		replacingTile.push(replacingTileEntity);
 		movingTiles.push(replacingTile);

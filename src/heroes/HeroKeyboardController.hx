@@ -2,7 +2,7 @@ package heroes;
 
 import b2d.components.Body;
 import box2D.common.math.B2Vec2;
-import controls.KeyboardControlled;
+import controls.KeyboardCommandSet;
 import controls.KeyState;
 import edge.ISystem;
 import hxlpers.Direction;
@@ -14,7 +14,7 @@ import hxlpers.Direction;
 class HeroKeyboardController implements ISystem
 {
 	
-	function update(body:Body, controlled:KeyboardControlled, heroControl:HeroReactivity) 
+	function update(body:Body, controlled:KeyboardCommandSet, heroControl:HeroReactivity) 
 	{
 		var isLeftPressed = false;
 		var isUpPressed = false;

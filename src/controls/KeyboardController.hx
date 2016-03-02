@@ -12,7 +12,7 @@ import openfl.Lib;
  */
 class KeyboardController implements ISystem
 {
-	function update(controlled:KeyboardControlled) 
+	function update(controlled:KeyboardCommandSet) 
 	{
 		//trace("controlledNodeUpdate");
 		for (keyCode in controlled.keyMap.keys())

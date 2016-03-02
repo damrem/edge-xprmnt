@@ -10,13 +10,15 @@ import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.dynamics.B2BodyType;
-import controls.KeyboardControlled;
+import controls.KeyboardCommandSet;
 import controls.KeyboardController;
 import controls.KeyboardListener;
+import de.polygonal.ds.Array2.Array2Cell;
 import edge.World;
 import heroes.HeroCommand;
 import heroes.HeroKeyboardController;
 import heroes.HeroReactivity;
+import heroes.PlayerFactory;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
@@ -183,68 +185,30 @@ class Main extends Sprite
 		
 		
 		
-		edgeWorld.engine.create([
-			new FixtureDef( {
-				shape:new B2CircleShape(12),
-				density:1.0,
-				filter: {
-					categoryBits:HERO_CATEGORY,
-					maskBits:HERO_MASK
-				}
-			}),
-			new Body( {
-				x: UnitConvert.posXfromCellX(0),
-				y: UnitConvert.posYfromCellY(0),
-				type:B2BodyType.DYNAMIC_BODY,
-				linearDamping:0.005,
-				fixedRotation:true
-			}),
-			new Gfx(new DiskShape(12)),
-			mainLayer,
-			//new Impulse(0.02, 0.01),
-			
-			new KeyboardControlled([
-				Keyboard.LEFT => HeroCommand.Left,
-				Keyboard.UP => HeroCommand.Up,
-				Keyboard.RIGHT => HeroCommand.Right,
-				Keyboard.DOWN => HeroCommand.Down,
-				Keyboard.SPACE => HeroCommand.Shoot
-			]),
-			
-			new HeroReactivity(5000)
-		]);
-		
-		
-		edgeWorld.engine.create([
-			new FixtureDef( {
-				shape:new B2CircleShape(12),
-				density:1.0,
-				filter: {
-					categoryBits:HERO_CATEGORY,
-					maskBits:HERO_MASK
-				}
-			}),
-			new Body( {
-				x: UnitConvert.posXfromCellX(MazeConf.WIDTH - 1),
-				y: UnitConvert.posYfromCellY(MazeConf.HEIGHT - 1),
-				type:B2BodyType.DYNAMIC_BODY,
-				linearDamping:0.005,
-				fixedRotation:true
-			}),
-			new Gfx(new DiskShape(12)),
-			mainLayer,
-			//new Impulse(0.02, 0.01),
-			
-			new KeyboardControlled([
+		edgeWorld.engine.create(PlayerFactory.createComponents(
+			new Array2Cell(0, 0), 
+			new KeyboardCommandSet([
 				Keyboard.Q => HeroCommand.Left,
 				Keyboard.Z => HeroCommand.Up,
 				Keyboard.D => HeroCommand.Right,
 				Keyboard.S => HeroCommand.Down,
 				Keyboard.SPACE => HeroCommand.Shoot
 			]),
-			
-			new HeroReactivity(5000)
-		]);
+			mainLayer
+		));
+		
+		
+		edgeWorld.engine.create(PlayerFactory.createComponents(
+			new Array2Cell(MazeConf.WIDTH - 1, MazeConf.HEIGHT - 1), 
+			new KeyboardCommandSet([
+				Keyboard.LEFT => HeroCommand.Left,
+				Keyboard.UP => HeroCommand.Up,
+				Keyboard.RIGHT => HeroCommand.Right,
+				Keyboard.DOWN => HeroCommand.Down,
+				Keyboard.SPACE => HeroCommand.Shoot
+			]),
+			mainLayer
+		));
 		
 		//addEventListener(MouseEvent.CLICK, 
 		

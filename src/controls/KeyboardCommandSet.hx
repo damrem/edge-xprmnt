@@ -8,7 +8,7 @@ import hxlpers.Direction;
  * ...
  * @author damrem
  */
-class KeyboardControlled implements IComponent
+class KeyboardCommandSet implements IComponent
 {
 	public var keyMap:Map<Int, Dynamic>;
 	public var keyStates:Map<Int, KeyState>;

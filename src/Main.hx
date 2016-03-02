@@ -195,7 +195,9 @@ class Main extends Sprite
 			new Body( {
 				x: UnitConvert.posXfromCellX(0),
 				y: UnitConvert.posYfromCellY(0),
-				type:B2BodyType.DYNAMIC_BODY
+				type:B2BodyType.DYNAMIC_BODY,
+				linearDamping:0.005,
+				fixedRotation:true
 			}),
 			new Gfx(new DiskShape(12)),
 			mainLayer,
@@ -225,7 +227,9 @@ class Main extends Sprite
 			new Body( {
 				x: UnitConvert.posXfromCellX(MazeConf.WIDTH - 1),
 				y: UnitConvert.posYfromCellY(MazeConf.HEIGHT - 1),
-				type:B2BodyType.DYNAMIC_BODY
+				type:B2BodyType.DYNAMIC_BODY,
+				linearDamping:0.005,
+				fixedRotation:true
 			}),
 			new Gfx(new DiskShape(12)),
 			mainLayer,

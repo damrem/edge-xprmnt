@@ -14,13 +14,13 @@ class KeyboardController implements ISystem
 {
 	function update(controlled:KeyboardControlled) 
 	{
-		trace("controlledNodeUpdate");
+		//trace("controlledNodeUpdate");
 		for (keyCode in controlled.keyMap.keys())
 		{
 			if (KeyboardListener.keyStates[keyCode] != null)
 			{
 				controlled.keyStates[keyCode] = KeyboardListener.keyStates[keyCode];
-				trace(controlled.keyStates);
+				//trace(controlled.keyStates);
 			}
 		}
 		

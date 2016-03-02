@@ -12,6 +12,7 @@ class WorldStep implements ISystem
 	public function update()
 	{
 		B2.world.step(timeDelta, 8, 3);
+		B2.world.clearForces();
 	}
 	
 }

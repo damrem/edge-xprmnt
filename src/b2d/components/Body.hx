@@ -18,14 +18,24 @@ class Body implements IComponent
 	 * Empty constructor does not force to pass a B2Body argument,
 	 * so that b2Body can be set later.
 	 */
-	public function new(bodyDefDef:BodyDefDef)
+	public function new(bodyDef:BodyDef)
 	{
 		b2BodyDef = new B2BodyDef();
-		b2BodyDef.position.set(bodyDefDef.x, bodyDefDef.y);
-		if (bodyDefDef.type != null)
+		b2BodyDef.position.set(bodyDef.x, bodyDef.y);
+		if (bodyDef.type != null)
 		{
-			b2BodyDef.type = bodyDefDef.type;			
+			b2BodyDef.type = bodyDef.type;
 		}
+		if (bodyDef.linearDamping != null)
+		{
+			b2BodyDef.linearDamping = bodyDef.linearDamping;
+		}
+		
+		if (bodyDef.fixedRotation != null)
+		{
+			b2BodyDef.fixedRotation = bodyDef.fixedRotation;
+		}
+		
 	}
 	
 	public function toString():String
@@ -34,7 +44,9 @@ class Body implements IComponent
 	}
 }
 
-typedef BodyDefDef = {
+typedef BodyDef = {
+	@:optional var fixedRotation:Bool;
+	@:optional var linearDamping:Float;
 	@:optional var type:B2BodyType;
 	@:optional var x:Float;
 	@:optional var y:Float;

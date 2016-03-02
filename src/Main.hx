@@ -1,10 +1,8 @@
 package;
 
 import b2d.B2;
-import b2d.B2RectShape;
 import b2d.components.Body;
 import b2d.components.FixtureDef;
-import b2d.components.Impulse;
 import b2d.systems.BodyApplyImpulse;
 import b2d.systems.BodyCreateFixture;
 import b2d.systems.CreateBody;
@@ -18,7 +16,7 @@ import controls.KeyboardListener;
 import edge.World;
 import heroes.HeroCommand;
 import heroes.HeroKeyboardController;
-import hxlpers.shapes.BoxShape;
+import heroes.HeroReactivity;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
@@ -209,7 +207,9 @@ class Main extends Sprite
 				Keyboard.RIGHT => HeroCommand.Right,
 				Keyboard.DOWN => HeroCommand.Down,
 				Keyboard.SPACE => HeroCommand.Shoot
-			])
+			]),
+			
+			new HeroReactivity(5000)
 		]);
 		
 		
@@ -237,7 +237,9 @@ class Main extends Sprite
 				Keyboard.D => HeroCommand.Right,
 				Keyboard.S => HeroCommand.Down,
 				Keyboard.SPACE => HeroCommand.Shoot
-			])
+			]),
+			
+			new HeroReactivity(5000)
 		]);
 		
 		//addEventListener(MouseEvent.CLICK, 

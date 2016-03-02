@@ -1,6 +1,7 @@
 package heroes;
 
 import b2d.components.Body;
+import box2D.common.math.B2Vec2;
 import controls.KeyboardControlled;
 import controls.KeyState;
 import edge.ISystem;
@@ -13,12 +14,16 @@ import hxlpers.Direction;
 class HeroKeyboardController implements ISystem
 {
 	
-	function update(body:Body, controlled:KeyboardControlled) 
+	function update(body:Body, controlled:KeyboardControlled, heroControl:HeroReactivity) 
 	{
 		var isLeftPressed = false;
 		var isUpPressed = false;
 		var isRightPressed = false;
 		var isDownPressed = false;
+		
+		var hDirection = Direction.None;
+		var vDirection = Direction.None;
+		var impulse = new B2Vec2();
 		
 		for (keyCode in controlled.keyStates.keys())
 		{
@@ -45,65 +50,65 @@ class HeroKeyboardController implements ISystem
 
 		if (isLeftPressed)
 		{	
-			controlled.hDirection = Direction.Left;
+			hDirection = Direction.Left;
 		}
 		
 		if (isUpPressed)
 		{
-			controlled.vDirection = Direction.Up;
+			vDirection = Direction.Up;
 		}
 		
 		if (isRightPressed)
 		{
-			controlled.hDirection = Direction.Right;
+			hDirection = Direction.Right;
 		}
 		
 		if (isDownPressed)
 		{
-			controlled.vDirection = Direction.Down;
+			vDirection = Direction.Down;
 		}
 		
 		if (!isLeftPressed && !isRightPressed)
 		{
-			controlled.hDirection = Direction.None;
+			hDirection = Direction.None;
 		}
 		
 		if (!isUpPressed && !isDownPressed)
 		{
-			controlled.vDirection = Direction.None;
+			vDirection = Direction.None;
 		}
 		
 		
 		
 		var mass = body.b2Body.getMass();
 		
-		switch(controlled.hDirection)
+		switch(hDirection)
 		{
 			case Left:
-				controlled.impulse.x = -controlled.reactivity * mass;
+				impulse.x = -heroControl.reactivity * mass;
 				
 			case Right:
-				controlled.impulse.x = controlled.reactivity * mass;
+				impulse.x = heroControl.reactivity * mass;
 				
 			default:
-				controlled.impulse.x = 0;
+				impulse.x = 0;
 		}
 		
-		switch(controlled.vDirection)
+		switch(vDirection)
 		{
 			case Up:
-				controlled.impulse.y = -controlled.reactivity * mass;
+				impulse.y = -heroControl.reactivity * mass;
 				
 			case Down:
-				controlled.impulse.y = controlled.reactivity * mass;
+				impulse.y = heroControl.reactivity * mass;
 				
 			default:
-				controlled.impulse.y = 0;
+				impulse.y = 0;
 		}
 		
 		
-		if (controlled.impulse.x != 0 || controlled.impulse.y != 0) {			
-			body.b2Body.applyImpulse(controlled.impulse, body.b2Body.getWorldCenter());
+		if (impulse.x != 0 || impulse.y != 0) {			
+			body.b2Body.applyImpulse(impulse, body.b2Body.getWorldCenter());
 		}
 		
 	}

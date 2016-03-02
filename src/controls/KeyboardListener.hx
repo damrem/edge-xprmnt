@@ -35,8 +35,6 @@ class KeyboardListener implements ISystem
 	
 	public function update()
 	{
-	
-		trace("update");
 		for (key in pressedKeys.keys())
 		{
 			if (pressedKeys[key])

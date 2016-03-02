@@ -20,6 +20,7 @@ class KeyboardController implements ISystem
 			if (KeyboardListener.keyStates[keyCode] != null)
 			{
 				controlled.keyStates[keyCode] = KeyboardListener.keyStates[keyCode];
+				trace(controlled.keyStates);
 			}
 		}
 		

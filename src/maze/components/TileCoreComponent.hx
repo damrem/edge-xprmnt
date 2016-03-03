@@ -5,7 +5,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class TileDef implements IComponent
+class TileCoreComponent implements IComponent
 {
 
 	var bits:Int;

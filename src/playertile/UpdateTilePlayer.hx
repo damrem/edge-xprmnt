@@ -3,9 +3,9 @@ import b2d.components.Body;
 import box2D.common.math.B2Vec2;
 import de.polygonal.core.math.Mathematics;
 import edge.ISystem;
-import heroes.Player;
+import heroes.PlayerCoreComponent;
 import maze.components.Maze;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 import maze.MazeConf;
 import maze.UnitConvert;
 import edge.Entity;
@@ -18,7 +18,7 @@ class UpdateTilePlayer implements ISystem
 	var pos:B2Vec2;
 	var entity:Entity;
 	
-	public function update(body:Body, player:Player, maze:Maze)
+	public function update(tile:TileCoreComponent, body:Body, player:PlayerCoreComponent, maze:Maze)
 	{
 		pos = body.b2Body.getPosition();
 		//trace(, );

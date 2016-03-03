@@ -17,7 +17,7 @@ import de.polygonal.ds.Array2.Array2Cell;
 import edge.World;
 import heroes.PlayerCommand;
 import heroes.PlayerKeyboardController;
-import heroes.Player;
+import heroes.PlayerCoreComponent;
 import playertile.ContactListener;
 import playertile.UpdateTilePlayer;
 import heroes.PlayerFactory;

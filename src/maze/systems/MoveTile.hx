@@ -8,7 +8,7 @@ import de.polygonal.ds.Array2.Array2Cell;
 import edge.Entity;
 import edge.ISystem;
 import edge.View;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 import maze.components.Maze;
 import maze.components.TileMovement;
 import motion.Actuate;
@@ -23,7 +23,7 @@ class MoveTile implements ISystem
 {
 	var entity:Entity;
 	
-	public function update(tileDef:TileDef, body:Body, tileMovement:TileMovement) 
+	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement) 
 	{
 		var dx = Math.abs(body.b2Body.getPosition().x - tileMovement.toX());
 		var dy = Math.abs(body.b2Body.getPosition().y - tileMovement.toY());
@@ -41,7 +41,7 @@ class MoveTile implements ISystem
 		
 	}
 	
-	public function updateAdded(entity:Entity, node:{tileDef:TileDef, body:Body, tileMovement:TileMovement}) 
+	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement}) 
 	{
 		//trace("updateAdded");
 		
@@ -53,7 +53,7 @@ class MoveTile implements ISystem
 		node.body.b2Body.setLinearVelocity(new B2Vec2(dx/10, dy/10));
 	}
 	
-	public function updateRemoved(entity:Entity, node:{tileDef:TileDef, body:Body, tileMovement:TileMovement})
+	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement})
 	{
 		//trace("updateRemoved");
 		node.body.b2Body.setLinearVelocity(new B2Vec2());
@@ -63,7 +63,7 @@ class MoveTile implements ISystem
 		if (node.tileMovement.isOut)
 		{
 			//trace("isOut");
-			entity.removeTypes([TileDef, Body, Entity]);
+			entity.removeTypes([TileCoreComponent, Body, Entity]);
 			entity.destroy();
 		}
 		

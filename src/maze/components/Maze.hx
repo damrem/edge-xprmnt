@@ -2,7 +2,7 @@ package maze.components;
 import de.polygonal.ds.Array2;
 import edge.Entity;
 import edge.IComponent;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 
 using hxlpers.ds.Array2SF;
 

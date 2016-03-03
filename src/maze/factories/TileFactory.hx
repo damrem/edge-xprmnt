@@ -5,7 +5,7 @@ import box2D.dynamics.B2BodyType;
 import edge.Engine;
 import edge.Entity;
 import hxlpers.shapes.BoxShape;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 import openfl.display.Sprite;
 import rendering.components.Gfx;
 
@@ -21,7 +21,7 @@ class TileFactory
 		//trace("createEntity(" + x, y);
 		var comps = new Array<{}>();
 		
-		comps.push(new TileDef());
+		comps.push(new TileCoreComponent());
 		
 		comps.push(new Body({
 			x: UnitConvert.posXfromCellX(x), 

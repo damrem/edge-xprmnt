@@ -8,7 +8,7 @@ import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
 import heroes.PlayerConf;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 
 /**
  * ...
@@ -30,12 +30,12 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	function update(tileDef:TileDef, body:Body)
+	function update(tileDef:TileCoreComponent, body:Body)
 	{
 		
 	}
 	
-	public function updateAdded(entity:Entity, node:{ tileDef:TileDef, body:Body })
+	public function updateAdded(entity:Entity, node:{ tileDef:TileCoreComponent, body:Body })
 	{
 		var fixtureDefs = [];
 		
@@ -141,7 +141,7 @@ class BuildPhysicalTile implements ISystem
 		
 	}
 	
-	public function updateRemoved(e:Entity, node:{ tileDef:TileDef, body:Body })
+	public function updateRemoved(e:Entity, node:{ tileDef:TileCoreComponent, body:Body })
 	{
 		
 	}

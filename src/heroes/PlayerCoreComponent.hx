@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class Player implements IComponent
+class PlayerCoreComponent implements IComponent
 {
 	public var reactivity:Float;		
 }

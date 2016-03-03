@@ -14,7 +14,7 @@ import hxlpers.Direction;
 class PlayerKeyboardController implements ISystem
 {
 	
-	function update(body:Body, controlled:KeyboardCommandSet, playerControl:Player) 
+	function update(body:Body, controlled:KeyboardCommandSet, playerControl:PlayerCoreComponent) 
 	{
 		var isLeftPressed = false;
 		var isUpPressed = false;

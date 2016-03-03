@@ -2,7 +2,8 @@ package playertile;
 import box2D.dynamics.B2ContactListener;
 import box2D.dynamics.contacts.B2Contact;
 import edge.Entity;
-import heroes.Player;
+import heroes.PlayerCoreComponent;
+import maze.components.TileCoreComponent;
 import rendering.components.Opacity;
 
 /**
@@ -21,10 +22,10 @@ class ContactListener extends B2ContactListener
 	{
 		var fixtureA = contact.getFixtureA();
 		var entityA = cast(fixtureA.getUserData(), Entity);
-		var entityAIsPlayer = entityA.existsType(Player) == true;
+		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent) == true;
 		var fixtureB = contact.getFixtureB();
 		var entityB = cast(fixtureB.getUserData(), Entity);
-		var entityBIsPlayer = entityB.existsType(Player) == true;
+		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent) == true;
 		
 		if (fixtureA.isSensor() && entityBIsPlayer)
 		{
@@ -45,16 +46,19 @@ class ContactListener extends B2ContactListener
 	{
 		var fixtureA = contact.getFixtureA();
 		var entityA = cast(fixtureA.getUserData(), Entity);
-		var entityAIsPlayer = entityA.existsType(Player) == true;
+		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent);
+		var entityAIsTile = entityA.existsType(TileCoreComponent);
+		
 		var fixtureB = contact.getFixtureB();
 		var entityB = cast(fixtureB.getUserData(), Entity);
-		var entityBIsPlayer = entityB.existsType(Player) == true;
+		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent);
+		var entityBIsTile = entityB.existsType(TileCoreComponent);
 		
-		if (fixtureA.isSensor() && entityBIsPlayer)
+		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.removeType(Opacity);
 		}
-		else if (fixtureB.isSensor() && entityAIsPlayer)
+		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.removeType(Opacity);
 		}

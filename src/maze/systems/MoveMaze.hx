@@ -10,7 +10,7 @@ import edge.View;
 import hxlpers.Direction;
 import maze.components.Maze;
 import maze.components.MazeMovement;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 import maze.components.TileMovement;
 import maze.factories.TileFactory;
 

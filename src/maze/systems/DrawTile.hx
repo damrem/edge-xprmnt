@@ -2,7 +2,7 @@ package maze.systems;
 import edge.Entity;
 import edge.ISystem;
 import hxlpers.shapes.BoxShape;
-import maze.components.TileDef;
+import maze.components.TileCoreComponent;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import rendering.components.Gfx;
@@ -29,12 +29,12 @@ class DrawTile implements ISystem
 		
 	}
 	
-	function update(tileDef:TileDef, gfx:Gfx)
+	function update(tileDef:TileCoreComponent, gfx:Gfx)
 	{
 		
 	}
 	
-	public function updateAdded(entity:Entity, node:{ tileDef:TileDef, gfx:Gfx})
+	public function updateAdded(entity:Entity, node:{ tileDef:TileCoreComponent, gfx:Gfx})
 	{
 		var sprite = cast(node.gfx.display, Sprite);
 		sprite.graphics.beginFill(0x0000ff);
@@ -73,7 +73,7 @@ class DrawTile implements ISystem
 		
 	}
 	
-	public function updateRemoved(e:Entity, node:{ tileDef:TileDef, gfx:Gfx})
+	public function updateRemoved(e:Entity, node:{ tileDef:TileCoreComponent, gfx:Gfx})
 	{
 		cast(node.gfx.display, Sprite).graphics.clear();
 	}

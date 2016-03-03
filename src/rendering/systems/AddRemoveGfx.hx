@@ -19,13 +19,13 @@ class AddRemoveGfx implements ISystem
 	
 	public function updateAdded(e:Entity, node: { layer:Layer, gfx:Gfx } )
 	{
-		trace("updateAdded");
+		//trace("updateAdded");
 		node.layer.scene1.addChild(node.gfx.display);
 	}
 	
 	public function updateRemoved(e:Entity, node: { layer:Layer, gfx:Gfx } )
 	{
-		trace("updateRemoved");
+		//trace("updateRemoved");
 		node.layer.scene1.removeChild(node.gfx.display);
 	}
 	

@@ -15,10 +15,11 @@ import controls.KeyboardController;
 import controls.KeyboardListener;
 import de.polygonal.ds.Array2.Array2Cell;
 import edge.World;
-import heroes.HeroCommand;
-import heroes.HeroKeyboardController;
-import heroes.Hero;
-import heroes.UpdatePlayerTile;
+import heroes.PlayerCommand;
+import heroes.PlayerKeyboardController;
+import heroes.Player;
+import playertile.ContactListener;
+import playertile.UpdateTilePlayer;
 import heroes.PlayerFactory;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
@@ -39,6 +40,7 @@ import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
 import rendering.systems.PositionGfx;
 import rendering.systems.RenderLayer;
+import rendering.systems.SetOpacity;
 
 
 
@@ -53,13 +55,13 @@ class Main extends Sprite
 	public static var mainLayer:Layer;
 	public static var maze:Maze;
 
-	public static inline var HERO_CATEGORY:Int = 0x0002;
+	public static inline var PLAYER_CATEGORY:Int = 0x0002;
 	public static inline var TILE_CATEGORY:Int = 0x0004;
 	public static inline var BOUNDARY_CATEGORY:Int = 0x0008;
 	
-	public static inline var HERO_MASK:Int = TILE_CATEGORY | BOUNDARY_CATEGORY;
-	public static inline var TILE_MASK:Int = HERO_CATEGORY;
-	public static inline var BOUNDARY_MASK:Int = HERO_CATEGORY;
+	public static inline var PLAYER_MASK:Int = TILE_CATEGORY | BOUNDARY_CATEGORY;
+	public static inline var TILE_MASK:Int = PLAYER_CATEGORY;
+	public static inline var BOUNDARY_MASK:Int = PLAYER_CATEGORY;
 	
 	public function new() 
 	{
@@ -67,6 +69,7 @@ class Main extends Sprite
 		
 		var edgeWorld = new World();
 		B2.createWorld();
+		B2.world.setContactListener(new ContactListener());
 		
 		/*
 		var bd = new BodyDef();
@@ -97,9 +100,9 @@ class Main extends Sprite
 		edgeWorld.physics.add(new MoveMaze());
 		edgeWorld.physics.add(new MoveTile());
 		
-		edgeWorld.physics.add(new HeroKeyboardController());
+		edgeWorld.physics.add(new PlayerKeyboardController());
 		
-		edgeWorld.physics.add(new UpdatePlayerTile());
+		edgeWorld.physics.add(new UpdateTilePlayer());
 		
 		
 		//edgeWorld.physics.add(new BodyCreateFixture());
@@ -111,6 +114,7 @@ class Main extends Sprite
 		edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());
 		edgeWorld.render.add(new PositionGfx());
+		edgeWorld.render.add(new SetOpacity());
 		
 		//edgeWorld.physics.add(new CreateShape());
 		edgeWorld.start();
@@ -188,11 +192,11 @@ class Main extends Sprite
 		edgeWorld.engine.create(PlayerFactory.createComponents(
 			new Array2Cell(0, 0), 
 			new KeyboardCommandSet([
-				Keyboard.Q => HeroCommand.Left,
-				Keyboard.Z => HeroCommand.Up,
-				Keyboard.D => HeroCommand.Right,
-				Keyboard.S => HeroCommand.Down,
-				Keyboard.SPACE => HeroCommand.Shoot
+				Keyboard.Q => PlayerCommand.Left,
+				Keyboard.Z => PlayerCommand.Up,
+				Keyboard.D => PlayerCommand.Right,
+				Keyboard.S => PlayerCommand.Down,
+				Keyboard.SPACE => PlayerCommand.Shoot
 			]),
 			mainLayer
 		));
@@ -201,11 +205,11 @@ class Main extends Sprite
 		edgeWorld.engine.create(PlayerFactory.createComponents(
 			new Array2Cell(MazeConf.WIDTH - 1, MazeConf.HEIGHT - 1), 
 			new KeyboardCommandSet([
-				Keyboard.LEFT => HeroCommand.Left,
-				Keyboard.UP => HeroCommand.Up,
-				Keyboard.RIGHT => HeroCommand.Right,
-				Keyboard.DOWN => HeroCommand.Down,
-				Keyboard.SPACE => HeroCommand.Shoot
+				Keyboard.LEFT => PlayerCommand.Left,
+				Keyboard.UP => PlayerCommand.Up,
+				Keyboard.RIGHT => PlayerCommand.Right,
+				Keyboard.DOWN => PlayerCommand.Down,
+				Keyboard.SPACE => PlayerCommand.Shoot
 			]),
 			mainLayer
 		));

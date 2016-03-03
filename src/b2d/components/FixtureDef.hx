@@ -24,6 +24,15 @@ class FixtureDef implements IComponent
 			b2FixtureDef.filter.categoryBits = fixtureDefDef.filter.categoryBits;
 			b2FixtureDef.filter.maskBits = fixtureDefDef.filter.maskBits;
 		}
+		
+		if (fixtureDefDef.isSensor != null)
+		{
+			b2FixtureDef.isSensor = fixtureDefDef.isSensor;
+		}
+		else
+		{
+			b2FixtureDef.isSensor = false;
+		}
 	}
 }
 
@@ -32,6 +41,7 @@ typedef FixtureDefDef =
 	var shape:B2Shape;
 	@:optional var density:Float;
 	@:optional var filter:B2FilterDataDef;
+	@:optional var isSensor:Bool;
 }
 
 typedef B2FilterDataDef =

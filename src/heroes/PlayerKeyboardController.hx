@@ -11,10 +11,10 @@ import hxlpers.Direction;
  * ...
  * @author damrem
  */
-class HeroKeyboardController implements ISystem
+class PlayerKeyboardController implements ISystem
 {
 	
-	function update(body:Body, controlled:KeyboardCommandSet, heroControl:Hero) 
+	function update(body:Body, controlled:KeyboardCommandSet, playerControl:Player) 
 	{
 		var isLeftPressed = false;
 		var isUpPressed = false;
@@ -32,16 +32,16 @@ class HeroKeyboardController implements ISystem
 			
 			switch(command)
 			{
-				case HeroCommand.Left:
+				case PlayerCommand.Left:
 					isLeftPressed = state == KeyState.JustPressed || state == KeyState.Pressed;
 					
-				case HeroCommand.Up:
+				case PlayerCommand.Up:
 					isUpPressed = state == KeyState.JustPressed || state == KeyState.Pressed;
 					
-				case HeroCommand.Right:
+				case PlayerCommand.Right:
 					isRightPressed = state == KeyState.JustPressed || state == KeyState.Pressed;
 					
-				case HeroCommand.Down:
+				case PlayerCommand.Down:
 					isDownPressed = state == KeyState.JustPressed || state == KeyState.Pressed;
 			}
 			
@@ -85,10 +85,10 @@ class HeroKeyboardController implements ISystem
 		switch(hDirection)
 		{
 			case Left:
-				impulse.x = -heroControl.reactivity * mass;
+				impulse.x = -playerControl.reactivity * mass;
 				
 			case Right:
-				impulse.x = heroControl.reactivity * mass;
+				impulse.x = playerControl.reactivity * mass;
 				
 			default:
 				impulse.x = 0;
@@ -97,10 +97,10 @@ class HeroKeyboardController implements ISystem
 		switch(vDirection)
 		{
 			case Up:
-				impulse.y = -heroControl.reactivity * mass;
+				impulse.y = -playerControl.reactivity * mass;
 				
 			case Down:
-				impulse.y = heroControl.reactivity * mass;
+				impulse.y = playerControl.reactivity * mass;
 				
 			default:
 				impulse.y = 0;

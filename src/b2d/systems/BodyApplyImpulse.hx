@@ -26,7 +26,7 @@ class BodyApplyImpulse implements ISystem
 	
 	public function updateAdded(entity:Entity, node: { body:Body, impulse:Impulse } )
 	{
-		trace("updateAdded");
+		//trace("updateAdded");
 		
 		mass = node.body.b2Body.getMass();
 		b2vec2.x = mass * node.impulse.x;

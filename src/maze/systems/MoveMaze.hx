@@ -38,7 +38,7 @@ class MoveMaze implements ISystem
 	
 	public function updateAdded(entity:Entity, node:{maze:Maze, movement:MazeMovement}) 
 	{
-		trace("updateAdded", node.movement.coord);
+		//trace("updateAdded", node.movement.coord);
 		
 		var movingTileEntities:Array<Entity> = [];
 		//var originCell;

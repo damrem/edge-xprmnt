@@ -12,26 +12,28 @@ import edge.View;
  */
 class BodyCreateFixture implements ISystem
 {
-	var multiShapeFixtureDefNode:View<{ body:Body, multiShapedFixtureDef:MultiFixtureDef }>;
+	var multiFixtureDefNode:View<{ body:Body, multiFixtureDef:MultiFixtureDef }>;
 	
-	public function update(body:Body, shapedFixtureDef:FixtureDef)
+	public function update(body:Body, fixtureDef:FixtureDef)
 	{
 		
 	}
 	
-	public function updateAdded(e:Entity, node:{ body:Body, shapedFixtureDef:FixtureDef }) 
+	public function updateAdded(entity:Entity, node:{ body:Body, fixtureDef:FixtureDef }) 
 	{
-		trace("updateAdded");
-		node.shapedFixtureDef.b2FixtureDef.shape = node.shapedFixtureDef.b2FixtureDef.shape;
-		node.body.b2Body.createFixture(node.shapedFixtureDef.b2FixtureDef);
+		//trace("updateAdded");
+		node.fixtureDef.b2FixtureDef.shape = node.fixtureDef.b2FixtureDef.shape;
+		node.fixtureDef.b2FixtureDef.userData = entity;
+		node.body.b2Body.createFixture(node.fixtureDef.b2FixtureDef);
 	}
 	
-	public function multiShapeFixtureDefNodeAdded(e:Entity, node: { body:Body, multiShapedFixtureDef:MultiFixtureDef } )
+	public function multiFixtureDefNodeAdded(entity:Entity, node: { body:Body, multiFixtureDef:MultiFixtureDef } )
 	{
-		for (shapedFixtureDef in node.multiShapedFixtureDef.shapedFixtureDefs)
+		for (fixtureDef in node.multiFixtureDef.fixtureDefs)
 		{
-			shapedFixtureDef.b2FixtureDef.shape = shapedFixtureDef.b2FixtureDef.shape;
-			node.body.b2Body.createFixture(shapedFixtureDef.b2FixtureDef);
+			fixtureDef.b2FixtureDef.shape = fixtureDef.b2FixtureDef.shape;
+			fixtureDef.b2FixtureDef.userData = entity;
+			node.body.b2Body.createFixture(fixtureDef.b2FixtureDef);
 		}
 	}
 	

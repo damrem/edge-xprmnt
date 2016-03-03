@@ -7,6 +7,7 @@ import b2d.components.MultiFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
 import edge.ISystem;
+import heroes.PlayerConf;
 import maze.components.TileDef;
 
 /**
@@ -36,13 +37,13 @@ class BuildPhysicalTile implements ISystem
 	
 	public function updateAdded(entity:Entity, node:{ tileDef:TileDef, body:Body })
 	{
-		var shapedFixtureDefs = [];
+		var fixtureDefs = [];
 		
 		for (x in cornerBlockCoords)
 		{
 			for (y in cornerBlockCoords)
 			{
-				shapedFixtureDefs.push(new FixtureDef( {
+				fixtureDefs.push(new FixtureDef( {
 					shape: new B2RectShape( { 
 						width:cornerBlockSize,
 						height:cornerBlockSize,
@@ -61,7 +62,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.bottom)
 		{
-			shapedFixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new FixtureDef( { 
 				shape: new B2RectShape( {
 					width: wallLength,
 					height: cornerBlockSize, 
@@ -78,7 +79,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.top)
 		{
-			shapedFixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new FixtureDef( { 
 				shape: new B2RectShape({
 					width: wallLength, 
 					height: cornerBlockSize, 
@@ -94,7 +95,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.right)
 		{
-			shapedFixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new FixtureDef( { 
 				shape: new B2RectShape({
 					width: cornerBlockSize, 
 					height: wallLength, 
@@ -110,7 +111,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.left)
 		{
-			shapedFixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new FixtureDef( { 
 				shape: new B2RectShape( {
 					width: cornerBlockSize, 
 					height: wallLength, 
@@ -124,7 +125,19 @@ class BuildPhysicalTile implements ISystem
 			} ));
 		}
 		
-		entity.add(new MultiFixtureDef(shapedFixtureDefs));
+		fixtureDefs.push(new FixtureDef( {
+			shape: new B2RectShape( {
+				width: TileConf.SIZE-PlayerConf.SIZE,
+				height: TileConf.SIZE-PlayerConf.SIZE
+			}),
+			isSensor:true,
+			filter: {
+				categoryBits:Main.TILE_CATEGORY, 
+				maskBits: Main.TILE_MASK
+			}
+		}));
+		
+		entity.add(new MultiFixtureDef(fixtureDefs));
 		
 	}
 	

@@ -18,7 +18,7 @@ class TileFactory
 {
 	public static function createComps(x:Int, y:Int):Array<{}>
 	{
-		trace("createEntity(" + x, y);
+		//trace("createEntity(" + x, y);
 		var comps = new Array<{}>();
 		
 		comps.push(new TileDef());

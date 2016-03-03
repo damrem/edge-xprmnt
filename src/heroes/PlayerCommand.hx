@@ -3,7 +3,7 @@ package heroes;
 /**
  * @author damrem
  */
-enum HeroCommand {
+enum PlayerCommand {
 	Left;
 	Up;
 	Right;

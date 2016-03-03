@@ -10,21 +10,22 @@ import edge.ISystem;
 class CreateBody implements ISystem
 {
 
-	public function update(b:Body) 
+	public function update(body:Body) 
 	{
 		
 	}
 	
-	public function updateAdded(e:Entity, n: { b:Body } )
+	public function updateAdded(entity:Entity, node: { body:Body } )
 	{
 		//trace("updateAdded");
-		n.b.b2Body = B2.world.createBody(n.b.b2BodyDef);
+		node.body.b2Body = B2.world.createBody(node.body.b2BodyDef);
+		node.body.b2Body.setUserData(entity);
 	}
 	
-	public function updateRemoved(e:Entity, n: { b:Body } )
+	public function updateRemoved(entity:Entity, node: { body:Body } )
 	{
 		//trace("updateRemoved");
-		B2.world.destroyBody(n.b.b2Body);
+		B2.world.destroyBody(node.body.b2Body);
 	}
 	
 }

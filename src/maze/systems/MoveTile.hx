@@ -32,7 +32,7 @@ class MoveTile implements ISystem
 		
 		if ((dx == 0 && dy == 0) || (dx > tileMovement.dx || dy > tileMovement.dy))
 		{
-			trace("ending movement");
+			//trace("ending movement");
 			entity.remove(tileMovement);
 		}
 		
@@ -43,7 +43,7 @@ class MoveTile implements ISystem
 	
 	public function updateAdded(entity:Entity, node:{tileDef:TileDef, body:Body, tileMovement:TileMovement}) 
 	{
-		trace("updateAdded");
+		//trace("updateAdded");
 		
 		node.body.b2Body.setAwake(true);
 		var fromPosition=node.body.b2Body.getPosition();
@@ -55,14 +55,14 @@ class MoveTile implements ISystem
 	
 	public function updateRemoved(entity:Entity, node:{tileDef:TileDef, body:Body, tileMovement:TileMovement})
 	{
-		trace("updateRemoved");
+		//trace("updateRemoved");
 		node.body.b2Body.setLinearVelocity(new B2Vec2());
 		node.body.b2Body.setPosition(new B2Vec2(node.tileMovement.toX(), node.tileMovement.toY()));
 		node.body.b2Body.setAwake(false);
-		trace(node.tileMovement);
+		//trace(node.tileMovement);
 		if (node.tileMovement.isOut)
 		{
-			trace("isOut");
+			//trace("isOut");
 			entity.removeTypes([TileDef, Body, Entity]);
 			entity.destroy();
 		}

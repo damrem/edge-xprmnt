@@ -22,11 +22,11 @@ class PlayerFactory
 	{
 		return [
 			new FixtureDef( {
-				shape:new B2CircleShape(12),
+				shape:new B2CircleShape(PlayerConf.SIZE/2),
 				density:1.0,
 				filter: {
-					categoryBits:Main.HERO_CATEGORY,
-					maskBits:Main.HERO_MASK
+					categoryBits:Main.PLAYER_CATEGORY,
+					maskBits:Main.PLAYER_MASK
 				}
 			}),
 			new Body( {
@@ -38,7 +38,7 @@ class PlayerFactory
 				linearDamping:0.005,
 				fixedRotation:true
 			}),
-			new Gfx(new DiskShape(12)),
+			new Gfx(new DiskShape(PlayerConf.SIZE/2)),
 			mainLayer,
 			Main.maze,
 			//new Impulse(0.02, 0.01),
@@ -46,7 +46,7 @@ class PlayerFactory
 			keyboardCommandSet,
 			
 			
-			new Hero(5000)
+			new Player(5000)
 		];
 	}
 	

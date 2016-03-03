@@ -23,17 +23,22 @@ class ContactListener extends B2ContactListener
 		var fixtureA = contact.getFixtureA();
 		var entityA = cast(fixtureA.getUserData(), Entity);
 		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent) == true;
+		var entityAIsTile = entityA.existsType(TileCoreComponent);
+		
 		var fixtureB = contact.getFixtureB();
 		var entityB = cast(fixtureB.getUserData(), Entity);
 		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent) == true;
+		var entityBIsTile = entityB.existsType(TileCoreComponent);
 		
-		if (fixtureA.isSensor() && entityBIsPlayer)
+		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.add(new Opacity(0.5));
+			entityA.add(new PlayerBody(entityB));
 		}
-		else if (fixtureB.isSensor() && entityAIsPlayer)
+		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.add(new Opacity(0.5));
+			entityB.add(new PlayerBody(entityA));
 		}
 		/*
 		trace("beginContact");

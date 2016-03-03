@@ -19,7 +19,7 @@ import heroes.PlayerCommand;
 import heroes.PlayerKeyboardController;
 import heroes.PlayerCoreComponent;
 import playertile.ContactListener;
-import playertile.UpdateTilePlayer;
+import playertile.MovePlayerWithTile;
 import heroes.PlayerFactory;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
@@ -102,7 +102,7 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new PlayerKeyboardController());
 		
-		edgeWorld.physics.add(new UpdateTilePlayer());
+		edgeWorld.physics.add(new MovePlayerWithTile());
 		
 		
 		//edgeWorld.physics.add(new BodyCreateFixture());

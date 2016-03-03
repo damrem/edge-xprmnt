@@ -40,17 +40,17 @@ class MoveMaze implements ISystem
 	{
 		trace("updateAdded", node.movement.coord);
 		
-		var movingTiles:Array<Array<{}>> = [];
+		var movingTileEntities:Array<Entity> = [];
 		//var originCell;
 		
 		
 		if (node.movement.direction == Direction.Left || node.movement.direction == Direction.Right)
 		{
-			movingTiles = node.maze.tiles.getRow(node.movement.coord, movingTiles);
+			movingTileEntities = node.maze.tiles.getRow(node.movement.coord, movingTileEntities);
 		}
 		else if (node.movement.direction == Direction.Up || node.movement.direction == Direction.Down)
 		{
-			movingTiles = node.maze.tiles.getCol(node.movement.coord, movingTiles);
+			movingTileEntities = node.maze.tiles.getCol(node.movement.coord, movingTileEntities);
 		}
 		
 		var insertedFromX:Int;
@@ -93,15 +93,15 @@ class MoveMaze implements ISystem
 		}
 		
 		
-		var replacingTile = TileFactory.createComps(insertedFromX, insertedFromY);
-		var replacingTileEntity = engine.create(replacingTile);
-		replacingTile.push(replacingTileEntity);
-		movingTiles.push(replacingTile);
+		var replacingTileEntity = TileFactory.createEntity(engine, insertedFromX, insertedFromY);
+		//var replacingTileEntity = engine.create(replacingTile);
+		//replacingTile.push(replacingTileEntity);
+		movingTileEntities.push(replacingTileEntity);
 		//trace("movingTiles"+ movingTiles);
 		
-		var replacedTile = node.maze.tiles.move(node.movement.coord, node.movement.coord, node.movement.direction, replacingTile);
+		var replacedTile = node.maze.tiles.move(node.movement.coord, node.movement.coord, node.movement.direction, replacingTileEntity);
 		
-		for (movingTile in movingTiles)
+		for (movingTile in movingTileEntities)
 		{
 			var isOut:Bool;
 			if (movingTile == replacedTile)
@@ -116,15 +116,16 @@ class MoveMaze implements ISystem
 				destCell = node.maze.tiles.getCellOf(movingTile);
 				isOut = false;
 			}
-			//destCell = node.maze.tiles.getCellOf(movingTile);
-			for (component in movingTile)
-			{
-				if (Type.getClass(component) == Entity)
-				{
-					cast(component, Entity).add(new TileMovement(destCell, isOut));
-					break;
-				}
-			}
+			
+			//for (component in movingTile)
+			//{
+				//if (Type.getClass(component) == Entity)
+				//{
+					//cast(component, Entity).add(new TileMovement(destCell, isOut));
+					movingTile.add(new TileMovement(destCell, isOut));
+					//break;
+				//}
+			//}
 		}
 	}
 	

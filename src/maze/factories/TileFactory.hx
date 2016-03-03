@@ -2,6 +2,8 @@ package maze.factories;
 
 import b2d.components.Body;
 import box2D.dynamics.B2BodyType;
+import edge.Engine;
+import edge.Entity;
 import hxlpers.shapes.BoxShape;
 import maze.components.TileDef;
 import openfl.display.Sprite;
@@ -31,6 +33,12 @@ class TileFactory
 		comps.push(Main.mainLayer);
 		
 		return comps;
+	}
+	
+	public static function createEntity(engine:Engine, x:Int, y:Int)
+	{
+		return engine.create(createComps(x, y));
+		
 	}
 	
 }

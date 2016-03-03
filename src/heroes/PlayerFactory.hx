@@ -40,12 +40,13 @@ class PlayerFactory
 			}),
 			new Gfx(new DiskShape(12)),
 			mainLayer,
+			Main.maze,
 			//new Impulse(0.02, 0.01),
 			
 			keyboardCommandSet,
 			
 			
-			new HeroReactivity(5000)
+			new Hero(5000)
 		];
 	}
 	

@@ -1,5 +1,6 @@
 package maze.components;
 import de.polygonal.ds.Array2;
+import edge.Entity;
 import edge.IComponent;
 import maze.components.TileDef;
 
@@ -12,7 +13,7 @@ using hxlpers.ds.Array2SF;
 class Maze implements IComponent
 {
 
-	public var tiles:Array2 < Array< {} > > ;
+	public var tiles:Array2 < Entity > ;
 	
 	/*
 	public function new(tileEntities:Array2<Array<{}>>)

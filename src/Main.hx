@@ -17,7 +17,8 @@ import de.polygonal.ds.Array2.Array2Cell;
 import edge.World;
 import heroes.HeroCommand;
 import heroes.HeroKeyboardController;
-import heroes.HeroReactivity;
+import heroes.Hero;
+import heroes.UpdatePlayerTile;
 import heroes.PlayerFactory;
 import hxlpers.shapes.DiskShape;
 import maze.components.Maze;
@@ -98,6 +99,7 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new HeroKeyboardController());
 		
+		edgeWorld.physics.add(new UpdatePlayerTile());
 		
 		
 		//edgeWorld.physics.add(new BodyCreateFixture());
@@ -173,17 +175,12 @@ class Main extends Sprite
 		*/
 		
 		
-		var tiles = MazeGenerator.create(MazeConf.WIDTH, MazeConf.HEIGHT);
+		var tileEnts = MazeGenerator.createEnts(edgeWorld.engine, MazeConf.WIDTH, MazeConf.HEIGHT);
 		
-		maze = new Maze(tiles);
+		maze = new Maze(tileEnts);
 		
 		edgeWorld.engine.create([maze]);
 		
-		for (tile in tiles)
-		{
-			var entity = edgeWorld.engine.create(tile);
-			tile.push(entity);	
-		}
 		
 		
 		

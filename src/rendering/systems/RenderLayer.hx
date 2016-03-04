@@ -38,7 +38,7 @@ class RenderLayer implements ISystem
 	
 	public function update(layer:Layer)
 	{
-		layer.image.clear(0xff00ff00);
+		layer.image.clear(0x00000000);
 		layer.image.draw(layer.scene0);
 	}
 	

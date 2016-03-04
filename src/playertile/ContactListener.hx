@@ -1,10 +1,14 @@
 package playertile;
+import b2d.components.Body;
 import box2D.dynamics.B2ContactListener;
 import box2D.dynamics.contacts.B2Contact;
 import edge.Entity;
 import heroes.PlayerCoreComponent;
+import hxlpers.edge.EntitySF;
 import maze.components.TileCoreComponent;
 import rendering.components.Opacity;
+
+using hxlpers.edge.EntitySF;
 
 /**
  * ...
@@ -33,18 +37,14 @@ class ContactListener extends B2ContactListener
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.add(new Opacity(0.5));
-			entityA.add(new PlayerBody(entityB));
+			entityA.add(new PlayerBody(entityB.getFirstComponentOfType(Body)));
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.add(new Opacity(0.5));
-			entityB.add(new PlayerBody(entityA));
+			entityB.add(new PlayerBody(entityA.getFirstComponentOfType(Body)));
 		}
-		/*
-		trace("beginContact");
-		if(contact.getFixtureA().isSensor && cast(contact.getFixtureA().getUserData(), 
-		trace(contact.getFixtureA().getUserData());
-		trace(contact.getFixtureB().getUserData());*/
+		
 	}
 	
 	override public function endContact(contact:B2Contact)
@@ -62,10 +62,12 @@ class ContactListener extends B2ContactListener
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.removeType(Opacity);
+			entityA.removeType(PlayerBody);
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.removeType(Opacity);
+			entityB.removeType(PlayerBody);
 		}
 	}
 	

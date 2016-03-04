@@ -6,6 +6,7 @@ import edge.ISystem;
 import heroes.PlayerCoreComponent;
 import maze.components.Maze;
 import maze.components.TileCoreComponent;
+import maze.components.TileMovement;
 import maze.MazeConf;
 import maze.UnitConvert;
 import edge.Entity;
@@ -18,13 +19,20 @@ class MovePlayerWithTile implements ISystem
 	var pos:B2Vec2;
 	var entity:Entity;
 	
-	public function update(tile:TileCoreComponent, body:Body, playerBody:PlayerBody)
+	public function update(tile:TileCoreComponent, body:Body, movement:TileMovement, playerBody:PlayerBody)
 	{
+		/*
 		tilePos = body.b2Body.getPosition();
 		playerPos = playerBody.body.b2Body.getPosition();
-		playerPos.set
+		playerPos.
 		
 		playerBody.body.b2Body.setPosition(
+		*/trace(movement.dx, movement.dy);
+	}
+	
+	public function udpateAdded(entity:Entity, node: { tile:TileCoreComponent, body:Body, movement:TileMovement, playerBody:PlayerBody } )
+	{
+		trace("updateAdded");
 	}
 	
 }

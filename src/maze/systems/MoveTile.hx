@@ -25,12 +25,10 @@ class MoveTile implements ISystem
 	
 	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement) 
 	{
-		var dx = Math.abs(body.b2Body.getPosition().x - tileMovement.toX());
-		var dy = Math.abs(body.b2Body.getPosition().y - tileMovement.toY());
+		var dx = body.b2Body.getPosition().x - tileMovement.toX();
+		var dy = body.b2Body.getPosition().y - tileMovement.toY();
 		
-		//trace(dx, tileMovement.dx);
-		
-		if ((dx == 0 && dy == 0) || (dx > tileMovement.dx || dy > tileMovement.dy))
+		if ((Math.abs(dx) == 0 && Math.abs(dy) == 0) || (Math.abs(dx) > Math.abs(tileMovement.dx) || Math.abs(dy) > Math.abs(tileMovement.dy)))
 		{
 			//trace("ending movement");
 			entity.remove(tileMovement);

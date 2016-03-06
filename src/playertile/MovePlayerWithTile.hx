@@ -16,21 +16,32 @@ import edge.Entity;
  */
 class MovePlayerWithTile implements ISystem
 {
-	var pos:B2Vec2;
+	var playerVel:B2Vec2;
 	var entity:Entity;
+	var tileVel:B2Vec2;
 	
-	public function update(tile:TileCoreComponent, body:Body, movement:TileMovement, playerBody:PlayerBody)
+	public function update(player:PlayerCoreComponent, playerBody:Body, tileBodyRef:TileBodyRef)
 	{
+		tileVel = tileBodyRef.body.b2Body.getLinearVelocity();
+		if (tileVel.length() > 0)
+		{
+			//trace(tileVel);
+			playerBody.b2Body.setAwake(true);
+			playerVel = playerBody.b2Body.getLinearVelocity();
+			playerVel.add(tileVel);
+			playerBody.b2Body.setLinearVelocity(playerVel);			
+		}
 		/*
 		tilePos = body.b2Body.getPosition();
 		playerPos = playerBody.body.b2Body.getPosition();
 		playerPos.
 		
 		playerBody.body.b2Body.setPosition(
-		*/trace(movement.dx, movement.dy);
+		trace(movement.dx, movement.dy);
+		*/
 	}
 	
-	public function udpateAdded(entity:Entity, node: { tile:TileCoreComponent, body:Body, movement:TileMovement, playerBody:PlayerBody } )
+	public function udpateAdded(entity:Entity, node: { tile:PlayerCoreComponent, body:Body, movement:TileMovement, tileBodyRef:TileBodyRef } )
 	{
 		trace("updateAdded");
 	}

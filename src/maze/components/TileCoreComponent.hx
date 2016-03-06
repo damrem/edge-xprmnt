@@ -17,6 +17,7 @@ class TileCoreComponent implements IComponent
 			bits = Std.random(16);
 		}
 		while (bits == 0 || bits == 1 || bits == 2 || bits == 4 || bits == 8);
+		bits = 15;
 	}
 	
 	public var right(get, null):Bool;

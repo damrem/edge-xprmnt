@@ -26,23 +26,23 @@ class ContactListener extends B2ContactListener
 	{
 		var fixtureA = contact.getFixtureA();
 		var entityA = cast(fixtureA.getUserData(), Entity);
-		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent) == true;
+		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent);
 		var entityAIsTile = entityA.existsType(TileCoreComponent);
 		
 		var fixtureB = contact.getFixtureB();
 		var entityB = cast(fixtureB.getUserData(), Entity);
-		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent) == true;
+		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent);
 		var entityBIsTile = entityB.existsType(TileCoreComponent);
 		
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.add(new Opacity(0.5));
-			entityA.add(new PlayerBody(entityB.getFirstComponentOfType(Body)));
+			entityB.add(new TileBodyRef(entityA.getFirstComponentOfType(Body)));
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.add(new Opacity(0.5));
-			entityB.add(new PlayerBody(entityA.getFirstComponentOfType(Body)));
+			entityA.add(new TileBodyRef(entityB.getFirstComponentOfType(Body)));
 		}
 		
 	}
@@ -62,12 +62,12 @@ class ContactListener extends B2ContactListener
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.removeType(Opacity);
-			entityA.removeType(PlayerBody);
+			entityA.removeType(TileBodyRef);
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.removeType(Opacity);
-			entityB.removeType(PlayerBody);
+			entityB.removeType(TileBodyRef);
 		}
 	}
 	

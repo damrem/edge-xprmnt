@@ -7,7 +7,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class PlayerBody implements IComponent
+class TileBodyRef implements IComponent
 {
 	public var body:Body;
 	

@@ -6,6 +6,6 @@ package heroes;
  */
 class PlayerConf
 {
-	public static inline var SIZE:Float = 24;
+	public static inline var SIZE:Float = 16;
 	
 }

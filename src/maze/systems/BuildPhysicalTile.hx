@@ -44,6 +44,7 @@ class BuildPhysicalTile implements ISystem
 			for (y in cornerBlockCoords)
 			{
 				fixtureDefs.push(new FixtureDef( {
+					//density:10,
 					shape: new B2RectShape( { 
 						width:cornerBlockSize,
 						height:cornerBlockSize,

@@ -7,6 +7,6 @@ package rendering;
 class RenderingConf
 {
 
-	public static var PIXEL_SIZE:Int = 4;
+	public static var PIXEL_SIZE:Int = 2;
 	
 }

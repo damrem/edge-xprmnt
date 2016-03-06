@@ -5,7 +5,7 @@ import edge.Entity;
  * ...
  * @author damrem
  */
-class EntitySF
+class EntityStaticExtension
 {
 
 	public static function getFirstComponentOfType<T>(user:Entity, type:Class<{}>, ?typeOut:Class<T>):T

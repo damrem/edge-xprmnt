@@ -13,6 +13,7 @@ import maze.components.Maze;
 import maze.components.TileMovement;
 import motion.Actuate;
 
+
 using hxlpers.ds.Array2SF;
 
 /**
@@ -36,7 +37,7 @@ class MoveTile implements ISystem
 		
 		tileMovement.dx = dx;
 		tileMovement.dy = dy;
-		
+		//trace(body.b2Body.getLinearVelocity().toString());
 	}
 	
 	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement}) 
@@ -44,11 +45,14 @@ class MoveTile implements ISystem
 		//trace("updateAdded");
 		
 		node.body.b2Body.setAwake(true);
-		var fromPosition=node.body.b2Body.getPosition();
+		var fromPosition = node.body.b2Body.getPosition();
 		var dx = UnitConvert.posXfromCellX(node.tileMovement.toCell.x) - fromPosition.x;
 		var dy = UnitConvert.posYfromCellY(node.tileMovement.toCell.y) - fromPosition.y;
 		
-		node.body.b2Body.setLinearVelocity(new B2Vec2(dx/10, dy/10));
+		var v = new B2Vec2(dx / 1000, dy / 1000);
+		node.body.b2Body.setLinearVelocity(v);
+		//trace("added" + node.body.b2Body.getLinearVelocity().toString());
+		//trace(node.body.b2Body.max
 	}
 	
 	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement})

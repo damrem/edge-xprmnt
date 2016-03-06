@@ -10,6 +10,8 @@ import maze.components.TileMovement;
 import maze.MazeConf;
 import maze.UnitConvert;
 import edge.Entity;
+
+using hxlpers.edge.EntityStaticExtension;
 /**
  * ...
  * @author damrem
@@ -20,17 +22,31 @@ class MovePlayerWithTile implements ISystem
 	var entity:Entity;
 	var tileVel:B2Vec2;
 	
-	public function update(player:PlayerCoreComponent, playerBody:Body, tileBodyRef:TileBodyRef)
+	public function update(player:PlayerCoreComponent, playerBody:Body, tileEntityRef:TileEntityRef)
 	{
-		tileVel = tileBodyRef.body.b2Body.getLinearVelocity();
-		if (tileVel.length() > 0)
+		var tileEntity = tileEntityRef.tile;
+		var tileMovement = tileEntity.getFirstComponentOfType(TileMovement);
+		if (tileMovement == null)
 		{
-			//trace(tileVel);
-			playerBody.b2Body.setAwake(true);
-			playerVel = playerBody.b2Body.getLinearVelocity();
-			playerVel.add(tileVel);
-			playerBody.b2Body.setLinearVelocity(playerVel);			
+			return;
 		}
+		var tileBody = tileEntity.getFirstComponentOfType(Body);
+		
+		//tileVel = tileBody.b2Body.getLinearVelocity();
+		trace(tileMovement.dx, tileMovement.dy);
+		
+		
+		playerBody.b2Body.setAwake(true);
+		/*
+		playerVel = playerBody.b2Body.getLinearVelocity();
+		playerVel.add(tileVel);
+		playerBody.b2Body.setLinearVelocity(playerVel);			
+		*/
+		var playerPos = playerBody.b2Body.getPosition();
+		//trace(tileVel.x, tileVel.y);
+		playerPos.set(playerPos.x + tileMovement.dx, playerPos.y + tileMovement.dy);
+		playerBody.b2Body.setPosition(playerPos);
+		
 		/*
 		tilePos = body.b2Body.getPosition();
 		playerPos = playerBody.body.b2Body.getPosition();
@@ -41,7 +57,7 @@ class MovePlayerWithTile implements ISystem
 		*/
 	}
 	
-	public function udpateAdded(entity:Entity, node: { tile:PlayerCoreComponent, body:Body, movement:TileMovement, tileBodyRef:TileBodyRef } )
+	public function udpateAdded(entity:Entity, node: { player:PlayerCoreComponent, playerBody:Body, tileBodyRef:TileEntityRef, tileMovement:TileMovement } )
 	{
 		trace("updateAdded");
 	}

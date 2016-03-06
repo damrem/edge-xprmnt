@@ -21,7 +21,7 @@ class MoveMazeRandomly implements ISystem
 
 	var tt:Float = 0;
 	var nextPeriod:Float;
-	static inline var NEXT_PERIOD_MIN:Float = 2500;
+	static inline var NEXT_PERIOD_MIN:Float = 5000;
 	static inline var NEXT_PERIOD_MAX:Float = 7500;
 	
 	public function new() 

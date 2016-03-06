@@ -1,5 +1,4 @@
 package playertile;
-import b2d.components.Body;
 import edge.Entity;
 import edge.IComponent;
 
@@ -7,8 +6,8 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class TileBodyRef implements IComponent
+class TileEntityRef implements IComponent
 {
-	public var body:Body;
+	public var tile:Entity;
 	
 }

@@ -4,11 +4,12 @@ import box2D.dynamics.B2ContactListener;
 import box2D.dynamics.contacts.B2Contact;
 import edge.Entity;
 import heroes.PlayerCoreComponent;
-import hxlpers.edge.EntitySF;
+import hxlpers.edge.EntityStaticExtension;
 import maze.components.TileCoreComponent;
+import maze.components.TileMovement;
 import rendering.components.Opacity;
 
-using hxlpers.edge.EntitySF;
+using hxlpers.edge.EntityStaticExtension;
 
 /**
  * ...
@@ -37,12 +38,14 @@ class ContactListener extends B2ContactListener
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.add(new Opacity(0.5));
-			entityB.add(new TileBodyRef(entityA.getFirstComponentOfType(Body)));
+			entityB.add(new TileEntityRef(entityA));
+			entityB.add(entityA.getFirstComponentOfType(TileMovement));
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.add(new Opacity(0.5));
-			entityA.add(new TileBodyRef(entityB.getFirstComponentOfType(Body)));
+			entityA.add(new TileEntityRef(entityB));
+			entityA.add(entityB.getFirstComponentOfType(TileMovement));
 		}
 		
 	}
@@ -62,12 +65,14 @@ class ContactListener extends B2ContactListener
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
 			entityA.removeType(Opacity);
-			entityA.removeType(TileBodyRef);
+			entityB.removeType(TileEntityRef);
+			entityB.removeType(TileMovement);
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
 			entityB.removeType(Opacity);
-			entityB.removeType(TileBodyRef);
+			entityA.removeType(TileEntityRef);
+			entityA.removeType(TileMovement);
 		}
 	}
 	

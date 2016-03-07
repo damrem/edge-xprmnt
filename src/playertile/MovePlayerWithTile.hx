@@ -30,23 +30,39 @@ class MovePlayerWithTile implements ISystem
 		{
 			return;
 		}
-		var tileBody = tileEntity.getFirstComponentOfType(Body);
-		
-		//tileVel = tileBody.b2Body.getLinearVelocity();
-		trace(tileMovement.dx, tileMovement.dy);
-		
-		
+
 		playerBody.b2Body.setAwake(true);
+		var tileBody:Body = tileEntity.getFirstComponentOfType(Body);
+		var mass = playerBody.b2Body.getMass();
+		tileVel = tileBody.b2Body.getLinearVelocity();
+		tileVel.set(tileVel.x * mass / 2, tileVel.y * mass / 2);
+		//trace(tileMovement.dx, tileMovement.dy);
+		
+		
+		
+		//playerVel = playerBody.b2Body.getLinearVelocity();
+		//playerVel.add(tileVel);
+		//playerBody.b2Body.setLinearVelocity(playerVel);
+		
+		playerBody.b2Body.applyForce(tileVel, playerBody.b2Body.getWorldCenter());
+		
+		
 		/*
-		playerVel = playerBody.b2Body.getLinearVelocity();
-		playerVel.add(tileVel);
-		playerBody.b2Body.setLinearVelocity(playerVel);			
+		var force = tileBody.b2Body.getLinearVelocity();
+		var mass = playerBody.b2Body.getMass();
+		force.x *= mass / 2;
+		force.y *= mass / 2;
+		playerBody.b2Body.applyImpulse(force, playerBody.b2Body.getWorldCenter());
 		*/
+		/*
 		var playerPos = playerBody.b2Body.getPosition();
 		//trace(tileVel.x, tileVel.y);
-		playerPos.set(playerPos.x + tileMovement.dx, playerPos.y + tileMovement.dy);
+		//playerPos.set(playerPos.x + tileMovement.dx, playerPos.y + tileMovement.dy);
+		trace(tileBody.b2Body.getLinearVelocity().x, tileBody.b2Body.getLinearVelocity().y);
+		playerPos.add(tileBody.b2Body.getLinearVelocity());
+		trace(playerPos.x, playerPos.y);
 		playerBody.b2Body.setPosition(playerPos);
-		
+		*/
 		/*
 		tilePos = body.b2Body.getPosition();
 		playerPos = playerBody.body.b2Body.getPosition();
@@ -57,7 +73,7 @@ class MovePlayerWithTile implements ISystem
 		*/
 	}
 	
-	public function udpateAdded(entity:Entity, node: { player:PlayerCoreComponent, playerBody:Body, tileBodyRef:TileEntityRef, tileMovement:TileMovement } )
+	public function udpateAdded(entity:Entity, node: { player:PlayerCoreComponent, playerBody:Body, tileEntityRef:TileEntityRef } )
 	{
 		trace("updateAdded");
 	}

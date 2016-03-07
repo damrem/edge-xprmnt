@@ -4,8 +4,10 @@ import b2d.components.Body;
 import box2D.dynamics.B2BodyType;
 import edge.Engine;
 import edge.Entity;
+import flash.display.Bitmap;
 import hxlpers.shapes.BoxShape;
 import maze.components.TileCoreComponent;
+import openfl.Assets;
 import openfl.display.Sprite;
 import rendering.components.Gfx;
 
@@ -29,7 +31,10 @@ class TileFactory
 			type: B2BodyType.KINEMATIC_BODY
 		}));
 		
-		comps.push(new Gfx(new Sprite()));
+		var ground = new Bitmap(Assets.getBitmapData("img/ground1.gif"));
+		var gfx = new Sprite();
+		gfx.addChild(ground);
+		comps.push(new Gfx(gfx));
 		comps.push(Main.mainLayer);
 		
 		return comps;

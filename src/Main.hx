@@ -120,7 +120,7 @@ class Main extends Sprite
 			edgeWorld.engine.create([tileLayer]);
 		}
 		
-		edgeWorld.render.add(new RenderLayer(this, [mainLayer].concat(tileLayers)));
+		edgeWorld.render.add(new RenderLayer(this, tileLayers.concat([mainLayer])));
 		edgeWorld.render.add(new ChangeTileLayer());
 		//edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());

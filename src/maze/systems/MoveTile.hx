@@ -61,6 +61,9 @@ class MoveTile implements ISystem
 		node.body.b2Body.setLinearVelocity(new B2Vec2());
 		node.body.b2Body.setPosition(new B2Vec2(node.tileMovement.toX(), node.tileMovement.toY()));
 		node.body.b2Body.setAwake(false);
+		
+		//entity.
+		
 		//trace(node.tileMovement);
 		if (node.tileMovement.isOut)
 		{

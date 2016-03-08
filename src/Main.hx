@@ -18,6 +18,7 @@ import edge.World;
 import heroes.PlayerCommand;
 import heroes.PlayerKeyboardController;
 import heroes.PlayerCoreComponent;
+import maze.systems.ChangeTileLayer;
 import playertile.ContactListener;
 import playertile.MovePlayerWithTile;
 import heroes.PlayerFactory;
@@ -53,6 +54,7 @@ using hxlpers.display.ShapeSF;
 class Main extends Sprite 
 {
 	public static var mainLayer:Layer;
+	public static var tileLayers:Array<Layer>;
 	public static var maze:Maze;
 
 	public static inline var PLAYER_CATEGORY:Int = 0x0002;
@@ -110,7 +112,16 @@ class Main extends Sprite
 		
 		mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
 		
-		edgeWorld.render.add(new RenderLayer(this, [mainLayer]));
+		tileLayers = [];
+		for (_y in 0...MazeConf.HEIGHT+2)
+		{
+			var tileLayer = new Layer(RenderingConf.PIXEL_SIZE);
+			tileLayers.push(tileLayer);
+			edgeWorld.engine.create([tileLayer]);
+		}
+		
+		edgeWorld.render.add(new RenderLayer(this, [mainLayer].concat(tileLayers)));
+		edgeWorld.render.add(new ChangeTileLayer());
 		//edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());
 		edgeWorld.render.add(new PositionGfx());

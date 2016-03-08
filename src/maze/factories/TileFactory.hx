@@ -2,6 +2,7 @@ package maze.factories;
 
 import b2d.components.Body;
 import box2D.dynamics.B2BodyType;
+import de.polygonal.core.math.Mathematics;
 import edge.Engine;
 import edge.Entity;
 import flash.display.Bitmap;
@@ -49,7 +50,7 @@ class TileFactory
 		tilesheet.drawTiles(gfx.graphics, [0, 0, wallMapping.indexOf(core.bits)]);
 		//gfx.addChild(ground);
 		comps.push(new Gfx(gfx));
-		comps.push(Main.mainLayer);
+		comps.push(Main.tileLayers[y+1]);
 		
 		return comps;
 	}

@@ -16,6 +16,7 @@ import openfl.Assets;
 import openfl.display.Sprite;
 import openfl.display.Tilesheet;
 import rendering.components.Gfx;
+import rendering.components.Opacity;
 
 
 /**
@@ -37,8 +38,8 @@ class TileFactory
 		for (x in 0...wallMapping.length)
 		{
 			var _x = x * 64;
-			tilesheet.addTileRect(new Rectangle(_x, 0, 64, 48), new Point(32, 40));
-			tilesheet.addTileRect(new Rectangle(_x, 48, 64, 32), new Point(32, 40));
+			tilesheet.addTileRect(new Rectangle(_x, 0, 64, 48), new Point(32, 48));
+			tilesheet.addTileRect(new Rectangle(_x, 48, 64, 32), new Point(32, 0));
 		}
 		
 		comps.push(new Body({
@@ -52,18 +53,20 @@ class TileFactory
 		tilesheet.drawTiles(backGfx.graphics, [0, 0, wallMapping.indexOf(core.bits)*2]);
 		var backEntity = engine.create([
 			new Gfx(backGfx),
-			Main.layers.get(y+1, 0)
+			Main.layers.get(y + 1, 2),
+			//new Opacity(0.5)
 		]);
 		
 		var frontGfx = new Sprite();
 		tilesheet.drawTiles(frontGfx.graphics, [0, 0, wallMapping.indexOf(core.bits)*2+1]);
-		var back = engine.create([
+		var frontEntity = engine.create([
 			new Gfx(frontGfx),
-			Main.layers.get(y+1, 2)
+			Main.layers.get(y+1, 0),
+			//new Opacity(0.5)
 		]);
 		
 		comps.push(new TileBack(backEntity));
-		comps.push(new TileFront(backEntity));
+		comps.push(new TileFront(frontEntity));
 		
 		return comps;
 	}

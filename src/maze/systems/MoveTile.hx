@@ -9,6 +9,7 @@ import edge.Entity;
 import edge.ISystem;
 import edge.View;
 import maze.components.TileBack;
+import maze.components.TileCell;
 import maze.components.TileCoreComponent;
 import maze.components.Maze;
 import maze.components.TileFront;
@@ -28,7 +29,7 @@ class MoveTile implements ISystem
 {
 	var entity:Entity;
 	
-	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement, back:TileBack, front:TileFront) 
+	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement, tileCell:TileCell, back:TileBack, front:TileFront) 
 	{
 		var dx = body.b2Body.getPosition().x - tileMovement.toX();
 		var dy = body.b2Body.getPosition().y - tileMovement.toY();
@@ -44,7 +45,7 @@ class MoveTile implements ISystem
 		//trace(body.b2Body.getLinearVelocity().toString());
 	}
 	
-	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement, back:TileBack, front:TileFront}) 
+	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement, tileCell:TileCell, back:TileBack, front:TileFront}) 
 	{
 		//trace("updateAdded");
 		
@@ -53,13 +54,16 @@ class MoveTile implements ISystem
 		var dx = UnitConvert.posXfromCellX(node.tileMovement.toCell.x) - fromPosition.x;
 		var dy = UnitConvert.posYfromCellY(node.tileMovement.toCell.y) - fromPosition.y;
 		
+		node.tileCell.x = node.tileMovement.toCell.x;
+		node.tileCell.y = node.tileMovement.toCell.y;
+		
 		var v = new B2Vec2(dx / 1000, dy / 1000);
 		node.body.b2Body.setLinearVelocity(v);
 		//trace("added" + node.body.b2Body.getLinearVelocity().toString());
 		//trace(node.body.b2Body.max
 	}
 	
-	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement, back:TileBack, front:TileFront})
+	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement, tileCell:TileCell, back:TileBack, front:TileFront})
 	{
 		//trace("updateRemoved");
 		node.body.b2Body.setLinearVelocity(new B2Vec2());

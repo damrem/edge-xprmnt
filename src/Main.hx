@@ -45,7 +45,7 @@ using hxlpers.display.ShapeSF;
  */
 class Main extends Sprite 
 {
-	public static var mainLayer:Layer;
+	//public static var mainLayer:Layer;
 	//public static var tileLayers:Array<Layer>;
 	public static var layers:Array2<Layer>;
 	public static var maze:Maze;
@@ -107,13 +107,35 @@ class Main extends Sprite
 		
 		layers = new Array2<Layer>(MazeConf.HEIGHT + 2, 3);
 		layers.assign(Layer, [RenderingConf.PIXEL_SIZE]);
-		for (layer in layers.iterator())
+		
+		var layersArray = [];
+		//layersArray.reverse();
+		
+		
+		for (u in 0...layers.getW())
+		{
+			trace(u);
+			for (v in 0...layers.getH())
+			{
+				//trace(v);
+				//var layer = layers.get(MazeConf.HEIGHT+2-1-u, v);
+				var layer = layers.get(u, v);
+				layersArray.push(layer);
+				edgeWorld.engine.create([layer]);
+			}
+		}
+		trace(layersArray.length);
+		/*
+		for (layer in layersArray)
 		{
 			edgeWorld.engine.create([layer]);
 		}
+		*/
+		
+		
 		
 		//edgeWorld.render.add(new RenderLayer(this, tileLayers.concat([mainLayer])));
-		edgeWorld.render.add(new RenderLayer(this, layers.getArray()));
+		edgeWorld.render.add(new RenderLayer(this, layersArray));
 		edgeWorld.render.add(new ChangeTileLayer());
 		//edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());
@@ -133,7 +155,7 @@ class Main extends Sprite
 		//var disk = new openfl.display.Shape();
 		//disk.circle(50, 0xff0000);
 		
-		edgeWorld.engine.create([mainLayer]);
+		//edgeWorld.engine.create([mainLayer]);
 		
 		
 		
@@ -203,7 +225,7 @@ class Main extends Sprite
 				Keyboard.S => PlayerCommand.Down,
 				Keyboard.SPACE => PlayerCommand.Shoot
 			]),
-			mainLayer
+			layers.get(0, 1)
 		));
 		
 		
@@ -216,7 +238,7 @@ class Main extends Sprite
 				Keyboard.DOWN => PlayerCommand.Down,
 				Keyboard.SPACE => PlayerCommand.Shoot
 			]),
-			mainLayer
+			layers.get(MazeConf.HEIGHT - 1, 1)
 		));
 		
 		//addEventListener(MouseEvent.CLICK, 

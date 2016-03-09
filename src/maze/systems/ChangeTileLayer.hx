@@ -27,11 +27,11 @@ class ChangeTileLayer implements ISystem
 		
 		var backEntity:Entity = node.tileBack.entity;
 		backEntity.removeType(Layer);
-		backEntity.add(Main.layers.get(node.tileMovement.toCell.y+1, 2));
+		backEntity.add(Main.layers.get(node.tileMovement.toCell.y + 1, 0));
 		
 		var frontEntity:Entity = node.tileFront.entity;
 		frontEntity.removeType(Layer);
-		frontEntity.add(Main.layers.get(node.tileMovement.toCell.y+1, 0));
+		frontEntity.add(Main.layers.get(node.tileMovement.toCell.y + 1, 2));
 		
 	}
 	

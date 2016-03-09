@@ -10,6 +10,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import hxlpers.shapes.BoxShape;
 import maze.components.TileBack;
+import maze.components.TileCell;
 import maze.components.TileCoreComponent;
 import maze.components.TileFront;
 import openfl.Assets;
@@ -34,6 +35,8 @@ class TileFactory
 		var core = new TileCoreComponent();
 		comps.push(core);
 		
+		comps.push(new TileCell(x, y));
+		
 		var tilesheet = new Tilesheet(Assets.getBitmapData("img/walls.gif"));
 		for (x in 0...wallMapping.length)
 		{
@@ -53,7 +56,7 @@ class TileFactory
 		tilesheet.drawTiles(backGfx.graphics, [0, 0, wallMapping.indexOf(core.bits)*2]);
 		var backEntity = engine.create([
 			new Gfx(backGfx),
-			Main.layers.get(y + 1, 2),
+			Main.layers.get(y + 1, 0),
 			//new Opacity(0.5)
 		]);
 		
@@ -61,7 +64,7 @@ class TileFactory
 		tilesheet.drawTiles(frontGfx.graphics, [0, 0, wallMapping.indexOf(core.bits)*2+1]);
 		var frontEntity = engine.create([
 			new Gfx(frontGfx),
-			Main.layers.get(y+1, 0),
+			Main.layers.get(y+1, 2),
 			//new Opacity(0.5)
 		]);
 		

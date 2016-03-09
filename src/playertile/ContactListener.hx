@@ -5,8 +5,10 @@ import box2D.dynamics.contacts.B2Contact;
 import edge.Entity;
 import heroes.PlayerCoreComponent;
 import hxlpers.edge.EntityStaticExtension;
+import maze.components.TileCell;
 import maze.components.TileCoreComponent;
 import maze.components.TileMovement;
+import rendering.components.Layer;
 import rendering.components.Opacity;
 
 using hxlpers.edge.EntityStaticExtension;
@@ -35,17 +37,28 @@ class ContactListener extends B2ContactListener
 		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent);
 		var entityBIsTile = entityB.existsType(TileCoreComponent);
 		
+		var player:Entity = null;
+		var tile:Entity=null;
+		
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
-			//entityA.add(new Opacity(0.5));
-			entityB.add(new TileEntityRef(entityA));
-			entityB.add(entityA.getFirstComponentOfType(TileMovement));
+			player = entityB;
+			tile = entityA;
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
-			//entityB.add(new Opacity(0.5));
-			entityA.add(new TileEntityRef(entityB));
-			entityA.add(entityB.getFirstComponentOfType(TileMovement));
+			player = entityA;
+			tile = entityB;
+		}
+		
+		if (player != null && tile != null)
+		{
+			player.add(new TileEntityRef(tile));
+			player.add(tile.getFirstComponentOfType(TileMovement));
+			
+			var cell = tile.getFirstComponentOfType(TileCell);
+			player.removeType(Layer);
+			player.add(Main.layers.get(cell.y+1, 1));
 		}
 		
 	}

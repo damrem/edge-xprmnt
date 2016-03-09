@@ -1,41 +1,32 @@
 package;
 
 import b2d.B2;
-import b2d.components.Body;
-import b2d.components.FixtureDef;
 import b2d.systems.BodyApplyImpulse;
 import b2d.systems.BodyCreateFixture;
 import b2d.systems.CreateBody;
-import b2d.systems.WorldDrawDebugData;
 import b2d.systems.WorldStep;
-import box2D.collision.shapes.B2CircleShape;
-import box2D.dynamics.B2BodyType;
 import controls.KeyboardCommandSet;
 import controls.KeyboardController;
 import controls.KeyboardListener;
+import de.polygonal.ds.Array2;
 import de.polygonal.ds.Array2.Array2Cell;
 import edge.World;
 import heroes.PlayerCommand;
-import heroes.PlayerKeyboardController;
-import heroes.PlayerCoreComponent;
-import maze.systems.ChangeTileLayer;
-import playertile.ContactListener;
-import playertile.MovePlayerWithTile;
 import heroes.PlayerFactory;
-import hxlpers.shapes.DiskShape;
+import heroes.PlayerKeyboardController;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
 import maze.MazeConf;
 import maze.systems.BuildPhysicalTile;
-import maze.systems.DrawTile;
+import maze.systems.ChangeTileLayer;
 import maze.systems.MoveMaze;
 import maze.systems.MoveMazeRandomly;
 import maze.systems.MoveTile;
-import maze.UnitConvert;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.ui.Keyboard;
-import rendering.components.Gfx;
+import playertile.ContactListener;
+import playertile.MovePlayerWithTile;
 import rendering.components.Layer;
 import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
@@ -54,7 +45,8 @@ using hxlpers.display.ShapeSF;
 class Main extends Sprite 
 {
 	public static var mainLayer:Layer;
-	public static var tileLayers:Array<Layer>;
+	//public static var tileLayers:Array<Layer>;
+	public static var layers:Array2<Layer>;
 	public static var maze:Maze;
 
 	public static inline var PLAYER_CATEGORY:Int = 0x0002;
@@ -110,17 +102,17 @@ class Main extends Sprite
 		//edgeWorld.physics.add(new BodyCreateFixture());
 		
 		
-		mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
+		//mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
 		
-		tileLayers = [];
-		for (_y in 0...MazeConf.HEIGHT+2)
+		layers = new Array2<Layer>(MazeConf.HEIGHT + 2, 3);
+		layers.assign(Layer, [RenderingConf.PIXEL_SIZE]);
+		for (layer in layers.iterator())
 		{
-			var tileLayer = new Layer(RenderingConf.PIXEL_SIZE);
-			tileLayers.push(tileLayer);
-			edgeWorld.engine.create([tileLayer]);
+			edgeWorld.engine.create([layer]);
 		}
 		
-		edgeWorld.render.add(new RenderLayer(this, tileLayers.concat([mainLayer])));
+		//edgeWorld.render.add(new RenderLayer(this, tileLayers.concat([mainLayer])));
+		edgeWorld.render.add(new RenderLayer(this, layers.getArray()));
 		edgeWorld.render.add(new ChangeTileLayer());
 		//edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());

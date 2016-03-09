@@ -12,7 +12,7 @@ import maze.factories.TileFactory;
  */
 class MazeGenerator
 {
-	public static function createComps(width:Int, height:Int):Array2<Array<{}>>
+	public static function createComps(engine:Engine, width:Int, height:Int):Array2<Array<{}>>
 	{
 		var tileComps = new Array2<Array<{}>>(width, height);
 		
@@ -20,7 +20,7 @@ class MazeGenerator
 		{
 			for(x in 0...width)
 			{
-				var tile = TileFactory.createComps(x, y);
+				var tile = TileFactory.createComps(engine, x, y);
 				tileComps.set(x, y, tile);
 			}
 		}
@@ -30,7 +30,7 @@ class MazeGenerator
 	
 	public static function createEnts(engine:Engine, width:Int, height:Int):Array2<Entity>
 	{
-		var tileComps = createComps(width, height);
+		var tileComps = createComps(engine, width, height);
 		var tileEnts = new Array2<Entity>(width, height);
 		for (y in 0...height)
 		{

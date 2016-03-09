@@ -41,8 +41,8 @@ class TileFactory
 		for (x in 0...wallMapping.length)
 		{
 			var _x = x * 64;
-			tilesheet.addTileRect(new Rectangle(_x, 0, 64, 48), new Point(32, 48));
-			tilesheet.addTileRect(new Rectangle(_x, 48, 64, 32), new Point(32, 0));
+			tilesheet.addTileRect(new Rectangle(_x, 0, 64, 48), new Point(32, 40));
+			tilesheet.addTileRect(new Rectangle(_x, 48, 64, 32), new Point(32, -8));
 		}
 		
 		comps.push(new Body({

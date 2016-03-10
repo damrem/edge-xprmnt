@@ -21,8 +21,8 @@ class MoveMazeRandomly implements ISystem
 
 	var tt:Float = 0;
 	var nextPeriod:Float;
-	static inline var NEXT_PERIOD_MIN:Float = 5000;
-	static inline var NEXT_PERIOD_MAX:Float = 7500;
+	static inline var NEXT_PERIOD_MIN:Float = 10000;
+	static inline var NEXT_PERIOD_MAX:Float = 15000;
 	
 	public function new() 
 	{
@@ -67,6 +67,8 @@ class MoveMazeRandomly implements ISystem
 				direction = Direction.Down;
 				coord = Std.random(MazeConf.WIDTH);
 		}
+		direction = Left;
+		coord = 2;
 		
 		if (direction != Direction.None)
 		{

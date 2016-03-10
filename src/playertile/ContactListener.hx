@@ -37,13 +37,13 @@ class ContactListener extends B2ContactListener
 		
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
-			entityA.add(new Opacity(0.5));
+			//entityA.add(new Opacity(0.5));
 			entityB.add(new TileEntityRef(entityA));
 			entityB.add(entityA.getFirstComponentOfType(TileMovement));
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
-			entityB.add(new Opacity(0.5));
+			//entityB.add(new Opacity(0.5));
 			entityA.add(new TileEntityRef(entityB));
 			entityA.add(entityB.getFirstComponentOfType(TileMovement));
 		}

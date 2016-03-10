@@ -49,7 +49,7 @@ class MoveTile implements ISystem
 		var dx = UnitConvert.posXfromCellX(node.tileMovement.toCell.x) - fromPosition.x;
 		var dy = UnitConvert.posYfromCellY(node.tileMovement.toCell.y) - fromPosition.y;
 		
-		var v = new B2Vec2(dx / 1000, dy / 1000);
+		var v = new B2Vec2(dx / 2000, dy / 2000);
 		node.body.b2Body.setLinearVelocity(v);
 		//trace("added" + node.body.b2Body.getLinearVelocity().toString());
 		//trace(node.body.b2Body.max

@@ -10,6 +10,7 @@ import maze.components.TileMovement;
 import maze.MazeConf;
 import maze.UnitConvert;
 import edge.Entity;
+import rendering.components.Opacity;
 
 using hxlpers.edge.EntityStaticExtension;
 /**
@@ -21,31 +22,36 @@ class MovePlayerWithTile implements ISystem
 	var playerVel:B2Vec2;
 	var entity:Entity;
 	var tileVel:B2Vec2;
-	
+	var c:Int = 0;
 	public function update(player:PlayerCoreComponent, playerBody:Body, tileEntityRef:TileEntityRef)
 	{
+		
 		var tileEntity = tileEntityRef.tile;
 		var tileMovement = tileEntity.getFirstComponentOfType(TileMovement);
+		tileEntity.removeType(Opacity);
+		tileEntity.add(new Opacity(Math.random()));
 		if (tileMovement == null)
 		{
 			return;
 		}
-
-		playerBody.b2Body.setAwake(true);
+		trace("update", c++);
+		//playerBody.b2Body.setAwake(true);
 		var tileBody:Body = tileEntity.getFirstComponentOfType(Body);
-		var mass = playerBody.b2Body.getMass();
+		//var mass = 1;//playerBody.b2Body.getMass()/10;
+		//trace(mass);
 		tileVel = tileBody.b2Body.getLinearVelocity();
-		tileVel.set(tileVel.x * mass / 2, tileVel.y * mass / 2);
+		//trace(tileVel.x, tileVel.y);
+		//tileVel.set(tileVel.x * mass, tileVel.y * mass);
+		//trace(tileVel.x, tileVel.y);
 		//trace(tileMovement.dx, tileMovement.dy);
 		
 		
 		
 		//playerVel = playerBody.b2Body.getLinearVelocity();
 		//playerVel.add(tileVel);
-		//playerBody.b2Body.setLinearVelocity(playerVel);
+		playerBody.b2Body.setLinearVelocity(tileVel);
 		
-		playerBody.b2Body.applyForce(tileVel, playerBody.b2Body.getWorldCenter());
-		
+		//playerBody.b2Body.applyForce(tileVel, playerBody.b2Body.getWorldCenter());
 		
 		/*
 		var force = tileBody.b2Body.getLinearVelocity();

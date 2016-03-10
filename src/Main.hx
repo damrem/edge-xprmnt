@@ -86,23 +86,31 @@ class Main extends Sprite
 		edgeWorld.frame.add(new KeyboardListener());
 		edgeWorld.frame.add(new KeyboardController());
 		
-		edgeWorld.physics.add(new WorldStep());
-		//edgeWorld.physics.add(new WorldDrawDebugData());
-		
 		edgeWorld.physics.add(new CreateBody());
 		
 		edgeWorld.physics.add(new BuildPhysicalTile());
 		edgeWorld.physics.add(new BodyCreateFixture());
 		
 		edgeWorld.physics.add(new BodyApplyImpulse());
-
+		
+		edgeWorld.physics.add(new PlayerKeyboardController());
+		
 		edgeWorld.physics.add(new MoveMazeRandomly());
 		edgeWorld.physics.add(new MoveMaze());
 		edgeWorld.physics.add(new MoveTile());
 		
-		edgeWorld.physics.add(new PlayerKeyboardController());
-		
+		edgeWorld.physics.add(new WorldStep());
 		edgeWorld.physics.add(new MovePlayerWithTile());
+		
+		//edgeWorld.physics.add(new WorldDrawDebugData());
+		
+		
+
+		
+		
+		
+		
+		
 		
 		
 		//edgeWorld.physics.add(new BodyCreateFixture());

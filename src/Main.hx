@@ -102,7 +102,7 @@ class Main extends Sprite
 		edgeWorld.physics.add(new WorldStep());
 		edgeWorld.physics.add(new MovePlayerWithTile());
 		
-		//edgeWorld.physics.add(new WorldDrawDebugData());
+		edgeWorld.physics.add(new WorldDrawDebugData());
 		
 		
 
@@ -209,7 +209,7 @@ class Main extends Sprite
 			mainLayer
 		));
 		
-		
+		/*
 		edgeWorld.engine.create(PlayerFactory.createComponents(
 			new Array2Cell(MazeConf.WIDTH - 1, MazeConf.HEIGHT - 1), 
 			new KeyboardCommandSet([
@@ -221,7 +221,7 @@ class Main extends Sprite
 			]),
 			mainLayer
 		));
-		
+		*/
 		//addEventListener(MouseEvent.CLICK, 
 		
 		B2.addDebugTo(this, .5);

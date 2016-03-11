@@ -128,8 +128,8 @@ class BuildPhysicalTile implements ISystem
 		
 		fixtureDefs.push(new FixtureDef( {
 			shape: new B2RectShape( {
-				width: TileConf.SIZE-PlayerConf.SIZE,
-				height: TileConf.SIZE-PlayerConf.SIZE
+				width: TileConf.SIZE-PlayerConf.SIZE-1,
+				height: TileConf.SIZE-PlayerConf.SIZE-1
 			}),
 			isSensor:true,
 			filter: {

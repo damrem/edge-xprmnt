@@ -25,17 +25,17 @@ class MovePlayerWithTile implements ISystem
 	var c:Int = 0;
 	public function update(player:PlayerCoreComponent, playerBody:Body, tileEntityRef:TileEntityRef)
 	{
-		
+		trace(Std.int(playerBody.b2Body.getLinearVelocity().length()*1000));
 		var tileEntity = tileEntityRef.tile;
 		var tileMovement = tileEntity.getFirstComponentOfType(TileMovement);
-		tileEntity.removeType(Opacity);
+		if(tileEntity.existsType(Opacity))	tileEntity.removeType(Opacity);
 		tileEntity.add(new Opacity(Math.random()));
 		if (tileMovement == null)
 		{
 			return;
 		}
-		trace("update", c++);
-		//playerBody.b2Body.setAwake(true);
+		//trace("update", c++);
+		if(!playerBody.b2Body.isAwake())	playerBody.b2Body.setAwake(true);
 		var tileBody:Body = tileEntity.getFirstComponentOfType(Body);
 		//var mass = 1;//playerBody.b2Body.getMass()/10;
 		//trace(mass);
@@ -48,7 +48,8 @@ class MovePlayerWithTile implements ISystem
 		
 		
 		//playerVel = playerBody.b2Body.getLinearVelocity();
-		//playerVel.add(tileVel);
+		//playerVel.add(tileVel
+		
 		playerBody.b2Body.setLinearVelocity(tileVel);
 		
 		//playerBody.b2Body.applyForce(tileVel, playerBody.b2Body.getWorldCenter());

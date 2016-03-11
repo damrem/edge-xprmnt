@@ -23,7 +23,7 @@ class PlayerKeyboardController implements ISystem
 		
 		var hDirection = Direction.None;
 		var vDirection = Direction.None;
-		var impulse = new B2Vec2();
+		var force = new B2Vec2();
 		
 		for (keyCode in controlled.keyStates.keys())
 		{
@@ -85,30 +85,30 @@ class PlayerKeyboardController implements ISystem
 		switch(hDirection)
 		{
 			case Left:
-				impulse.x = -playerControl.reactivity * mass;
+				force.x = -playerControl.reactivity * mass;
 				
 			case Right:
-				impulse.x = playerControl.reactivity * mass;
+				force.x = playerControl.reactivity * mass;
 				
 			default:
-				impulse.x = 0;
+				force.x = 0;
 		}
 		
 		switch(vDirection)
 		{
 			case Up:
-				impulse.y = -playerControl.reactivity * mass;
+				force.y = -playerControl.reactivity * mass;
 				
 			case Down:
-				impulse.y = playerControl.reactivity * mass;
+				force.y = playerControl.reactivity * mass;
 				
 			default:
-				impulse.y = 0;
+				force.y = 0;
 		}
 		
 		
-		if (impulse.x != 0 || impulse.y != 0) {			
-			body.b2Body.applyImpulse(impulse, body.b2Body.getWorldCenter());
+		if (force.x != 0 || force.y != 0) {			
+			body.b2Body.applyForce(force, body.b2Body.getWorldCenter());
 		}
 		
 	}

@@ -1,15 +1,10 @@
 package playertile;
 import b2d.components.Body;
 import box2D.common.math.B2Vec2;
-import de.polygonal.core.math.Mathematics;
+import edge.Entity;
 import edge.ISystem;
 import heroes.PlayerCoreComponent;
-import maze.components.Maze;
-import maze.components.TileCoreComponent;
 import maze.components.TileMovement;
-import maze.MazeConf;
-import maze.UnitConvert;
-import edge.Entity;
 import rendering.components.Opacity;
 
 using hxlpers.edge.EntityStaticExtension;
@@ -21,38 +16,40 @@ class MovePlayerWithTile implements ISystem
 {
 	var playerVel:B2Vec2;
 	var entity:Entity;
-	var tileVel:B2Vec2;
+	var tileForce:B2Vec2;
 	var c:Int = 0;
 	public function update(player:PlayerCoreComponent, playerBody:Body, tileEntityRef:TileEntityRef)
 	{
-		trace(Std.int(playerBody.b2Body.getLinearVelocity().length()*1000));
+		//trace(playerBody.b2Body.getLinearVelocity().length()*1000);
 		var tileEntity = tileEntityRef.tile;
 		var tileMovement = tileEntity.getFirstComponentOfType(TileMovement);
-		if(tileEntity.existsType(Opacity))	tileEntity.removeType(Opacity);
-		tileEntity.add(new Opacity(Math.random()));
+		
+		
+		
 		if (tileMovement == null)
 		{
 			return;
 		}
-		//trace("update", c++);
-		if(!playerBody.b2Body.isAwake())	playerBody.b2Body.setAwake(true);
+		
+		//DEBUG
+		if(tileEntity.existsType(Opacity))	tileEntity.removeType(Opacity);
+		tileEntity.add(new Opacity(Math.random()));
+		//!DEBUG
+		
+		
+		/*if (!playerBody.b2Body.isAwake())	*/
+		
+		
 		var tileBody:Body = tileEntity.getFirstComponentOfType(Body);
-		//var mass = 1;//playerBody.b2Body.getMass()/10;
-		//trace(mass);
-		tileVel = tileBody.b2Body.getLinearVelocity();
-		//trace(tileVel.x, tileVel.y);
-		//tileVel.set(tileVel.x * mass, tileVel.y * mass);
-		//trace(tileVel.x, tileVel.y);
-		//trace(tileMovement.dx, tileMovement.dy);
+		var mass = playerBody.b2Body.getMass();
+		tileForce = tileBody.b2Body.getLinearVelocity().copy();
+		//tileForce.multiply(mass/4);
+		trace(tileForce.x, tileForce.y);
+		
+		playerBody.b2Body.setAwake(true);
+		playerBody.b2Body.applyForce(tileForce, playerBody.b2Body.getWorldCenter());
 		
 		
-		
-		//playerVel = playerBody.b2Body.getLinearVelocity();
-		//playerVel.add(tileVel
-		
-		playerBody.b2Body.setLinearVelocity(tileVel);
-		
-		//playerBody.b2Body.applyForce(tileVel, playerBody.b2Body.getWorldCenter());
 		
 		/*
 		var force = tileBody.b2Body.getLinearVelocity();

@@ -14,6 +14,7 @@ class WorldStep implements ISystem
 		//trace("update");
 		B2.world.step(timeDelta, 10, 10);
 		B2.world.clearForces();
+		
 	}
 	
 }

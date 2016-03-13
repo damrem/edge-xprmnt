@@ -1,4 +1,5 @@
 package heroes;
+import b2d.B2;
 import b2d.components.Body;
 import b2d.components.FixtureDef;
 import box2D.collision.shapes.B2CircleShape;
@@ -7,7 +8,6 @@ import controls.KeyboardCommandSet;
 import de.polygonal.ds.Array2.Array2Cell;
 import hxlpers.shapes.DiskShape;
 import maze.UnitConvert;
-import openfl.ui.Keyboard;
 import rendering.components.Gfx;
 import rendering.components.Layer;
 
@@ -22,7 +22,7 @@ class PlayerFactory
 	{
 		return [
 			new FixtureDef( {
-				shape:new B2CircleShape(PlayerConf.SIZE/2),
+				shape:new B2CircleShape(PlayerConf.SIZE/2/B2.worldScale),
 				density:1.0,
 				filter: {
 					categoryBits:Main.PLAYER_CATEGORY,
@@ -35,7 +35,7 @@ class PlayerFactory
 				x: UnitConvert.posXfromCellX(cell.x),
 				y: UnitConvert.posYfromCellY(cell.y),
 				type:B2BodyType.DYNAMIC_BODY,
-				linearDamping:0.005,
+				linearDamping:0.05,
 				fixedRotation:true
 			}),
 			new Gfx(new DiskShape(PlayerConf.SIZE/2)),
@@ -46,7 +46,7 @@ class PlayerFactory
 			keyboardCommandSet,
 			
 			
-			new PlayerCoreComponent(5000)
+			new PlayerCoreComponent(0.001)
 		];
 	}
 	

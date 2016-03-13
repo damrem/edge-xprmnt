@@ -26,12 +26,30 @@ class MoveTile implements ISystem
 	
 	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement) 
 	{
+		//trace(body.b2Body.getPosition().x, tileMovement.toX());
+		
 		var dx = body.b2Body.getPosition().x - tileMovement.toX();
+		trace(body.b2Body.getPosition().x + " - " + tileMovement.toX());
 		var dy = body.b2Body.getPosition().y - tileMovement.toY();
 		
-		if ((Math.abs(dx) == 0 && Math.abs(dy) == 0) || (Math.abs(dx) > Math.abs(tileMovement.dx) || Math.abs(dy) > Math.abs(tileMovement.dy)))
+		trace(Math.abs(dx) + " >= " + Math.abs(tileMovement.dx));
+		//trace(Math.abs(dy) + " >= " + Math.abs(tileMovement.dy));
+		
+		trace((Math.abs(dx) == 0 && Math.abs(dy) == 0) );
+		trace(((tileMovement.dx != 0) + " && " + (Math.abs(dx) >= Math.abs(tileMovement.dx))));
+		trace(((tileMovement.dx != 0) && (Math.abs(dx) >= Math.abs(tileMovement.dx))));
+		trace((tileMovement.dy != 0 && Math.abs(dy) >= Math.abs(tileMovement.dy)));
+		
+		if (
+			(Math.abs(dx) == 0 && Math.abs(dy) == 0) 
+			|| 
+			(/*tileMovement.dx != 0 && */Math.abs(dx) > Math.abs(tileMovement.dx))
+			|| 
+			(/*tileMovement.dy != 0 && */Math.abs(dy) > Math.abs(tileMovement.dy))
+			
+		)
 		{
-			//trace("ending movement");
+			trace("ending movement");
 			entity.remove(tileMovement);
 		}
 		
@@ -42,22 +60,25 @@ class MoveTile implements ISystem
 	
 	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement}) 
 	{
-		//trace("updateAdded");
+		trace("updateAdded");
 		
 		node.body.b2Body.setAwake(true);
 		var fromPosition = node.body.b2Body.getPosition();
 		var dx = UnitConvert.posXfromCellX(node.tileMovement.toCell.x) - fromPosition.x;
+		trace(UnitConvert.posXfromCellX(node.tileMovement.toCell.x) + " - " + fromPosition.x);
 		var dy = UnitConvert.posYfromCellY(node.tileMovement.toCell.y) - fromPosition.y;
+		trace(dx, dy);
 		
-		var v = new B2Vec2(dx / 3000, dy / 3000);
+		var v = new B2Vec2(dx / 200, dy / 200);
 		node.body.b2Body.setLinearVelocity(v);
+		trace(node.body.b2Body.getLinearVelocity().x);
 		//trace("added" + node.body.b2Body.getLinearVelocity().toString());
 		//trace(node.body.b2Body.max
 	}
 	
 	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement})
 	{
-		//trace("updateRemoved");
+		trace("updateRemoved");
 		node.body.b2Body.setLinearVelocity(new B2Vec2());
 		node.body.b2Body.setPosition(new B2Vec2(node.tileMovement.toX(), node.tileMovement.toY()));
 		node.body.b2Body.setAwake(false);

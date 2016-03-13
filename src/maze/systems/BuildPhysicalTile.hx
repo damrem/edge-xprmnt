@@ -23,10 +23,10 @@ class BuildPhysicalTile implements ISystem
 	
 	public function new() 
 	{
-		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 2;
-		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE + cornerBlockSize) / 2;
+		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 2/B2.worldScale;
+		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE/B2.worldScale + cornerBlockSize) / 2;
 		cornerBlockCoords = [ -cornerBlockAbsCoord, cornerBlockAbsCoord];
-		wallLength = TileConf.TUNNEL_SIZE;
+		wallLength = TileConf.TUNNEL_SIZE/B2.worldScale;
 		
 	}
 	
@@ -128,8 +128,8 @@ class BuildPhysicalTile implements ISystem
 		
 		fixtureDefs.push(new FixtureDef( {
 			shape: new B2RectShape( {
-				width: TileConf.SIZE-PlayerConf.SIZE-1,
-				height: TileConf.SIZE-PlayerConf.SIZE-1
+				width: (TileConf.SIZE-PlayerConf.SIZE-1)/B2.worldScale,
+				height: (TileConf.SIZE-PlayerConf.SIZE-1)/B2.worldScale
 			}),
 			isSensor:true,
 			filter: {

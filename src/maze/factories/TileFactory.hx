@@ -26,7 +26,8 @@ class TileFactory
 		comps.push(new Body({
 			x: UnitConvert.posXfromCellX(x), 
 			y: UnitConvert.posYfromCellY(y),
-			type: B2BodyType.KINEMATIC_BODY
+			type: B2BodyType.KINEMATIC_BODY,
+			linearDamping:0
 		}));
 		
 		comps.push(new Gfx(new Sprite()));

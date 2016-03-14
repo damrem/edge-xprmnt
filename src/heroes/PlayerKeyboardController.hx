@@ -1,5 +1,6 @@
 package heroes;
 
+import b2d.B2;
 import b2d.components.Body;
 import box2D.common.math.B2Vec2;
 import controls.KeyboardCommandSet;
@@ -47,48 +48,50 @@ class PlayerKeyboardController implements ISystem
 			
 		}
 		
-
-		if (isLeftPressed)
-		{	
-			hDirection = Direction.Left;
-		}
-		
-		if (isUpPressed)
-		{
-			vDirection = Direction.Up;
-		}
-		
-		if (isRightPressed)
-		{
-			hDirection = Direction.Right;
-		}
-		
-		if (isDownPressed)
-		{
-			vDirection = Direction.Down;
-		}
-		
 		if (!isLeftPressed && !isRightPressed)
 		{
 			hDirection = Direction.None;
 		}
+		else if (isLeftPressed && isRightPressed)
+		{
+			hDirection = Direction.None;
+		}
+		else if (isLeftPressed)
+		{	
+			hDirection = Direction.Left;
+		}
+		else if (isRightPressed)
+		{
+			hDirection = Direction.Right;
+		}
+
 		
 		if (!isUpPressed && !isDownPressed)
 		{
 			vDirection = Direction.None;
 		}
-		
-		
-		
+		else if (isUpPressed && isDownPressed)
+		{
+			vDirection = Direction.None;
+		}
+		else if (isUpPressed)
+		{
+			vDirection = Direction.Up;
+		}
+		else if (isDownPressed)
+		{
+			vDirection = Direction.Down;
+		}
+				
 		var mass = body.b2Body.getMass();
 		
 		switch(hDirection)
 		{
 			case Left:
-				force.x = -playerControl.reactivity * mass;
+				force.x = -playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
 				
 			case Right:
-				force.x = playerControl.reactivity * mass;
+				force.x = playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
 				
 			default:
 				force.x = 0;
@@ -97,10 +100,10 @@ class PlayerKeyboardController implements ISystem
 		switch(vDirection)
 		{
 			case Up:
-				force.y = -playerControl.reactivity * mass;
+				force.y = -playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
 				
 			case Down:
-				force.y = playerControl.reactivity * mass;
+				force.y = playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
 				
 			default:
 				force.y = 0;

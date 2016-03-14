@@ -23,7 +23,7 @@ class B2
 	public static var world:B2World;
 	public static var gravity:B2Vec2;
 	public static var debugSprite:Sprite;
-	public static var worldScale:Float = 30.0;
+	public static var worldScale:Float = 1.0;
 	
 	/**
 	 * Creates the box2d world.

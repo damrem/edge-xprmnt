@@ -29,23 +29,23 @@ class MoveTile implements ISystem
 		//trace(body.b2Body.getPosition().x, tileMovement.toX());
 		
 		var dx = body.b2Body.getPosition().x - tileMovement.toX();
-		trace(body.b2Body.getPosition().x + " - " + tileMovement.toX());
+		//trace(body.b2Body.getPosition().x + "+" +body.b2Body.getLinearVelocity().x+" - " + tileMovement.toX());
 		var dy = body.b2Body.getPosition().y - tileMovement.toY();
 		
-		trace(Math.abs(dx) + " >= " + Math.abs(tileMovement.dx));
+		//trace(Math.abs(dx) + " >= " + Math.abs(tileMovement.dx));
 		//trace(Math.abs(dy) + " >= " + Math.abs(tileMovement.dy));
 		
-		trace((Math.abs(dx) == 0 && Math.abs(dy) == 0) );
-		trace(((tileMovement.dx != 0) + " && " + (Math.abs(dx) >= Math.abs(tileMovement.dx))));
-		trace(((tileMovement.dx != 0) && (Math.abs(dx) >= Math.abs(tileMovement.dx))));
-		trace((tileMovement.dy != 0 && Math.abs(dy) >= Math.abs(tileMovement.dy)));
+		//trace((Math.abs(dx) == 0 && Math.abs(dy) == 0) );
+		//trace(((tileMovement.dx != 0) + " && " + (Math.abs(dx) >= Math.abs(tileMovement.dx))));
+		//trace(((tileMovement.dx != 0) && (Math.abs(dx) >= Math.abs(tileMovement.dx))));
+		//trace((tileMovement.dy != 0 && Math.abs(dy) >= Math.abs(tileMovement.dy)));
 		
 		if (
 			(Math.abs(dx) == 0 && Math.abs(dy) == 0) 
 			|| 
-			(/*tileMovement.dx != 0 && */Math.abs(dx) > Math.abs(tileMovement.dx))
+			((tileMovement.direction==Left||tileMovement.direction==Right) && Math.abs(dx) > Math.abs(tileMovement.dx))
 			|| 
-			(/*tileMovement.dy != 0 && */Math.abs(dy) > Math.abs(tileMovement.dy))
+			((tileMovement.direction==Up||tileMovement.direction==Down) && Math.abs(dy) > Math.abs(tileMovement.dy))
 			
 		)
 		{
@@ -62,15 +62,21 @@ class MoveTile implements ISystem
 	{
 		trace("updateAdded");
 		
-		node.body.b2Body.setAwake(true);
 		var fromPosition = node.body.b2Body.getPosition();
 		var dx = UnitConvert.posXfromCellX(node.tileMovement.toCell.x) - fromPosition.x;
-		trace(UnitConvert.posXfromCellX(node.tileMovement.toCell.x) + " - " + fromPosition.x);
+		//trace(UnitConvert.posXfromCellX(node.tileMovement.toCell.x) + " - " + fromPosition.x);
 		var dy = UnitConvert.posYfromCellY(node.tileMovement.toCell.y) - fromPosition.y;
 		trace(dx, dy);
 		
-		var v = new B2Vec2(dx / 200, dy / 200);
+		var v = new B2Vec2(dx / 500, dy / 500);
+		//v.multiply(node.body.b2Body.getMass());
+		trace(node.body.b2Body.getMass());
+		/*
+		if(!node.body.b2Body.isAwake())	node.body.b2Body.setAwake(true);
 		node.body.b2Body.setLinearVelocity(v);
+		*/
+		node.body.b2Body.applyForce(v, node.body.b2Body.getWorldCenter());
+		
 		trace(node.body.b2Body.getLinearVelocity().x);
 		//trace("added" + node.body.b2Body.getLinearVelocity().toString());
 		//trace(node.body.b2Body.max

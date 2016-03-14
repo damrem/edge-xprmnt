@@ -122,7 +122,7 @@ class MoveMaze implements ISystem
 				//if (Type.getClass(component) == Entity)
 				//{
 					//cast(component, Entity).add(new TileMovement(destCell, isOut));
-					movingTile.add(new TileMovement(destCell, isOut));
+					movingTile.add(new TileMovement(destCell, isOut, node.movement.direction));
 					//break;
 				//}
 			//}

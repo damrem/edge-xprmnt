@@ -2,6 +2,7 @@ package maze.components;
 
 import de.polygonal.ds.Array2.Array2Cell;
 import edge.IComponent;
+import hxlpers.Direction;
 
 /**
  * ...
@@ -13,11 +14,13 @@ class TileMovement implements IComponent
 	public var dx:Float;
 	public var dy:Float;
 	public var isOut:Bool;
+	public var direction:Direction;
 	
-	public function new(toCell:Array2Cell, isOut:Bool=false) 
+	public function new(toCell:Array2Cell, isOut:Bool=false, direction:Direction) 
 	{
 		this.toCell = toCell;
 		this.isOut = isOut;
+		this.direction = direction;
 	}
 	
 	public function toString():String

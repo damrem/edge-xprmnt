@@ -34,6 +34,7 @@ class BodyCreateFixture implements ISystem
 			fixtureDef.b2FixtureDef.shape = fixtureDef.b2FixtureDef.shape;
 			fixtureDef.b2FixtureDef.userData = entity;
 			node.body.b2Body.createFixture(fixtureDef.b2FixtureDef);
+			//node.body.b2Body.setM();
 		}
 	}
 	

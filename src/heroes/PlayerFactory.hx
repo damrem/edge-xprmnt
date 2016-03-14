@@ -46,7 +46,7 @@ class PlayerFactory
 			keyboardCommandSet,
 			
 			
-			new PlayerCoreComponent(0.001)
+			new PlayerCoreComponent(0.1)
 		];
 	}
 	

@@ -23,6 +23,7 @@ class B2
 	public static var world:B2World;
 	public static var gravity:B2Vec2;
 	public static var debugSprite:Sprite;
+	public static var worldScale:Float=25;
 	
 	/**
 	 * Creates the box2d world.
@@ -54,14 +55,16 @@ class B2
 		debugSprite.alpha = alpha;
 		container.addChild(debugSprite);
 		debugDraw.setSprite(debugSprite);
-		debugDraw.setDrawScale(1);
+		debugDraw.setDrawScale(B2.worldScale);
 		debugDraw.setFlags(
 		
+			/*
 			B2DebugDraw.e_aabbBit | 
 			B2DebugDraw.e_centerOfMassBit | 
-			B2DebugDraw.e_controllerBit | 
+			*/
 			B2DebugDraw.e_jointBit | 
-			B2DebugDraw.e_pairBit | 
+			B2DebugDraw.e_pairBit |
+			B2DebugDraw.e_controllerBit |
 			B2DebugDraw.e_shapeBit
 		);
 		B2.world.setDebugDraw(debugDraw);

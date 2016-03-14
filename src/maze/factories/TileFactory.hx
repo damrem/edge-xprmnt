@@ -1,5 +1,6 @@
 package maze.factories;
 
+import b2d.B2;
 import b2d.components.Body;
 import box2D.dynamics.B2BodyType;
 import edge.Engine;

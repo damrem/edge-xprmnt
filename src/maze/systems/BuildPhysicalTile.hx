@@ -21,12 +21,24 @@ class BuildPhysicalTile implements ISystem
 	var cornerBlockAbsCoord:Float;
 	var wallLength:Float;
 	
+	var tileSize:Float;
+	var tileTunnelSize:Float;
+	var playerSize:Float;
+	
 	public function new() 
 	{
-		cornerBlockSize = (TileConf.SIZE - TileConf.TUNNEL_SIZE) / 2;
-		cornerBlockAbsCoord = (TileConf.TUNNEL_SIZE + cornerBlockSize) / 2;
+		tileSize = TileConf.SIZE / B2.worldScale;
+		//trace(tileSize);
+		tileTunnelSize = TileConf.TUNNEL_SIZE / B2.worldScale;
+		//trace(tileTunnelSize);
+		playerSize = PlayerConf.SIZE / B2.worldScale;
+		
+		cornerBlockSize = (tileSize - tileTunnelSize) / 2;
+		cornerBlockAbsCoord = (tileTunnelSize + cornerBlockSize) / 2;
 		cornerBlockCoords = [ -cornerBlockAbsCoord, cornerBlockAbsCoord];
-		wallLength = TileConf.TUNNEL_SIZE;
+		wallLength = tileTunnelSize;
+		
+		//trace(wallLength, cornerBlockSize);
 		
 	}
 	
@@ -46,8 +58,8 @@ class BuildPhysicalTile implements ISystem
 				fixtureDefs.push(new FixtureDef( {
 					//density:10,
 					shape: new B2RectShape( { 
-						width:cornerBlockSize,
-						height:cornerBlockSize,
+						width: cornerBlockSize,
+						height: cornerBlockSize,
 						x:x,
 						y:y,
 						//angle: 0
@@ -128,8 +140,8 @@ class BuildPhysicalTile implements ISystem
 		
 		fixtureDefs.push(new FixtureDef( {
 			shape: new B2RectShape( {
-				width: TileConf.SIZE-PlayerConf.SIZE-1,
-				height: TileConf.SIZE-PlayerConf.SIZE-1
+				width: tileSize - playerSize,
+				height: tileSize - playerSize
 			}),
 			isSensor:true,
 			filter: {

@@ -119,7 +119,7 @@ class Main extends Sprite
 		mainLayer = new Layer(RenderingConf.PIXEL_SIZE);
 		
 		edgeWorld.render.add(new RenderLayer(this, [mainLayer]));
-		edgeWorld.render.add(new DrawTile());
+		//edgeWorld.render.add(new DrawTile());
 		edgeWorld.render.add(new AddRemoveGfx());
 		edgeWorld.render.add(new PositionGfx());
 		edgeWorld.render.add(new SetOpacity());

@@ -1,4 +1,5 @@
 package heroes;
+import b2d.B2;
 import b2d.components.Body;
 import b2d.components.FixtureDef;
 import box2D.collision.shapes.B2CircleShape;
@@ -22,7 +23,7 @@ class PlayerFactory
 	{
 		return [
 			new FixtureDef( {
-				shape:new B2CircleShape(PlayerConf.SIZE/2),
+				shape:new B2CircleShape(PlayerConf.SIZE/2/B2.worldScale),
 				density:1.0,
 				filter: {
 					categoryBits:Main.PLAYER_CATEGORY,

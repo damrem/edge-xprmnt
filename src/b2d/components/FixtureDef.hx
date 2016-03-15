@@ -39,7 +39,7 @@ class FixtureDef implements IComponent
 typedef FixtureDefDef =
 {
 	var shape:B2Shape;
-	@:optional var density:Float;
+	var density:Float;
 	@:optional var filter:B2FilterDataDef;
 	@:optional var isSensor:Bool;
 }

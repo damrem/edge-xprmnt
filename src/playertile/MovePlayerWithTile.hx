@@ -48,7 +48,7 @@ class MovePlayerWithTile implements ISystem
 		
 		//tileForce.multiply(Math.sqrt(mass));
 		
-		tileForce.multiply(1000 / timeDelta);
+		tileForce.multiply(timeDelta/1000);
 		
 		//playerBody.b2Body.setAwake(true);
 		playerBody.b2Body.applyForce(tileForce, playerBody.b2Body.getWorldCenter());

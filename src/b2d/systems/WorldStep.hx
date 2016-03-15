@@ -11,10 +11,8 @@ class WorldStep implements ISystem
 	var timeDelta:Float;
 	public function update()
 	{
-		//trace("update");
-		B2.world.step(timeDelta, 10, 10);
+		B2.world.step(timeDelta/1000, 10, 10);
 		B2.world.clearForces();
-		
 	}
 	
 }

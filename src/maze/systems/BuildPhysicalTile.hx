@@ -44,7 +44,7 @@ class BuildPhysicalTile implements ISystem
 			for (y in cornerBlockCoords)
 			{
 				fixtureDefs.push(new FixtureDef( {
-					//density:10,
+					density:10,
 					shape: new B2RectShape( { 
 						width:cornerBlockSize,
 						height:cornerBlockSize,
@@ -64,6 +64,7 @@ class BuildPhysicalTile implements ISystem
 		if (!node.tileDef.bottom)
 		{
 			fixtureDefs.push(new FixtureDef( { 
+				density:10,
 				shape: new B2RectShape( {
 					width: wallLength,
 					height: cornerBlockSize, 
@@ -81,6 +82,7 @@ class BuildPhysicalTile implements ISystem
 		if (!node.tileDef.top)
 		{
 			fixtureDefs.push(new FixtureDef( { 
+				density:10,
 				shape: new B2RectShape({
 					width: wallLength, 
 					height: cornerBlockSize, 
@@ -97,6 +99,7 @@ class BuildPhysicalTile implements ISystem
 		if (!node.tileDef.right)
 		{
 			fixtureDefs.push(new FixtureDef( { 
+				density:10,
 				shape: new B2RectShape({
 					width: cornerBlockSize, 
 					height: wallLength, 
@@ -113,6 +116,7 @@ class BuildPhysicalTile implements ISystem
 		if (!node.tileDef.left)
 		{
 			fixtureDefs.push(new FixtureDef( { 
+				density:10,
 				shape: new B2RectShape( {
 					width: cornerBlockSize, 
 					height: wallLength, 
@@ -127,6 +131,7 @@ class BuildPhysicalTile implements ISystem
 		}
 		
 		fixtureDefs.push(new FixtureDef( {
+			density:10,
 			shape: new B2RectShape( {
 				width: (TileConf.SIZE-PlayerConf.SIZE-1)/B2.worldScale,
 				height: (TileConf.SIZE-PlayerConf.SIZE-1)/B2.worldScale

@@ -63,12 +63,18 @@ class MoveTile implements ISystem
 		trace("updateAdded");
 		
 		var fromPosition = node.body.b2Body.getPosition();
-		var dx = UnitConvert.posXfromCellX(node.tileMovement.toCell.x) - fromPosition.x;
+		trace("fromPosition.x", fromPosition.x);
+		
+		var toPositionX = UnitConvert.posXfromCellX(node.tileMovement.toCell.x);
+		trace("toPositionX", toPositionX);
+		var toPositionY = UnitConvert.posYfromCellY(node.tileMovement.toCell.y);
+		
+		var dx = toPositionX - fromPosition.x;
 		//trace(UnitConvert.posXfromCellX(node.tileMovement.toCell.x) + " - " + fromPosition.x);
-		var dy = UnitConvert.posYfromCellY(node.tileMovement.toCell.y) - fromPosition.y;
+		var dy = toPositionY - fromPosition.y;
 		trace(dx, dy);
 		
-		var v = new B2Vec2(dx / 10, dy / 10);
+		var v = new B2Vec2(dx/* / 10*/, dy/* / 10*/);
 		//v.multiply(node.body.b2Body.getMass());
 		
 	

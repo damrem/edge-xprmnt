@@ -90,9 +90,9 @@ class Main extends Sprite
 		edgeWorld.physics.add(new MoveMazeRandomly());
 		edgeWorld.physics.add(new MoveMaze());
 		edgeWorld.physics.add(new MoveTile());
+		edgeWorld.physics.add(new MovePlayerWithTile());
 		
 		edgeWorld.physics.add(new WorldStep());
-		edgeWorld.physics.add(new MovePlayerWithTile());
 		
 		edgeWorld.physics.add(new WorldDrawDebugData());
 		

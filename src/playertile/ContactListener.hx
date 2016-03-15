@@ -37,15 +37,19 @@ class ContactListener extends B2ContactListener
 		
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
-			//entityA.add(new Opacity(0.5));
-			//trace("add");
+			trace("add");
+			entityA.add(new Opacity(0.5));
+			entityB.removeType(TileEntityRef);
+			entityB.removeType(TileMovement);
 			entityB.add(new TileEntityRef(entityA));
 			entityB.add(entityA.getFirstComponentOfType(TileMovement));
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
-			//trace("add");
-			//entityB.add(new Opacity(0.5));
+			trace("add");
+			entityB.add(new Opacity(0.5));
+			entityA.removeType(TileEntityRef);
+			entityA.removeType(TileMovement);
 			entityA.add(new TileEntityRef(entityB));
 			entityA.add(entityB.getFirstComponentOfType(TileMovement));
 		}
@@ -66,17 +70,17 @@ class ContactListener extends B2ContactListener
 		
 		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
 		{
-			//trace("remove");
+			trace("remove");
 			entityA.removeType(Opacity);
-			entityB.removeType(TileEntityRef);
-			entityB.removeType(TileMovement);
+			//entityB.removeType(TileEntityRef);
+			//entityB.removeType(TileMovement);
 		}
 		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
 		{
-			//trace("remove");
+			trace("remove");
 			entityB.removeType(Opacity);
-			entityA.removeType(TileEntityRef);
-			entityA.removeType(TileMovement);
+			//entityA.removeType(TileEntityRef);
+			//entityA.removeType(TileMovement);
 		}
 	}
 	

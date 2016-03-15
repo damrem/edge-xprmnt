@@ -35,7 +35,7 @@ class PlayerFactory
 				x: UnitConvert.posXfromCellX(cell.x),
 				y: UnitConvert.posYfromCellY(cell.y),
 				type:B2BodyType.DYNAMIC_BODY,
-				linearDamping:0.05,
+				linearDamping:0,
 				fixedRotation:true
 			}),
 			new Gfx(new DiskShape(PlayerConf.SIZE/2)),
@@ -46,7 +46,7 @@ class PlayerFactory
 			keyboardCommandSet,
 			
 			
-			new PlayerCoreComponent(0.1)
+			new PlayerCoreComponent(1000)
 		];
 	}
 	

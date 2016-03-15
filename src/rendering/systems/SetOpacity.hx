@@ -19,11 +19,13 @@ class SetOpacity implements ISystem
 	
 	public function updateAdded(entity:Entity, node: { gfx:Gfx, opacity:Opacity } )
 	{
+		//trace("updateAdded");
 		node.gfx.display.alpha = node.opacity.alpha;
 	}
 	
 	public function updateRemoved(entity:Entity, node: { gfx:Gfx, opacity:Opacity } )
 	{
+		//trace("updateRemoved");
 		node.gfx.display.alpha = 1.0;
 	}
 	

@@ -50,10 +50,10 @@ class MovePlayerWithTile implements ISystem
 		tileForce = tileBody.b2Body.getLinearVelocity().copy();
 		trace(tileForce.x);
 		
-		tileForce.multiply(Math.sqrt(mass));
+		//tileForce.multiply(Math.sqrt(mass));
 		//tileForce.multiply(mass);
 		//tileForce.multiply(1000/timeDelta);
-		tileForce.multiply(timeDelta);
+		//tileForce.multiply(timeDelta);
 		trace(playerBody.b2Body.getLinearVelocity().x);
 		playerBody.b2Body.applyForce(tileForce, playerBody.b2Body.getWorldCenter());
 		

@@ -32,11 +32,15 @@ class MoveTile implements ISystem
 	var toPositionX:Float;
 	var toPositionY:Float;
 	var velocity:B2Vec2;
+	var position:B2Vec2;
+	var dx:Float;
+	var dy:Float;
 	
 	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement) 
 	{
-		var dx = tileMovement.toX() - body.b2Body.getPosition().x;
-		var dy = tileMovement.toY() - body.b2Body.getPosition().y;
+		position = body.b2Body.getPosition();
+		dx = tileMovement.toX() - position.x;
+		dy = tileMovement.toY() - position.y;
 		
 		if (
 			(Math.abs(dx) == 0 && Math.abs(dy) == 0) 
@@ -66,8 +70,8 @@ class MoveTile implements ISystem
 		toPositionX = UnitConvert.posXfromCellX(toCell.x);
 		toPositionY = UnitConvert.posYfromCellY(toCell.y);
 		
-		var dx = toPositionX - fromPosition.x;
-		var dy = toPositionY - fromPosition.y;
+		dx = toPositionX - fromPosition.x;
+		dy = toPositionY - fromPosition.y;
 		
 		velocity = new B2Vec2(dx, dy);
 		

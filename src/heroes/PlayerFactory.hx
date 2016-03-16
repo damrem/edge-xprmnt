@@ -35,7 +35,7 @@ class PlayerFactory
 				x: UnitConvert.posXfromCellX(cell.x),
 				y: UnitConvert.posYfromCellY(cell.y),
 				type:B2BodyType.DYNAMIC_BODY,
-				linearDamping:0,
+				linearDamping:5,
 				fixedRotation:true
 			}),
 			new Gfx(new DiskShape(PlayerConf.SIZE/2)),

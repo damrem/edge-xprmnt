@@ -25,7 +25,7 @@ class MovePlayerWithTile implements ISystem
 	{
 		//trace(playerBody.b2Body.getLinearVelocity().length()*1000);
 		var tileEntity = tileEntityRef.tile;
-		var tileMovement = tileEntity.getFirstComponentOfType(TileMovement);
+		var tileMovement:TileMovement = tileEntity.getFirstComponentOfType(TileMovement);
 		
 		
 		
@@ -36,26 +36,24 @@ class MovePlayerWithTile implements ISystem
 		
 		//DEBUG
 		//trace('plop');
+		#if debug
 		if(tileEntity.existsType(Opacity))	tileEntity.removeType(Opacity);
 		tileEntity.add(new Opacity(Math.random()));
-		//!DEBUG
+		#end
 		
 		
-		/*if (!playerBody.b2Body.isAwake())	*/
+		
 		
 		
 		var tileBody:Body = tileEntity.getFirstComponentOfType(Body);
 		var mass = playerBody.b2Body.getMass();
-		trace(mass);
 		tileForce = tileBody.b2Body.getLinearVelocity().copy();
-		trace(tileForce.x);
+		tileForce.multiply(1 / 60);
 		
-		//tileForce.multiply(Math.sqrt(mass));
-		//tileForce.multiply(mass);
-		//tileForce.multiply(1000/timeDelta);
-		//tileForce.multiply(timeDelta);
-		trace(playerBody.b2Body.getLinearVelocity().x);
-		playerBody.b2Body.applyForce(tileForce, playerBody.b2Body.getWorldCenter());
+		tileForce.add(playerBody.b2Body.getPosition());
+		
+		playerBody.b2Body.setPosition(tileForce);
+		
 		
 		
 	}

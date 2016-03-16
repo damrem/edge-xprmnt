@@ -94,8 +94,9 @@ class Main extends Sprite
 		
 		edgeWorld.physics.add(new WorldStep());
 		
-		edgeWorld.physics.add(new WorldDrawDebugData());
-		
+		#if debug
+		//edgeWorld.physics.add(new WorldDrawDebugData());
+		#end
 		
 
 		

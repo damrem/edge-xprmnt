@@ -26,19 +26,8 @@ class MoveTile implements ISystem
 	
 	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement) 
 	{
-		//trace(body.b2Body.getPosition().x, tileMovement.toX());
-		
 		var dx = body.b2Body.getPosition().x - tileMovement.toX();
-		//trace(body.b2Body.getPosition().x + "+" +body.b2Body.getLinearVelocity().x+" - " + tileMovement.toX());
 		var dy = body.b2Body.getPosition().y - tileMovement.toY();
-		
-		//trace(Math.abs(dx) + " >= " + Math.abs(tileMovement.dx));
-		//trace(Math.abs(dy) + " >= " + Math.abs(tileMovement.dy));
-		
-		//trace((Math.abs(dx) == 0 && Math.abs(dy) == 0) );
-		//trace(((tileMovement.dx != 0) + " && " + (Math.abs(dx) >= Math.abs(tileMovement.dx))));
-		//trace(((tileMovement.dx != 0) && (Math.abs(dx) >= Math.abs(tileMovement.dx))));
-		//trace((tileMovement.dy != 0 && Math.abs(dy) >= Math.abs(tileMovement.dy)));
 		
 		if (
 			(Math.abs(dx) == 0 && Math.abs(dy) == 0) 
@@ -49,58 +38,47 @@ class MoveTile implements ISystem
 			
 		)
 		{
-			trace("ending movement");
+			//trace("ending movement");
 			entity.remove(tileMovement);
 		}
 		
 		tileMovement.dx = dx;
 		tileMovement.dy = dy;
-		//trace(body.b2Body.getLinearVelocity().toString());
 	}
 	
 	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement}) 
 	{
 		trace("updateAdded");
 		
-		var fromPosition = node.body.b2Body.getPosition();
-		trace("fromPosition.x", fromPosition.x);
+		var toCell = node.tileMovement.toCell;
+		var b2Body = node.body.b2Body;
 		
-		var toPositionX = UnitConvert.posXfromCellX(node.tileMovement.toCell.x);
-		trace("toPositionX", toPositionX);
-		var toPositionY = UnitConvert.posYfromCellY(node.tileMovement.toCell.y);
+		var fromPosition = b2Body.getPosition();
+		var toPositionX = UnitConvert.posXfromCellX(toCell.x);
+		var toPositionY = UnitConvert.posYfromCellY(toCell.y);
 		
 		var dx = toPositionX - fromPosition.x;
-		//trace(UnitConvert.posXfromCellX(node.tileMovement.toCell.x) + " - " + fromPosition.x);
 		var dy = toPositionY - fromPosition.y;
-		trace(dx, dy);
 		
-		var v = new B2Vec2(dx/* / 10*/, dy/* / 10*/);
-		//v.multiply(node.body.b2Body.getMass());
+		var v = new B2Vec2(dx, dy);
 		
-	
-	
-		
-		if(!node.body.b2Body.isAwake())	node.body.b2Body.setAwake(true);
-		node.body.b2Body.setLinearVelocity(v);
-		
-		
-		//node.body.b2Body.applyImpulse(v, node.body.b2Body.getWorldCenter());
-		
-		trace(node.body.b2Body.getLinearVelocity().x);
-		//trace("added" + node.body.b2Body.getLinearVelocity().toString());
-		//trace(node.body.b2Body.max
+		b2Body.setAwake(true);
+		b2Body.setLinearVelocity(v);
 	}
 	
 	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement})
 	{
 		trace("updateRemoved");
-		node.body.b2Body.setLinearVelocity(new B2Vec2());
-		node.body.b2Body.setPosition(new B2Vec2(node.tileMovement.toX(), node.tileMovement.toY()));
-		node.body.b2Body.setAwake(false);
-		//trace(node.tileMovement);
-		if (node.tileMovement.isOut)
+		
+		var b2Body = node.body.b2Body;
+		var movement = node.tileMovement;
+		
+		b2Body.setLinearVelocity(new B2Vec2());
+		b2Body.setPosition(new B2Vec2(movement.toX(), movement.toY()));
+		b2Body.setAwake(false);
+		
+		if (movement.isOut)
 		{
-			//trace("isOut");
 			entity.removeTypes([TileCoreComponent, Body, Entity]);
 			entity.destroy();
 		}

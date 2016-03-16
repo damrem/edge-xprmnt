@@ -3,6 +3,7 @@ package maze.systems;
 import b2d.components.Body;
 import b2d.components.Impulse;
 import box2D.common.math.B2Vec2;
+import box2D.dynamics.B2Body;
 import box2D.dynamics.B2TimeStep;
 import de.polygonal.ds.Array2.Array2Cell;
 import edge.Entity;
@@ -24,10 +25,18 @@ class MoveTile implements ISystem
 {
 	var entity:Entity;
 	
+	var toCell:Array2Cell;
+	var b2Body:B2Body;
+	var movement:TileMovement;
+	var fromPosition:B2Vec2;
+	var toPositionX:Float;
+	var toPositionY:Float;
+	var velocity:B2Vec2;
+	
 	public function update(tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement) 
 	{
-		var dx = body.b2Body.getPosition().x - tileMovement.toX();
-		var dy = body.b2Body.getPosition().y - tileMovement.toY();
+		var dx = tileMovement.toX() - body.b2Body.getPosition().x;
+		var dy = tileMovement.toY() - body.b2Body.getPosition().y;
 		
 		if (
 			(Math.abs(dx) == 0 && Math.abs(dy) == 0) 
@@ -50,28 +59,28 @@ class MoveTile implements ISystem
 	{
 		trace("updateAdded");
 		
-		var toCell = node.tileMovement.toCell;
-		var b2Body = node.body.b2Body;
+		toCell = node.tileMovement.toCell;
+		b2Body = node.body.b2Body;
 		
-		var fromPosition = b2Body.getPosition();
-		var toPositionX = UnitConvert.posXfromCellX(toCell.x);
-		var toPositionY = UnitConvert.posYfromCellY(toCell.y);
+		fromPosition = b2Body.getPosition();
+		toPositionX = UnitConvert.posXfromCellX(toCell.x);
+		toPositionY = UnitConvert.posYfromCellY(toCell.y);
 		
 		var dx = toPositionX - fromPosition.x;
 		var dy = toPositionY - fromPosition.y;
 		
-		var v = new B2Vec2(dx, dy);
+		velocity = new B2Vec2(dx, dy);
 		
 		b2Body.setAwake(true);
-		b2Body.setLinearVelocity(v);
+		b2Body.setLinearVelocity(velocity);
 	}
 	
 	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement})
 	{
 		trace("updateRemoved");
 		
-		var b2Body = node.body.b2Body;
-		var movement = node.tileMovement;
+		b2Body = node.body.b2Body;
+		movement = node.tileMovement;
 		
 		b2Body.setLinearVelocity(new B2Vec2());
 		b2Body.setPosition(new B2Vec2(movement.toX(), movement.toY()));

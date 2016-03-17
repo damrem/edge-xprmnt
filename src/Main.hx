@@ -191,7 +191,7 @@ class Main extends Sprite
 		
 		
 		
-		Borders.create(edgeWorld.engine);
+		Gaps.create(edgeWorld.engine);
 		
 		
 		

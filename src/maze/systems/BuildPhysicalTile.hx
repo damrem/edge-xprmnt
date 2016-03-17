@@ -2,7 +2,7 @@ package maze.systems;
 import b2d.B2;
 import b2d.B2RectShape;
 import b2d.components.Body;
-import b2d.components.FixtureDef;
+import b2d.components.Fixture;
 import b2d.components.MultiFixtureDef;
 import box2D.dynamics.B2FixtureDef;
 import edge.Entity;
@@ -43,7 +43,7 @@ class BuildPhysicalTile implements ISystem
 		{
 			for (y in cornerBlockCoords)
 			{
-				fixtureDefs.push(new FixtureDef( {
+				fixtureDefs.push(new Fixture( {
 					density:10,
 					shape: new B2RectShape( { 
 						width:cornerBlockSize,
@@ -63,7 +63,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.bottom)
 		{
-			fixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new Fixture( { 
 				density:10,
 				shape: new B2RectShape( {
 					width: wallLength,
@@ -81,7 +81,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.top)
 		{
-			fixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new Fixture( { 
 				density:10,
 				shape: new B2RectShape({
 					width: wallLength, 
@@ -98,7 +98,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.right)
 		{
-			fixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new Fixture( { 
 				density:10,
 				shape: new B2RectShape({
 					width: cornerBlockSize, 
@@ -115,7 +115,7 @@ class BuildPhysicalTile implements ISystem
 		
 		if (!node.tileDef.left)
 		{
-			fixtureDefs.push(new FixtureDef( { 
+			fixtureDefs.push(new Fixture( { 
 				density:10,
 				shape: new B2RectShape( {
 					width: cornerBlockSize, 
@@ -130,7 +130,7 @@ class BuildPhysicalTile implements ISystem
 			} ));
 		}
 		
-		fixtureDefs.push(new FixtureDef( {
+		fixtureDefs.push(new Fixture( {
 			density:10,
 			shape: new B2RectShape( {
 				width: (TileConf.SIZE-PlayerConf.SIZE)/B2.worldScale,

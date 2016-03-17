@@ -14,6 +14,7 @@ import edge.World;
 import heroes.PlayerCommand;
 import heroes.PlayerFactory;
 import heroes.PlayerKeyboardController;
+import items.ArrowItemFactory;
 import maze.components.Maze;
 import maze.factories.MazeGenerator;
 import maze.MazeConf;
@@ -186,7 +187,7 @@ class Main extends Sprite
 		
 		edgeWorld.engine.create([maze]);
 		
-		
+		edgeWorld.engine.create(ArrowItemFactory.createComps(new Array2Cell()));
 		
 		
 		

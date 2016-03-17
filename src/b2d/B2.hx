@@ -1,5 +1,5 @@
 package b2d;
-import b2d.components.FixtureDef;
+import b2d.components.Fixture;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.collision.shapes.B2PolygonShape;
 import box2D.collision.shapes.B2Shape;

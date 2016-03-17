@@ -1,7 +1,7 @@
 package b2d.systems;
 import b2d.components.Body;
 import b2d.components.MultiFixtureDef;
-import b2d.components.FixtureDef;
+import b2d.components.Fixture;
 import edge.Entity;
 import edge.ISystem;
 import edge.View;
@@ -14,12 +14,12 @@ class BodyCreateFixture implements ISystem
 {
 	var multiFixtureDefNode:View<{ body:Body, multiFixtureDef:MultiFixtureDef }>;
 	
-	public function update(body:Body, fixtureDef:FixtureDef)
+	public function update(body:Body, fixtureDef:Fixture)
 	{
 		
 	}
 	
-	public function updateAdded(entity:Entity, node:{ body:Body, fixtureDef:FixtureDef }) 
+	public function updateAdded(entity:Entity, node:{ body:Body, fixtureDef:Fixture }) 
 	{
 		//trace("updateAdded");
 		node.fixtureDef.b2FixtureDef.shape = node.fixtureDef.b2FixtureDef.shape;

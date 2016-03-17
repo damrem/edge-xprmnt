@@ -1,7 +1,7 @@
 package heroes;
 import b2d.B2;
 import b2d.components.Body;
-import b2d.components.FixtureDef;
+import b2d.components.Fixture;
 import box2D.collision.shapes.B2CircleShape;
 import box2D.dynamics.B2BodyType;
 import controls.KeyboardCommandSet;
@@ -21,7 +21,7 @@ class PlayerFactory
 	public static function createComponents(cell:Array2Cell, keyboardCommandSet:KeyboardCommandSet, mainLayer:Layer):Array<{}> 
 	{
 		return [
-			new FixtureDef( {
+			new Fixture( {
 				shape:new B2CircleShape(PlayerConf.SIZE/2/B2.worldScale),
 				density:1.0,
 				filter: {

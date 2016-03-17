@@ -7,7 +7,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class FixtureDef implements IComponent
+class Fixture implements IComponent
 {
 	public var b2FixtureDef:B2FixtureDef;
 	
@@ -39,7 +39,7 @@ class FixtureDef implements IComponent
 typedef FixtureDefDef =
 {
 	var shape:B2Shape;
-	var density:Float;
+	@:optional var density:Float;
 	@:optional var filter:B2FilterDataDef;
 	@:optional var isSensor:Bool;
 }

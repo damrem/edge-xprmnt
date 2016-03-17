@@ -8,5 +8,5 @@ import edge.IComponent;
  */
 class MultiFixtureDef implements IComponent
 {
-	public var fixtureDefs:Array<FixtureDef>;
+	public var fixtureDefs:Array<Fixture>;
 }

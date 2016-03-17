@@ -22,8 +22,8 @@ class PlayerKeyboardController implements ISystem
 		var isRightPressed = false;
 		var isDownPressed = false;
 		
-		var hDirection = Direction.None;
-		var vDirection = Direction.None;
+		var hDirection:Direction = null;
+		var vDirection:Direction = null;
 		var force = new B2Vec2();
 		
 		for (keyCode in controlled.keyStates.keys())
@@ -50,11 +50,11 @@ class PlayerKeyboardController implements ISystem
 		
 		if (!isLeftPressed && !isRightPressed)
 		{
-			hDirection = Direction.None;
+			hDirection = null;
 		}
 		else if (isLeftPressed && isRightPressed)
 		{
-			hDirection = Direction.None;
+			hDirection = null;
 		}
 		else if (isLeftPressed)
 		{	
@@ -68,11 +68,11 @@ class PlayerKeyboardController implements ISystem
 		
 		if (!isUpPressed && !isDownPressed)
 		{
-			vDirection = Direction.None;
+			vDirection = null;
 		}
 		else if (isUpPressed && isDownPressed)
 		{
-			vDirection = Direction.None;
+			vDirection = null;
 		}
 		else if (isUpPressed)
 		{
@@ -85,30 +85,35 @@ class PlayerKeyboardController implements ISystem
 				
 		var mass = body.b2Body.getMass();
 		
-		switch(hDirection)
+		if (hDirection != null)
 		{
-			case Left:
-				force.x = -playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
-				
-			case Right:
-				force.x = playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
-				
-			default:
-				force.x = 0;
+			switch(hDirection)
+			{
+				case Left:
+					force.x = -playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
+					
+				case Right:
+					force.x = playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
+					
+				default:
+					force.x = 0;
+			}
 		}
 		
-		switch(vDirection)
+		if (vDirection != null)
 		{
-			case Up:
-				force.y = -playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
-				
-			case Down:
-				force.y = playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
-				
-			default:
-				force.y = 0;
+			switch(vDirection)
+			{
+				case Up:
+					force.y = -playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
+					
+				case Down:
+					force.y = playerControl.reactivity * mass / B2.worldScale / B2.worldScale;
+					
+				default:
+					force.y = 0;
+			}
 		}
-		
 		
 		if (force.x != 0 || force.y != 0) {			
 			body.b2Body.applyForce(force, body.b2Body.getWorldCenter());

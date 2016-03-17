@@ -10,5 +10,4 @@ enum Direction
 	Down;
 	Left;
 	Up;
-	None;
 }

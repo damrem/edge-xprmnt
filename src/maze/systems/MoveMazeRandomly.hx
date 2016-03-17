@@ -46,7 +46,7 @@ class MoveMazeRandomly implements ISystem
 	{
 		//trace("startMoving");
 		
-		var direction = Direction.None;
+		var direction:Direction = null;
 		var coord:Int = 0;
 		
 		switch(Std.random(4))
@@ -73,7 +73,7 @@ class MoveMazeRandomly implements ISystem
 		coord = 0;
 		*/
 		
-		if (direction != Direction.None)
+		if (direction != null)
 		{
 			entity.add(new MazeMovement(direction, coord));
 		}

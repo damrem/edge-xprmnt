@@ -61,7 +61,7 @@ class MoveMaze implements ISystem
 		
 		switch(node.movement.direction)
 		{
-			case Direction.None:
+			case null:
 				insertedFromX = 10;
 				insertedFromY = 10;
 				outteredToX = 10;

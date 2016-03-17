@@ -67,8 +67,11 @@ class MoveMazeRandomly implements ISystem
 				direction = Direction.Down;
 				coord = Std.random(MazeConf.WIDTH);
 		}
+		
+		/*
 		direction = Right;
 		coord = 0;
+		*/
 		
 		if (direction != Direction.None)
 		{

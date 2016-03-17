@@ -61,7 +61,7 @@ class MoveTile implements ISystem
 	
 	public function updateAdded(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement}) 
 	{
-		trace("updateAdded");
+		//trace("updateAdded");
 		
 		toCell = node.tileMovement.toCell;
 		b2Body = node.body.b2Body;
@@ -81,7 +81,7 @@ class MoveTile implements ISystem
 	
 	public function updateRemoved(entity:Entity, node:{tileDef:TileCoreComponent, body:Body, tileMovement:TileMovement})
 	{
-		trace("updateRemoved");
+		//trace("updateRemoved");
 		
 		b2Body = node.body.b2Body;
 		movement = node.tileMovement;

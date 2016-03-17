@@ -50,11 +50,11 @@ class Main extends Sprite
 
 	public static inline var PLAYER_CATEGORY:Int = 0x0002;
 	public static inline var TILE_CATEGORY:Int = 0x0004;
-	public static inline var BOUNDARY_CATEGORY:Int = 0x0008;
+	public static inline var BORDER_CATEGORY:Int = 0x0008;
 	
-	public static inline var PLAYER_MASK:Int = TILE_CATEGORY | BOUNDARY_CATEGORY;
+	public static inline var PLAYER_MASK:Int = TILE_CATEGORY | BORDER_CATEGORY;
 	public static inline var TILE_MASK:Int = PLAYER_CATEGORY;
-	public static inline var BOUNDARY_MASK:Int = PLAYER_CATEGORY;
+	public static inline var BORDER_MASK:Int = PLAYER_CATEGORY;
 	
 	public function new() 
 	{
@@ -96,7 +96,7 @@ class Main extends Sprite
 		edgeWorld.physics.add(new WorldStep());
 		
 		#if debug
-		//edgeWorld.physics.add(new WorldDrawDebugData());
+		edgeWorld.physics.add(new WorldDrawDebugData());
 		#end
 		
 
@@ -188,6 +188,19 @@ class Main extends Sprite
 		edgeWorld.engine.create([maze]);
 		
 		edgeWorld.engine.create(ArrowItemFactory.createComps(new Array2Cell()));
+		
+		
+		
+		Borders.create(edgeWorld.engine);
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

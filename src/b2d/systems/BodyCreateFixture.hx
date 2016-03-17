@@ -22,7 +22,7 @@ class BodyCreateFixture implements ISystem
 	public function updateAdded(entity:Entity, node:{ body:Body, fixtureDef:Fixture }) 
 	{
 		//trace("updateAdded");
-		node.fixtureDef.b2FixtureDef.shape = node.fixtureDef.b2FixtureDef.shape;
+		//node.fixtureDef.b2FixtureDef.shape = node.fixtureDef.b2FixtureDef.shape;
 		node.fixtureDef.b2FixtureDef.userData = entity;
 		node.body.b2Body.createFixture(node.fixtureDef.b2FixtureDef);
 	}
@@ -31,7 +31,7 @@ class BodyCreateFixture implements ISystem
 	{
 		for (fixtureDef in node.multiFixtureDef.fixtureDefs)
 		{
-			fixtureDef.b2FixtureDef.shape = fixtureDef.b2FixtureDef.shape;
+			//fixtureDef.b2FixtureDef.shape = fixtureDef.b2FixtureDef.shape;
 			fixtureDef.b2FixtureDef.userData = entity;
 			node.body.b2Body.createFixture(fixtureDef.b2FixtureDef);
 			//node.body.b2Body.setM();

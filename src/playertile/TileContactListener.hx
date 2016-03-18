@@ -1,10 +1,7 @@
 package playertile;
-import b2d.components.Body;
 import box2D.dynamics.B2ContactListener;
 import box2D.dynamics.contacts.B2Contact;
 import edge.Entity;
-import heroes.PlayerCoreComponent;
-import hxlpers.edge.EntityStaticExtension;
 import maze.components.TileCoreComponent;
 import maze.components.TileMovement;
 import rendering.components.Opacity;
@@ -27,30 +24,30 @@ class TileContactListener extends B2ContactListener
 	{
 		var fixtureA = contact.getFixtureA();
 		var entityA = cast(fixtureA.getUserData(), Entity);
-		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent);
+		var entityAIsMovedByTile = entityA.existsType(MovedByTile);
 		var entityAIsTile = entityA.existsType(TileCoreComponent);
 		
 		var fixtureB = contact.getFixtureB();
 		var entityB = cast(fixtureB.getUserData(), Entity);
-		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent);
+		var entityBIsMovedByTile = entityB.existsType(MovedByTile);
 		var entityBIsTile = entityB.existsType(TileCoreComponent);
 		
-		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
+		if (fixtureA.isSensor() && entityAIsTile && entityBIsMovedByTile)
 		{
 			trace("add");
 			entityA.add(new Opacity(0.5));
-			entityB.removeType(TileEntityRef);
+			entityB.removeType(IsOnTile);
 			entityB.removeType(TileMovement);
-			entityB.add(new TileEntityRef(entityA));
+			entityB.add(new IsOnTile(entityA));
 			entityB.add(entityA.getFirstComponentOfType(TileMovement));
 		}
-		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
+		else if (fixtureB.isSensor() && entityBIsTile && entityAIsMovedByTile)
 		{
 			trace("add");
 			entityB.add(new Opacity(0.5));
-			entityA.removeType(TileEntityRef);
+			entityA.removeType(IsOnTile);
 			entityA.removeType(TileMovement);
-			entityA.add(new TileEntityRef(entityB));
+			entityA.add(new IsOnTile(entityB));
 			entityA.add(entityB.getFirstComponentOfType(TileMovement));
 		}
 		
@@ -60,22 +57,22 @@ class TileContactListener extends B2ContactListener
 	{
 		var fixtureA = contact.getFixtureA();
 		var entityA = cast(fixtureA.getUserData(), Entity);
-		var entityAIsPlayer = entityA.existsType(PlayerCoreComponent);
+		var entityAIsMovedByTile = entityA.existsType(MovedByTile);
 		var entityAIsTile = entityA.existsType(TileCoreComponent);
 		
 		var fixtureB = contact.getFixtureB();
 		var entityB = cast(fixtureB.getUserData(), Entity);
-		var entityBIsPlayer = entityB.existsType(PlayerCoreComponent);
+		var entityBIsMovedByTile = entityB.existsType(MovedByTile);
 		var entityBIsTile = entityB.existsType(TileCoreComponent);
 		
-		if (fixtureA.isSensor() && entityAIsTile && entityBIsPlayer)
+		if (fixtureA.isSensor() && entityAIsTile && entityBIsMovedByTile)
 		{
 			trace("remove");
 			entityA.removeType(Opacity);
 			//entityB.removeType(TileEntityRef);
 			//entityB.removeType(TileMovement);
 		}
-		else if (fixtureB.isSensor() && entityBIsTile && entityAIsPlayer)
+		else if (fixtureB.isSensor() && entityBIsTile && entityAIsMovedByTile)
 		{
 			trace("remove");
 			entityB.removeType(Opacity);

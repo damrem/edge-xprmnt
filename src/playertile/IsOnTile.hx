@@ -6,7 +6,7 @@ import edge.IComponent;
  * ...
  * @author damrem
  */
-class TileEntityRef implements IComponent
+class IsOnTile implements IComponent
 {
 	public var tile:Entity;
 	

@@ -15,7 +15,7 @@ using hxlpers.edge.EntityStaticExtension;
  * ...
  * @author damrem
  */
-class ContactListener extends B2ContactListener
+class TileContactListener extends B2ContactListener
 {
 
 	public function new() 

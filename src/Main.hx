@@ -1,6 +1,7 @@
 package;
 
 import b2d.B2;
+import b2d.MultiContactListener;
 import b2d.systems.BodyApplyImpulse;
 import b2d.systems.BodyCreateFixture;
 import b2d.systems.CreateBody;
@@ -26,7 +27,7 @@ import maze.systems.MoveTile;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.ui.Keyboard;
-import playertile.ContactListener;
+import playertile.TileContactListener;
 import playertile.MovePlayerWithTile;
 import rendering.components.Layer;
 import rendering.RenderingConf;
@@ -62,7 +63,7 @@ class Main extends Sprite
 		
 		var edgeWorld = new World();
 		B2.createWorld();
-		B2.world.setContactListener(new ContactListener());
+		B2.world.setContactListener(new MultiContactListener([new TileContactListener()]));
 		
 		/*
 		var bd = new BodyDef();

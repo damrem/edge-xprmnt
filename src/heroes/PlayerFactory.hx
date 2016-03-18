@@ -8,7 +8,7 @@ import controls.KeyboardCommandSet;
 import de.polygonal.ds.Array2.Array2Cell;
 import hxlpers.shapes.DiskShape;
 import maze.UnitConvert;
-import playertile.MovedByTile;
+import movebytile.comps.MovedByTile;
 import rendering.components.Gfx;
 import rendering.components.Layer;
 

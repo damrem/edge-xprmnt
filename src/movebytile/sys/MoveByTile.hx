@@ -1,9 +1,10 @@
-package playertile;
+package movebytile.sys;
 import b2d.components.Body;
 import box2D.common.math.B2Vec2;
 import edge.Entity;
 import edge.ISystem;
 import maze.components.TileMovement;
+import movebytile.comps.IsOnTile;
 import rendering.components.Opacity;
 
 using hxlpers.edge.EntityStaticExtension;
@@ -11,7 +12,7 @@ using hxlpers.edge.EntityStaticExtension;
  * ...
  * @author damrem
  */
-class MoveWithTile implements ISystem
+class MoveByTile implements ISystem
 {
 	var timeDelta:Float;
 	var entity:Entity;

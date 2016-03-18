@@ -1,4 +1,4 @@
-package playertile;
+package movebytile.comps;
 import edge.Entity;
 import edge.IComponent;
 

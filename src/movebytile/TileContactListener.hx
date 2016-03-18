@@ -1,9 +1,11 @@
-package playertile;
+package movebytile;
 import box2D.dynamics.B2ContactListener;
 import box2D.dynamics.contacts.B2Contact;
 import edge.Entity;
 import maze.components.TileCoreComponent;
 import maze.components.TileMovement;
+import movebytile.comps.IsOnTile;
+import movebytile.comps.MovedByTile;
 import rendering.components.Opacity;
 
 using hxlpers.edge.EntityStaticExtension;

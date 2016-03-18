@@ -27,8 +27,8 @@ import maze.systems.MoveTile;
 import openfl.display.FPS;
 import openfl.display.Sprite;
 import openfl.ui.Keyboard;
-import playertile.TileContactListener;
-import playertile.MoveWithTile;
+import movebytile.TileContactListener;
+import movebytile.sys.MoveByTile;
 import rendering.components.Layer;
 import rendering.RenderingConf;
 import rendering.systems.AddRemoveGfx;
@@ -92,7 +92,7 @@ class Main extends Sprite
 		edgeWorld.physics.add(new MoveMazeRandomly());
 		edgeWorld.physics.add(new MoveMaze());
 		edgeWorld.physics.add(new MoveTile());
-		edgeWorld.physics.add(new MoveWithTile());
+		edgeWorld.physics.add(new MoveByTile());
 		
 		edgeWorld.physics.add(new WorldStep());
 		

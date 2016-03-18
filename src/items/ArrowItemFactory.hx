@@ -8,7 +8,7 @@ import hxlpers.Direction;
 import hxlpers.shapes.DiskShape;
 import maze.TileConf;
 import maze.UnitConvert;
-import playertile.MovedByTile;
+import movebytile.comps.MovedByTile;
 import rendering.components.Gfx;
 
 /**
